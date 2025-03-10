@@ -1,0 +1,298 @@
+body {
+  /* Center the form on the page */
+  text-align: center;
+  max-width: 100%;
+  overflow-x: hidden;
+padding-left: 5%;
+padding-right: 5%;
+
+}
+.pattern {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: -100;
+  background-color: #ffffff;
+opacity: 0.05;
+background-image:  linear-gradient(#535353 1.8px, transparent 1.8px), linear-gradient(to right, #6d6d6d 1.8px, #ffffff 1.8px);
+background-size: 36px 36px;
+}
+
+form {
+  text-align: center;
+ 
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  background: rgba(119, 102, 102, 0.2);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+
+
+}
+form div{
+  margin: 0.5%;
+
+}
+p + p {
+  margin-top: 1em;
+}
+
+label {
+  /* Uniform size & alignment */
+  display: inline-block;
+  min-width: 90px;
+  text-align: right;
+}
+
+input,
+textarea {
+  /* To make sure that all text fields have the same font settings
+     By default, text areas have a monospace font */
+  font: 1em sans-serif;
+  /* Uniform text field size */
+  width: 50%;
+  box-sizing: border-box;
+  /* Match form field borders */
+  border: 1px solid #999;
+}
+
+input:focus,
+textarea:focus {
+  /* Set the outline width and style */
+  outline-style: solid;
+  /* To give a little highlight on active elements */
+  outline-color: #000;
+}
+
+textarea {
+  /* Align multiline text fields with their labels */
+  vertical-align: top;
+  /* Provide space to type some text */
+  height: 5em;
+}
+
+
+
+#submitForm {
+  appearance: button;
+  background-color: #1899D6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: din-round, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 13px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 100%;
+}
+
+#submitForm:after {
+  background-clip: padding-box;
+  background-color: #1CB0F6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+#submitForm,
+#submitForm:focus {
+  user-select: auto;
+}
+
+#submitForm:hover:not(:disabled) {
+  filter: brightness(1.1);
+  -webkit-filter: brightness(1.1);
+}
+
+#submitForm:disabled {
+  cursor: auto;
+}
+
+#submitForm:active {
+  border-width: 4px 0 0;
+  background: none;
+}
+
+
+#outputCard{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 400px);
+  justify-content: center;
+  height: 300px;
+  margin: 2%;
+  margin-left: 20%;
+  gap: 15px;
+  width: 100%;
+  flex-wrap: wrap;
+  
+  padding: 1rem;
+  
+ 
+ 
+}
+
+
+#outputCard svg{
+  position: relative;
+  display: flex;
+cursor: pointer;
+  
+}
+
+#innerOutput{
+  
+background: rgba(255, 255, 255, 0.753);
+border-radius: 16px;
+box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+ 
+}
+#innerOutput h2{
+ 
+  font-size: 2em
+}
+
+#time{
+  position: relative;
+ margin-left: 80%;
+ top: 16%;
+ color: gray;
+ margin-right: 5%;
+}
+#time h4, h5{
+  text-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+
+} 
+
+#navigationArea{
+  display: grid;
+  grid-template-rows: repeat(4,1fr);
+  justify-content: flex-start;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-right: 0%;
+gap: 15px;
+  flex-wrap: wrap;
+}
+#navigationArea div{
+width: 300%;
+background: rgba(255, 255, 255, 0.2);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#stats{
+  
+}
+#status{
+ padding-bottom: 20%;
+}
+
+#statusbuttons button{
+  border: solid white 0.5px;
+  text-align: center;
+margin: 3%;
+height: 13%;
+  border-radius: 15px;
+  margin-left: 15%;
+ 
+}
+.column{
+  text-align: left;
+  margin-top: 2%;
+  flex: 1 1 0px;
+  
+  border-radius: 10%;
+}
+.column h3{
+  margin-left: 2%;
+  font-weight: 550;
+}
+#searchBar{
+  margin-top: 2%;
+
+}
+#bigBox{
+  display: inline-flex;
+width: 100%;
+}
+
+@media(max-width: 900px){
+  body{
+    max-width: 100%;
+    overflow-x: hidden
+  }
+ #outputCard{
+    transform: scale(0.8);
+    transform-origin: 0 0;
+   margin-left: 7%;
+ }
+  #bigBox{
+    display: block;
+  }
+  #navigationArea {
+  display: flex;
+  }
+  #navigationArea div{
+    font-size: 0.75em;
+  }
+}
+
+#applied{
+background-color: green;
+color: white;
+} 
+#not{
+  color: white;
+  background-color: rgb(255, 208, 0);
+} 
+#closed{
+  color: white;
+  background-color: rgb(255, 145, 0);
+} 
+#assess{
+  color: white;
+  background-color: rgb(234, 0, 255);
+} 
+#reject{
+  color: white;
+  background-color: red;
+} 
+#interview{
+  color: white;
+  background-color: rgb(16, 83, 230);
+}

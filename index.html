@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="stylefile/file.css">
+</head>
+<body>
+    <div class="pattern"></div>
+    <h1>JobLog</h1>
+    <form onsubmit="sendData(event)">
+        
+        <div>
+            <label for="name">Name:</label>
+            <input name="name" id="name">
+        </div>
+        <div>
+            <label for="jobTitle">Job Title:</label>
+            <input name="job" id="jobTitle">
+        </div>
+        <div>
+            <label for="company">Company:</label>
+            <input name="company" id="company">
+        </div>
+    
+            <button id="submitForm" class="submit" type="submit">Add Job</button>
+        
+    </form>
+    
+    <div id="searchBar">
+        <input placeholder="search">
+    </div>
+
+
+<div id="bigBox">
+<div id="navigationArea">
+
+    
+    <div class="column" id="stats">
+        <h3>This month</h3> <h3></h3>
+    </div>
+
+    <div class='column' id="status">
+        <h3>Status:</h3> 
+            <span id="statusbuttons">
+               <button id="applied">Applied</button>
+               <button id="not">Not Applied</button><br>
+               <button id="closed">Closed</button>
+               <button id="assess">Assessment</button><br>
+               <button id="reject">Rejected</button>
+               <button id="interview">Interview</button>
+            </span>
+
+    </div>
+
+    <div class="column " id="jobSites">
+
+    </div>
+
+    <div class="column" id="categories">
+
+    </div>
+
+
+</div>
+    <div id="outputCard">
+        
+    </div>
+</div>
+    <script src="js/file.js"></script>
+</body>
+</html>
