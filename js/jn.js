@@ -66,3 +66,37 @@ function sendData(){
     document.querySelector("form").addEventListener("submit", 
     sendData())
     
+
+
+
+
+
+
+
+
+    document.querySelector(".submit").addEventListener(
+        "click",
+        () => {
+          console.log("made it thru first");
+          setTimeout(() => {
+            console.log("made it thru 2");
+      
+            const deleteButton = document.querySelectorAll(".delete")[0];
+            const deleteButtonArray = Array.isArray(deleteButton) ? deleteButton : [deleteButton];
+              
+            deleteButtonArray.forEach(function(i) {
+              console.log("made it thru 3");
+              console.log(deleteButtonArray);
+         
+      console.log(deleteButtonArray[0])
+      console.log(deleteButtonArray)
+              
+              i.addEventListener("click", e => {
+                console.log("made it thru 4");
+                e.currentTarget.parentNode.parentNode.parentNode.parentNode.remove();
+              });
+            }, 500);
+          });
+        },
+        true
+      );
