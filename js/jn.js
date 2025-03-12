@@ -1,4 +1,4 @@
-//gaining access to query string from form input
+/*//gaining access to query string from form input
 const params = new URLSearchParams(window.location.search) 
 
 function sendData(){
@@ -93,10 +93,40 @@ function sendData(){
               
               i.addEventListener("click", e => {
                 console.log("made it thru 4");
-                e.currentTarget.parentNode.parentNode.parentNode.parentNode.remove();
+                e.currentTarget.parentNode.parentNode.parentNode.remove();
               });
             }, 500);
           });
         },
         true
       );
+
+
+
+
+
+
+
+
+
+
+
+      //////??
+      document.addEventListener("click", ()=> {
+
+        if(!sendData()){
+            return;
+        }
+            const deleteButton = document.querySelectorAll(".delete")[0];
+              console.log(deleteButton)
+            deleteButton.forEach(i => {
+              console.log("made it thru 3");
+        
+        console.log(deleteButtonArray)
+              
+              i.addEventListener("click", e => {
+                console.log("made it thru 4");
+                e.currentTarget.parentNode.parentNode.parentNode.parentNode.remove();
+              })
+          })
+        */
