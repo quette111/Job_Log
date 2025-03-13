@@ -13,8 +13,16 @@
     <form onsubmit="sendData(event)">
         
         <div>
-            <label for="name">Name:</label>
-            <input name="name" id="name">
+            <label for="name">Status:</label>
+            <select autofocus id="name" name="name" >
+                <option>--Please choose a job status--</option>
+                <option value="applied">Applied</option>
+                <option value="not">Not Applied</option>
+                <option value="closed">Closed</option>
+                <option value="assess">Assessment</option>
+                <option value="reject">Rejected</option>
+                <option value="interview">Interview</option>
+              </select>
         </div>
         <div>
             <label for="jobTitle">Job Title:</label>

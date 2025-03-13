@@ -221,7 +221,14 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 #status{
  padding-bottom: 20%;
 }
+ #outputCard button{ 
+    border: solid white 0.5px;
+ 
+margin: 3%;
+height: 13%;
+  border-radius: 15px;
 
+ }
 #statusbuttons button{
   border: solid white 0.5px;
   text-align: center;
@@ -271,8 +278,13 @@ width: 100%;
     font-size: 0.75em;
   }
 }
-
+#outputCard button{
+  right: 16%;
+  top: 330px;
+  position: relative;
+}
 #applied{
+ 
 background-color: green;
 color: white;
 } 
@@ -295,4 +307,18 @@ color: white;
 #interview{
   color: white;
   background-color: rgb(16, 83, 230);
+}
+
+#jobOutput, #companyOutput{
+font-weight: 250;
+
+}
+
+#jobOutput{
+position: relative;
+left: 50%;
+}
+#companyOutput{
+  
+
 }

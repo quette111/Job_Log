@@ -1,14 +1,23 @@
-///note to self: struggling with implementing forEach() and localStorage no idea why, will keep at it 2moro
+  
+  
+  
+  
+  
+  ///note to self: this code is all over the place, implementing functionality first for learning purposes
 function sendData(e) {
     let d = new Date();
-  
-    let info = [
+
+  let info = [
       {
         Name: `${document.getElementById("name").value}`,
         Job: `${document.getElementById("jobTitle").value}`,
         Company: `${document.getElementById("company").value}`
       }
     ];
+    
+
+    
+
     localStorage.setItem("ggs", info);
     let g = localStorage.getItem("ggs");
     let amPm;
@@ -23,16 +32,57 @@ function sendData(e) {
   
     e.preventDefault();
   
+    
+    let companyName = info[0].Company
+    let companyName2 = companyName.replaceAll(' ', '').toLowerCase()    
+   const apiKey = 'pk_AcKPaEj6R5q_Al3XZu8hCw' 
+    const  apiUrl = `https://img.logo.dev/${companyName2}.com?token=${apiKey}`
+  
+
+const headers = {
+  'Authorization': `Bearer: ${apiKey}`,
+  'Content-Type': 'application/json'
+};
+
+ async function getData(){
+     try{
+         const response = await fetch(apiUrl, {
+           method: 'GET',
+           headers: headers
+         
+     });
+     if(!response.ok){
+       throw new Error(`API call not working ${response.statusText}`)
+    }
+     const data = await response.json();
+     console.log('success', data)
+
+     //displayData(data)
+ }catch(error){
+   console.log('error cuh:', error)
+ }
+
+ }
+    
+
+
+
+
+
+
+
+  
+
     if (document.querySelector("input").value != "") {
       document.getElementById("outputCard").innerHTML += info
         .map(
           item =>
             `
       <div id="innerOutput">
-          <h3 id="nameOutput">${item.Name}</h3>
-          <h3 id="jobOutput">${item.Job}</h3>
-          <h3 id="companyOutput">${item.Company}</h3>
-          <img id="companyImage"/>
+          <h3 id="jobOutput"></h3>
+          <h3 id="nameOutput">${item.Company}</h3>
+          <h3 id="companyOutput">${item.Job}</h3>
+          <img src='${apiUrl}' id="companyImage"/>
               <div id='time'>
                   <h4>${d.getMonth()}/${d.getDate()}/${d.getFullYear()}</h4>
                  
@@ -49,13 +99,69 @@ function sendData(e) {
   `
         )
         .join("");
-        getData()
+        //getData()
       document.getElementById("name").value = "";
       document.getElementById("jobTitle").value = "";
       document.getElementById("company").value = "";
     }
-  }
+
+  //status()
+
+  //getData()
+
+  }    
   
+
+//////////////////////////////does not work as intended yet
+
+function status(){
+let e = document.getElementById('name')
+
+let text = e.options[e.selectedIndex].text
+console.log(text)
+
+
+let clone = document.getElementById(`'${text}'`)
+
+let cl = clone.cloneNode(true)
+document.getElementById('nameOutput').append(cl)
+
+}
+
+
+////////////////???API CALL API CALL/////////////////////
+/*let companyName = info[0].Company
+    let companyName2 = companyName.replaceAll(' ', '').toLowerCase()    
+   const apiKey = 'pk_AcKPaEj6R5q_Al3XZu8hCw' 
+    const  apiUrl = `https://img.logo.dev/${companyName2}.com?token=${apiKey}`
+  
+
+const headers = {
+  'Authorization': `Bearer: ${apiKey}`,
+  'Content-Type': 'application/json'
+};
+
+ async function getData(){
+     try{
+         const response = await fetch(apiUrl, {
+           method: 'GET',
+           headers: headers
+         
+     });
+     if(!response.ok){
+       throw new Error(`API call not working ${response.statusText}`)
+    }
+     const data = await response.json();
+     console.log('success', data)
+     //displayData(data)
+ }catch(error){
+   console.log('error cuh:', error)
+ }
+document.getElementById('companyImage').src = apiUrl
+ }
+ console.log(companyName)
+  
+ */
 
   /*
   /////////EDIT
@@ -139,37 +245,8 @@ const ohwell = document.getElementById('innerOutput')
         })
     })
     
-    const apiKey = 'pk_AcKPaEj6R5q_Al3XZu8hCw'
-
-const headers = {
-  'Authorization': `Bearer: ${apiKey}`,
-  'Content-Type': 'application/json'
-};
-
-let companyName = document.getElementById("company").value
-companyName.replaceAll(' ', '');
-const apiUrl = `https://img.logo.dev/${companyName}.com?token=${apiKey}`
 
 
-
- async function getData(){
-     try{
-         const response = await fetch(apiUrl, {
-           method: 'GET',
-           headers: headers
-         
-     });
-     if(!response.ok){
-       throw new Error(`API call not working ${response.statusText}`)
-    }
-     const data = await response.json();
-     console.log('success', data)
-     //displayData(data)
- }catch(error){
-   console.log('error cuh:', error)
- }
-document.getElementById('companyImage').src = apiUrl
- }
  
 
  /////OLD DELETE  FUNCTION
