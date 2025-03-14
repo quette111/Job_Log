@@ -105,8 +105,8 @@ const headers = {
       document.getElementById("company").value = "";
     }
 
-  //status()
 
+  //status()
   //getData()
 
   }    
@@ -116,14 +116,10 @@ const headers = {
 
 function status(){
 let e = document.getElementById('name')
-
 let text = e.options[e.selectedIndex].text
 console.log(text)
-
-
-let clone = document.getElementById(`'${text}'`)
-
-let cl = clone.cloneNode(true)
+let clonee = document.getElementById(`'${text}'`)
+let cl = clonee.cloneNode(true)
 document.getElementById('nameOutput').append(cl)
 
 }
@@ -202,23 +198,29 @@ document.getElementById('companyImage').src = apiUrl
 ///////////buggyyyyy
 
   document.addEventListener("click", ()=> {
+    console.log('editing?')
     const editButton = document.querySelectorAll(".edit");
     editButton.forEach(i => {
         i.addEventListener('click', e => {
+          
+          document.body.style.cssText = 'background-color: rgba(0, 0, 0, 0.219);';
+          let selectedCard = e.currentTarget.parentNode.parentNode.parentNode
+          selectedCard.style.cssText = 'scale: 1.5;opacity: 2.5;z-index:500'
+          
             const sp1 = document.createElement('h3')
 
             sp1.id = 'newSpan';
 
-let searValue = document.getElementById('searchBar').value
+            let searValue = document.getElementById('searchBar').value
 
 
             const sp1_content = document.createTextNode(searValue) 
             
             sp1.appendChild(sp1_content);
 
-            const sp2 = document.getElementById('nameOutput')
-const ohwell = document.getElementById('innerOutput')
-            let parentDiv = e.currentTarget.ohwell
+            let sp2 = document.getElementById('nameOutput')
+            let ow = document.getElementById('innerOutput');
+            let parentDiv = e.currentTarget.parentNode.parentNode.parentNode
             
             parentDiv.replaceChild(sp1, sp2);
 
