@@ -79,7 +79,10 @@ const headers = {
           item =>
             `
       <div id="innerOutput">
-          <h3 id="jobOutput"></h3>
+      <div id='minimize'>
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M240-120v-120H120v-80h200v200h-80Zm400 0v-200h200v80H720v120h-80ZM120-640v-80h120v-120h80v200H120Zm520 0v-200h80v120h120v80H640Z"/></svg>
+         </div> 
+      <h3 id="jobOutput"></h3>
           <h3 id="nameOutput">${item.Company}</h3>
           <h3 id="companyOutput">${item.Job}</h3>
           <img src='${apiUrl}' id="companyImage"/>
@@ -111,6 +114,8 @@ const headers = {
 
   }    
   
+///minimize function
+
 
 //////////////////////////////does not work as intended yet
 
@@ -120,7 +125,7 @@ let text = e.options[e.selectedIndex].text
 console.log(text)
 let clonee = document.getElementById(`'${text}'`)
 let cl = clonee.cloneNode(true)
-document.getElementById('nameOutput').append(cl)
+document.getElementById('jobOutput').append(cl)
 
 }
 
@@ -206,7 +211,10 @@ document.getElementById('companyImage').src = apiUrl
           document.body.style.cssText = 'background-color: rgba(0, 0, 0, 0.219);';
           let selectedCard = e.currentTarget.parentNode.parentNode.parentNode
           selectedCard.style.cssText = 'scale: 1.5;opacity: 2.5;z-index:500'
+         e.currentTarget.document.getElementById('nameOutput') = 'margin-top: 200;'
+
           
+
             const sp1 = document.createElement('h3')
 
             sp1.id = 'newSpan';
@@ -230,7 +238,20 @@ document.getElementById('companyImage').src = apiUrl
     })
 
   })
-  
+
+function min(){
+  console.log('minimize click')
+  const minimize = document.getElementById('minimize');
+    minimize.forEach(i => {
+      i.addEventListener("click", e =>{
+          document.body.style.cssText = 'background-color: rgba(0, 0, 0, 0);';
+         
+          e.currentTarget.parentNode.style.cssText = 'scale: 1;opacity: 1;z-index:0'
+      })
+    })
+  }
+
+
   ///NEW DELETE FUNCTION, NEED TO FIX MULT CLICKS FOR ONE DELETE
     document.addEventListener("click", ()=> {
 
