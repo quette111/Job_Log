@@ -119,15 +119,6 @@ const headers = {
 
 //////////////////////////////does not work as intended yet
 
-function status(){
-let e = document.getElementById('name')
-let text = e.options[e.selectedIndex].text
-console.log(text)
-let clonee = document.getElementById(`'${text}'`)
-let cl = clonee.cloneNode(true)
-document.getElementById('jobOutput').append(cl)
-
-}
 
 
 ////////////////???API CALL API CALL/////////////////////
@@ -269,8 +260,23 @@ function min(){
     })
     
 
+let sel = document.querySelector('select')
 
  
+    sel.addEventListener("change", () => {
+
+
+  console.log(`changed selection to: ${sel}`)
+
+let selectedIndexx = sel.selectedIndex
+let text = sel.options[sel.selectedIndexx].value
+console.log(text)
+let clonee = document.getElementById(text.value)
+let cl = clonee.cloneNode(true)
+document.getElementById('jobOutput').append(cl)
+
+    })
+
 
  /////OLD DELETE  FUNCTION
  /*
