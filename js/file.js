@@ -257,7 +257,7 @@ function min(){
                 e.currentTarget.parentNode.parentNode.parentNode.parentNode.remove();
         })
         })
-    })
+    });
     
 
 let sel = document.querySelector('select')
