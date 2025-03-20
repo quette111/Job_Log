@@ -256,7 +256,7 @@ function min(){
                 console.log("made it thru 4");
                 e.currentTarget.parentNode.parentNode.parentNode.parentNode.remove();
         })
-        })
+        });
     });
     
 
