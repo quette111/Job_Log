@@ -266,11 +266,18 @@ document.addEventListener("click", () => {
 
 
       i.addEventListener("click", e => {
+       
+
         console.log("made it thru 4");
         e.currentTarget.parentNode.parentNode.parentNode.parentNode.remove();
       })
     })
   });
+  let numberOfApps = document.getElementById('numberOfApplications')
+
+  start -= 1
+console.log('hi')
+numberOfApps.innerText = `${start}`
 });
 
 
@@ -298,6 +305,17 @@ sel.addEventListener("change", () => {
 
 })
 
+let start = 0;
+let numberOfApps = document.getElementById('numberOfApplications')
+document.getElementById('submitForm').addEventListener('click', ()=>{
+  if(document.getElementById('jobTitle').value == '' || document.getElementById('company').value == ''){
+    alert('Error: Please enter job title to continue')
+  }else{
+  start += 1
+  console.log('hi')
+numberOfApps.innerText = ` ${start}`;
+document.getElementById('submitForm').stopPropagation()
+}})
 
 /////OLD DELETE  FUNCTION
 /*
