@@ -284,28 +284,28 @@ width: 100%;
   position: relative;
   
 }
-#applied{
+#Applied{
  
 background-color: green;
 color: white;
 } 
-#not{
+#Interested{
   color: white;
   background-color: rgb(255, 208, 0);
 } 
-#closed{
+#Closed{
   color: white;
   background-color: rgb(255, 145, 0);
 } 
-#assess{
+#Assessment{
   color: white;
   background-color: rgb(234, 0, 255);
 } 
-#reject{
+#Rejected{
   color: white;
   background-color: red;
 } 
-#interview{
+#Interview{
   color: white;
   background-color: rgb(16, 83, 230);
 }
@@ -321,5 +321,18 @@ left: 50%;
 }
 #companyOutput{
   
+
+}
+
+#appendedButton{
+
+}
+
+#outputCard button{
+ 
+   right: 270%;
+  position: relative;
+top: 400%;
+width: 100%;
 
 }

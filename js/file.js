@@ -46,9 +46,6 @@ function sendData(e) {
     }
   ];
 
-
-
-
   localStorage.setItem("ggs", info);
   let g = localStorage.getItem("ggs");
   let amPm;
@@ -68,8 +65,22 @@ apiCall()
 
 
 
+let buttonOption = document.querySelector('select').value
 
 
+
+
+  /*console.log(`changed selection to: ${sel}`)
+
+  let selectedIndexx = sel.selectedIndex
+  let text = sel.selectedIndexx
+  console.log(text)
+  let clonee = document.getElementById(`${sel}`)
+  //let cl = 
+  document.getElementById('jobOutput').append(clonee.cloneNode(true))
+
+
+*/
 
 
 
@@ -87,6 +98,8 @@ apiCall()
           <h3 id="companyOutput">${item.Job}</h3>
           <img src='${apiUrl}' id="companyImage"/>
               <div id='time'>
+                        <button class='appendedButton' id='${buttonOption}' disabled>${buttonOption}</button>
+
                   <h4>${d.getMonth()}/${d.getDate()}/${d.getFullYear()}</h4>
                  
                   <h5>${hr}:${d.getMinutes()}${amPm}</h5>
@@ -289,22 +302,7 @@ numberOfApps.innerText = `${start}`
 
 
 
-let sel = document.querySelector('select')
 
-
-sel.addEventListener("change", (event) => {
-  event.stopPropagation(); 
-
-  console.log(`changed selection to: ${sel}`)
-
-  let selectedIndexx = sel.selectedIndex
-  let text = sel.options[sel.selectedIndexx].value
-  console.log(text)
-  let clonee = document.getElementById(text.value)
-  let cl = clonee.cloneNode(true)
-  document.getElementById('jobOutput').append(cl)
-
-})
 
 let start = 0;
 let numberOfApps = document.getElementById('numberOfApplications')
