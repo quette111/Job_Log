@@ -1,42 +1,8 @@
-
-
-
-
-
-///note to self: this code is all over the place, implementing functionality first for learning purposes
-function sendData(e) {
-  let d = new Date();
-
-  let info = [
-    {
-      Name: `${document.getElementById("name").value}`,
-      Job: `${document.getElementById("jobTitle").value}`,
-      Company: `${document.getElementById("company").value}`
-    }
-  ];
-
-
-
-
-  localStorage.setItem("ggs", info);
-  let g = localStorage.getItem("ggs");
-  let amPm;
-  let hr = d.getHours();
-  if (hr > 12) {
-    amPm = "PM";
-    hr = hr - 12;
-  } else {
-    amPm = "AM";
-    hr = hr;
-  }
-
-  e.preventDefault();
-
-
+function apiCall(){
   let companyName = info[0].Company
   let companyName2 = companyName.replaceAll(' ', '').toLowerCase()
   const apiKey = 'pk_AcKPaEj6R5q_Al3XZu8hCw'
-  const apiUrl = `https://img.logo.dev/${companyName2}.com?token=${apiKey}`
+  window.apiUrl = `https://img.logo.dev/${companyName2}.com?token=${apiKey}`
 
 
   const headers = {
@@ -63,7 +29,41 @@ function sendData(e) {
     }
 
   }
+}
 
+
+
+
+///note to self: this code is all over the place, implementing functionality first for learning purposes
+function sendData(e) {
+  let d = new Date();
+
+  window.info = [
+    {
+      Name: `${document.getElementById("name").value}`,
+      Job: `${document.getElementById("jobTitle").value}`,
+      Company: `${document.getElementById("company").value}`
+    }
+  ];
+
+
+
+
+  localStorage.setItem("ggs", info);
+  let g = localStorage.getItem("ggs");
+  let amPm;
+  let hr = d.getHours();
+  if (hr > 12) {
+    amPm = "PM";
+    hr = hr - 12;
+  } else {
+    amPm = "AM";
+    hr = hr;
+  }
+
+  e.preventDefault();
+
+apiCall()
 
 
 
@@ -193,15 +193,15 @@ document.querySelector(".submit").addEventListener(
 
 ///////////buggyyyyy
 
-document.addEventListener("click", () => {
-
+document.addEventListener("click", (event) => {
+event.stopPropagation()
   console.log('editing?')
   const editButton = document.querySelectorAll(".edit");
   editButton.forEach(i => {
     
     i.addEventListener('click', e => {
 
-
+e.stopPropagation()
       document.body.style.cssText = 'background-color: rgba(0, 0, 0, 0.219);';
       let selectedCard = e.currentTarget.parentNode.parentNode.parentNode
       selectedCard.style.cssText = 'scale: 1.5;opacity: 2.5;z-index:500'
@@ -240,6 +240,7 @@ function min() {
   const minimize = document.getElementById('minimize');
   minimize.forEach(i => {
     i.addEventListener("click", e => {
+      e.stopPropagation()
       document.body.style.cssText = 'background-color: rgba(0, 0, 0, 0);';
 
       e.currentTarget.parentNode.style.cssText = 'scale: 1;opacity: 1;z-index:0'
@@ -249,8 +250,8 @@ function min() {
 
 
 ///NEW DELETE FUNCTION, NEED TO FIX MULT CLICKS FOR ONE DELETE
-document.addEventListener("click", () => {
-
+document.addEventListener("click", (ev) => {
+ev.stopPropagation()
   const deleteButton = document.querySelectorAll(".delete");
   console.log(deleteButton)
 
@@ -258,15 +259,16 @@ document.addEventListener("click", () => {
     console.log("made it thru 3");
 
     i.addEventListener('click', (event) => {
-      console.lg
       event.stopPropagation()
+      console.lg
+      
 
 
 
 
 
       i.addEventListener("click", e => {
-       
+       e.stopPropagation()
 
         console.log("made it thru 4");
         e.currentTarget.parentNode.parentNode.parentNode.parentNode.remove();
@@ -275,7 +277,7 @@ document.addEventListener("click", () => {
   });
   let numberOfApps = document.getElementById('numberOfApplications')
 
-  start -= 1
+  
 console.log('hi')
 numberOfApps.innerText = `${start}`
 });
@@ -287,12 +289,11 @@ numberOfApps.innerText = `${start}`
 
 
 
-
 let sel = document.querySelector('select')
 
 
-sel.addEventListener("change", () => {
-
+sel.addEventListener("change", (event) => {
+  event.stopPropagation(); 
 
   console.log(`changed selection to: ${sel}`)
 
@@ -307,15 +308,19 @@ sel.addEventListener("change", () => {
 
 let start = 0;
 let numberOfApps = document.getElementById('numberOfApplications')
-document.getElementById('submitForm').addEventListener('click', ()=>{
-  if(document.getElementById('jobTitle').value == '' || document.getElementById('company').value == ''){
-    alert('Error: Please enter job title to continue')
-  }else{
-  start += 1
-  console.log('hi')
-numberOfApps.innerText = ` ${start}`;
-document.getElementById('submitForm').stopPropagation()
-}})
+document.getElementById('submitForm').addEventListener('click', (event) => {
+  event.stopPropagation(); // Prevents the event from bubbling up the DOM tree
+
+  if (document.getElementById('jobTitle').value == '' || document.getElementById('company').value == '') {
+    alert('Error: Please enter job title to continue');
+  } else {
+    start += 1;
+    console.log('hi');
+    numberOfApps.innerText = ` ${start}`;
+  }
+});
+
+
 
 /////OLD DELETE  FUNCTION
 /*
