@@ -70,15 +70,16 @@ let buttonOption = document.querySelector('select').value
         item =>
           `
       <div id="innerOutput">
-      <div id='minimize'>
-      <button id='exit'>X</button>
-      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M240-120v-120H120v-80h200v200h-80Zm400 0v-200h200v80H720v120h-80ZM120-640v-80h120v-120h80v200H120Zm520 0v-200h80v120h120v80H640Z"/></svg>
-         </div> 
+      
+     
       <h3 id="jobOutput"></h3>
+
           <h3 id="nameOutput">${item.Company}</h3>
           <h3 id="companyOutput">${item.Job}</h3>
           <img src='${apiUrl}' id="companyImage"/>
               <div id='time'>
+                         
+
                         <button class='appendedButton' id='${buttonOption}' disabled>${buttonOption}</button>
 
                   <h4>${d.getMonth()}/${d.getDate()}/${d.getFullYear()}</h4>
@@ -87,7 +88,6 @@ let buttonOption = document.querySelector('select').value
               </div>
               <div id='deleteAndEdit'>
                   
-                  <svg  xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="blue"><path class='edit' d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg>
                   <div>
                   <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="red"><path class='delete' d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
                   </div>
@@ -186,7 +186,7 @@ document.querySelector(".submit").addEventListener(
 
 
 ///////////buggyyyyy
-
+/*
 document.addEventListener("click", (event) => {
 event.stopPropagation()
   console.log('editing?')
@@ -196,10 +196,9 @@ event.stopPropagation()
     i.addEventListener('click', e => {
 
 e.stopPropagation()
-      document.body.style.cssText = 'background-color: rgba(0, 0, 0, 0.219);';
+      e.currentTarget.style.cssText = 'backdrop-filter: blur(5px);-webkit-backdrop-filter: blur(5px);'
+document.body.style.cssText = 'background: rgba(255, 255, 255, 0.2);'
       let selectedCard = e.currentTarget.parentNode.parentNode.parentNode
-      selectedCard.style.cssText = 'scale: 1.5;opacity: 2.5;z-index:500'
-      e.currentTarget.document.getElementById('nameOutput') = 'margin-top: 200;'
 
 
 
@@ -229,18 +228,17 @@ e.stopPropagation()
 
 })
 
-document.getElementById("outputCard").addEventListener('click', () => {
-  console.log('minimize click')
-  const minimize = document.getElementById('minimize');
-  minimize.forEach(i => {
+*/
+ 
+ /* minimize.forEach(i => {
     i.addEventListener("click", e => {
-      e.stopPropagation()
-      document.body.style.cssText = 'background-color: rgba(0, 0, 0, 0);';
+console.log('work nigga')
 
-      e.currentTarget.parentNode.style.cssText = 'scale: 1;opacity: 1;z-index:0'
-    })
+      e.stopPropagation()
+     
+      e.currentTarget.parentNode.remove()
   })
-})
+      */
 
 
 ///NEW DELETE FUNCTION, NEED TO FIX MULT CLICKS FOR ONE DELETE
@@ -275,16 +273,6 @@ ev.stopPropagation()
 console.log('hi')
 numberOfApps.innerText = `${start}`
 });
-
-
-
-
-
-
-
-
-
-
 let start = 0;
 let numberOfApps = document.getElementById('numberOfApplications')
 document.getElementById('submitForm').addEventListener('click', (event) => {
