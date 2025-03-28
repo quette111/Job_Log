@@ -62,35 +62,16 @@ function sendData(e) {
 
 apiCall()
 
-
-
-
 let buttonOption = document.querySelector('select').value
 
-
-
-
-  /*console.log(`changed selection to: ${sel}`)
-
-  let selectedIndexx = sel.selectedIndex
-  let text = sel.selectedIndexx
-  console.log(text)
-  let clonee = document.getElementById(`${sel}`)
-  //let cl = 
-  document.getElementById('jobOutput').append(clonee.cloneNode(true))
-
-
-*/
-
-
-
-  if (document.querySelector("input").value != "") {
+ if (document.querySelector("input").value != "") {
     document.getElementById("outputCard").innerHTML += info
       .map(
         item =>
           `
       <div id="innerOutput">
       <div id='minimize'>
+      <button id='exit'>X</button>
       <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M240-120v-120H120v-80h200v200h-80Zm400 0v-200h200v80H720v120h-80ZM120-640v-80h120v-120h80v200H120Zm520 0v-200h80v120h120v80H640Z"/></svg>
          </div> 
       <h3 id="jobOutput"></h3>
@@ -248,7 +229,7 @@ e.stopPropagation()
 
 })
 
-function min() {
+document.getElementById("outputCard").addEventListener('click', () => {
   console.log('minimize click')
   const minimize = document.getElementById('minimize');
   minimize.forEach(i => {
@@ -259,7 +240,7 @@ function min() {
       e.currentTarget.parentNode.style.cssText = 'scale: 1;opacity: 1;z-index:0'
     })
   })
-}
+})
 
 
 ///NEW DELETE FUNCTION, NEED TO FIX MULT CLICKS FOR ONE DELETE

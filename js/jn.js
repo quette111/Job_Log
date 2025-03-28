@@ -130,3 +130,17 @@ function sendData(){
               })
           })
         */
+
+          document.addEventListener('click', () => {
+            console.log('minimize click')
+            const minimize = document.getElementById('exit');
+            minimize.forEach(i => {
+              i.addEventListener("click", e => {
+                e.stopPropagation()
+                document.body.style.cssText = 'background-color: rgba(0, 0, 0, 0);';
+          
+                e.currentTarget.parentNode.style.cssText = 'scale: 1;opacity: 1;z-index:0'
+              })
+            })
+          })
+          
