@@ -1,0 +1,25 @@
+{
+  "name": "job-app",
+  "version": "1.0.0",
+  "main": "api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quette111/JobLog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/quette111/JobLog/issues"
+  },
+  "homepage": "https://github.com/quette111/JobLog#readme",
+  "description": "",
+  "dependencies": {
+    "chart.js": "^4.4.8",
+    "chokidar": "^4.0.3",
+    "express": "^4.21.2"
+  }
+}
