@@ -1,4 +1,6 @@
+
 const ctx = document.getElementById('myChart');
+
 
 const chart = new Chart(ctx, {
   type: 'bar',
@@ -26,3 +28,8 @@ document.getElementById('submitForm').addEventListener('click', ()=> {
   chart.data.data[1] + 1
   })
  
+
+$('.slide').on('click', function(event){
+  event.preventDefault();
+    $('.chart').toggleClass('show');
+});
