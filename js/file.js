@@ -32,7 +32,7 @@ function apiCall(){
 }
 
 
-
+let newInfo = [];
 
 ///note to self: this code is all over the place, implementing functionality first for learning purposes
 function sendData(e) {
@@ -63,8 +63,9 @@ function sendData(e) {
 apiCall()
 
 let buttonOption = document.querySelector('select').value
-
+newInfo += info
  if (document.querySelector("input").value != "") {
+
     document.getElementById("outputCard").innerHTML += info
       .map(
         item =>
@@ -80,7 +81,7 @@ let buttonOption = document.querySelector('select').value
               <div id='time'>
                          
 
-                        <button class='appendedButton' id='${buttonOption}' disabled>${buttonOption}</button>
+                        <button value='${buttonOption}' class='appendedButton' id='${buttonOption}' disabled>${buttonOption}</button>
 
                   <h4>${d.getMonth()}/${d.getDate()}/${d.getFullYear()}</h4>
                  
@@ -100,15 +101,26 @@ let buttonOption = document.querySelector('select').value
     document.getElementById("name").value = "";
     document.getElementById("jobTitle").value = "";
     document.getElementById("company").value = "";
+    
   }
 
 
   //status()
-  //getData()
-
+  //g
 }
 
-///minimize function
+
+
+let dd = document.getElementById('statusbuttons')
+dd.addEventListener('click', ()=> {
+  console.log('listening')
+for(let i = 0; i < dd.length; i++){ 
+  if( currentButton.innerText   != dd.childNodes[i].innerText){
+    console.log(currentButton.parentNode)
+    currentButton.parentNode.remove()
+  }
+}
+})
 
 
 //////////////////////////////does not work as intended yet
