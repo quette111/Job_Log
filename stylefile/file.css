@@ -261,6 +261,7 @@ height: 13%;
 #bigBox{
   display: inline-flex;
 width: 100%;
+
 }
 
 @media(max-width: 900px){
@@ -360,11 +361,16 @@ body button{
 }
 
 .chart{
+  background-color: #ffffff;
+  border: #000 1px solid;
   max-width: 900px;
   height: 450px;
   padding: 50px;
   margin: 0 auto;
   z-index: 1000;
+position: absolute;
+top: 110%;
+left: 15%;
 }
 
 .chart .chart_types{

@@ -283,7 +283,7 @@ ev.stopPropagation()
 
   
 console.log('hi')
-numberOfApps.innerText = `${start}`
+
 });
 let start = 0;
 let numberOfApps = document.getElementById('numberOfApplications')
