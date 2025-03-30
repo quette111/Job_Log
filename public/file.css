@@ -5,6 +5,7 @@ body {
   overflow-x: hidden;
   padding-left: 5%;
   padding-right: 5%;
+  font-weight: 250;
 }
 .pattern {
   position: fixed;
@@ -207,8 +208,10 @@ h5 {
 }
 
 #stats {
+  border: 0.5px solid rgb(0, 0, 0);
 }
 #status {
+  border: 0.5px solid rgb(0, 0, 0);
   padding-bottom: 20%;
 }
 #outputCard button {
@@ -230,7 +233,7 @@ h5 {
   text-align: left;
   margin-top: 2%;
   flex: 1 1 0px;
-
+  
   border-radius: 10%;
 }
 .column h3 {
@@ -339,12 +342,19 @@ body button {
 }
 
 .chart {
+
+  background-color: #6fcdf8;
+  background-image:
+  radial-gradient(
+    white,
+    #6fcdf8
+  );
   border-radius: 16px;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
     rgba(0, 0, 0, 0.23) 10px 6px 6px;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 0.5px solid rgb(0, 0, 0);
   width: 300px;
   height: 300px;
   padding: 50px;
@@ -374,4 +384,17 @@ body button {
   left: 65%;
   font-size: larger;
   bottom: 50%;
+}
+
+#chartTypes button{
+  border-radius: 5px;
+background-color: white;
+border: 1px solid black;
+box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+    rgba(0, 0, 0, 0.23) 10px 6px 6px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+.chart h3{
+  margin-top: -10%;
 }
