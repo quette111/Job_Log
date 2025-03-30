@@ -1,5 +1,5 @@
  [
-    {"status": "Applied", "amount": 1000 },
+    {"status": "Applied", "amount": 500000 },
     {"status": "Interested", "amount": 21 },
     {"status": "Closed", "amount": 12 },
     {"status": "Assessment", "amount": 43 },

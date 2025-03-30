@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const apiRouter = require('./api'); // Import the router for serving JSON data
 const app = express();
+const PORT = process.env.PORT || 1000;
 
 // Serve static files from the 'public' folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -20,6 +21,13 @@ app.all('*', (req, res) => {
     res.status(404).send('Resource not found');
 });
 
-app.listen(7772, () => {
-    console.log('Server is running on port 7777...');
-});
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  }).on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.log(`Port ${PORT} is already in use. Trying another port...`);
+      app.listen(0, () => console.log(`New port assigned: ${server.address().port}`));
+    } else {
+      console.error(err);
+    }
+  });

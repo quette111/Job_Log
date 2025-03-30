@@ -1,16 +1,17 @@
 const ctx = document.getElementById('myChart');
-
+let chart
+let jsonData
 document.addEventListener('DOMContentLoaded', () => {
 
-  document.getElementById('submitForm').addEventListener('click', () => {
+  document.getElementById('submitForm').addEventListener('click', createTable = () => {
 
     fetch('/data.json')
       .then(response => response.json())
       .then(data => {
         console.log(data); // Check the data received
 
-        
-        const chart = new Chart(ctx, {
+        jsonData = data
+        chart = new Chart(ctx, {
           type: 'bar',
           data: {
             labels: data.map(n => n.status),
@@ -30,6 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
 
+       
+
         console.log(chart.data);
         console.log(chart.data.datasets[0].data[2]); // Check data for 'Closed' value
 
@@ -41,4 +44,18 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Error fetching data:', error);
       });
   });
+
+
+  
 });
+
+
+
+ 
+//let chartType = currentTarget.value
+document.getElementById('chartTypes').addEventListener('click', () => {
+
+ chart.destroy();
+ createTable()
+
+})
