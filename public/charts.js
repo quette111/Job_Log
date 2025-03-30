@@ -1,9 +1,10 @@
 const ctx = document.getElementById('myChart');
 let chart
 let jsonData
+let graphButtonValue = document.querySelectorAll('.graph')
 document.addEventListener('DOMContentLoaded', () => {
 
-  document.getElementById('submitForm').addEventListener('click', createTable = () => {
+  document.getElementById('submitForm').addEventListener('click', createTable = (type) => {
 
     fetch('/data.json')
       .then(response => response.json())
@@ -12,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         jsonData = data
         chart = new Chart(ctx, {
-          type: 'bar',
+          type: 'line',
           data: {
             labels: data.map(n => n.status),
             datasets: [{
@@ -53,9 +54,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
  
 //let chartType = currentTarget.value
-document.getElementById('chartTypes').addEventListener('click', () => {
-
+/*
+document.getElementById('chartTypes').addEventListener('click', (e) => {
+console.log('jjsnfkx')
+console.log(chart.config.type)
+console.log(graphButtonValue)
+console.log(e.currentTarget.value)
  chart.destroy();
+ chart.config.type = e.currentTarget.value
  createTable()
 
 })
+*/
+document.querySelectorAll('.graph').forEach((i)=> {
+
+i.addEventListener('click', (e) =>{
+  console.log(e.currentTarget.value)
+  console.log('^^^^^^^')
+  
+  chart.config.type = e.currentTarget.value
+  chart.update()
+  
+}
+)
+})
+

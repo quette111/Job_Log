@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const apiRouter = require('./api'); // Import the router for serving JSON data
 const app = express();
-const PORT = process.env.PORT || 1000;
+const PORT = process.env.PORT || 1007;
 
 // Serve static files from the 'public' folder
 app.use(express.static(path.join(__dirname, 'public')));
