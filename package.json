@@ -20,6 +20,7 @@
   "dependencies": {
     "chart.js": "^4.4.8",
     "chokidar": "^4.0.3",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "open": "^10.1.0"
   }

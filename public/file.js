@@ -1,7 +1,16 @@
+fetch('/api/config')  // Get the API_KEY or other necessary data
+  .then(response => response.json())
+  .then(data => {
+    // Now you can use the API_KEY that was returned by the server
+    window.apiKey = data.apiKey;
+    console.log(apiKey);  // You can use the API key, but it's only available on the frontend at runtime
+  })
+  .catch(error => console.error('Error fetching config:', error));
+
+
 function apiCall() {
   let companyName = info[0].Company
   let companyName2 = companyName.replaceAll(' ', '').toLowerCase()
-  const apiKey = 'pk_AcKPaEj6R5q_Al3XZu8hCw'
   window.apiUrl = `https://img.logo.dev/${companyName2}.com?token=${apiKey}`
 
 
@@ -37,6 +46,8 @@ let newInfo = [];
 ///note to self: this code is all over the place, implementing functionality first for learning purposes
 function sendData(e) {
   let d = new Date();
+  e.preventDefault()
+  e.stopPropagation()
 
   window.info = [
     {
@@ -45,6 +56,19 @@ function sendData(e) {
       Company: `${document.getElementById("company").value}`
     }
   ];
+
+  fetch('/apii/submit', {
+    method: 'POST',
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(info)
+
+  })
+    .then((response) => response.json())
+    .then((data2) => {
+      console.log("Response from server:", data2)
+    })
+    .catch((error) => console.log('Error:', error));
+
 
   localStorage.setItem("ggs", info);
   let g = localStorage.getItem("ggs");
@@ -98,6 +122,10 @@ function sendData(e) {
       )
       .join("");
     //getData()
+
+
+
+
     document.getElementById("name").value = "";
     document.getElementById("jobTitle").value = "";
     document.getElementById("company").value = "";
@@ -105,9 +133,9 @@ function sendData(e) {
   }
 
 
-  //status()
-  //g
 }
+
+
 
 
 
