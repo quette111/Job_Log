@@ -1,48 +1,44 @@
-fetch('/api/config')  // Get the API_KEY or other necessary data
+fetch('/api/config')  
   .then(response => response.json())
   .then(data => {
-    // Now you can use the API_KEY that was returned by the server
+
     window.apiKey = data.apiKey;
   })
-  .catch(error => console.error('Error fetching config:', error));
-
+  .catch(error => {
+    console.error('Error fetching config:', error)
+  });
 
 function apiCall() {
-  let companyName = info[0].Company
-  let companyName2 = companyName.replaceAll(' ', '').toLowerCase()
-  window.apiUrl = `https://img.logo.dev/${companyName2}.com?token=${apiKey}`
-
 
   const headers = {
     'Authorization': `Bearer: ${apiKey}`,
     'Content-Type': 'application/json'
   };
 
+  let companyName = info[0].Company
+  let companyName2 = companyName.replaceAll(' ', '').toLowerCase()
+  window.apiUrl = `https://img.logo.dev/${companyName2}.com?token=${apiKey}`
+
   async function getData() {
     try {
       const response = await fetch(apiUrl, {
         method: 'GET',
         headers: headers
-
       });
       if (!response.ok) {
         throw new Error(`API call not working ${response.statusText}`)
       }
       const data = await response.json();
       console.log('success', data)
-
-      //displayData(data)
     } catch (error) {
       console.log('error cuh:', error)
     }
-
   }
 }
 
-
 let newInfo = [];
 
-document.querySelector('form').addEventListener('submit', (e)=> {
+document.querySelector('form').addEventListener('submit', (e) => {
   let d = new Date();
   e.preventDefault()
   e.stopPropagation()
@@ -58,7 +54,7 @@ document.querySelector('form').addEventListener('submit', (e)=> {
   let numberOfApps = document.getElementById('numberOfApplications')
   if (document.getElementById('jobTitle').value == '' || document.getElementById('company').value == '') {
     alert('Error: Please enter job title to continue');
-    
+
   } else {
     start += 1;
     console.log('hi');
@@ -75,7 +71,6 @@ document.querySelector('form').addEventListener('submit', (e)=> {
       console.log("Response from server:", data2)
     })
     .catch((error) => console.log('Error:', error));
-
 
   localStorage.setItem("ggs", info);
   let g = localStorage.getItem("ggs");
@@ -95,52 +90,62 @@ document.querySelector('form').addEventListener('submit', (e)=> {
 
   let buttonOption = document.querySelector('select').value
   newInfo += info
-  if (document.querySelector("input").value != "") {
 
+  if (document.querySelector("input").value != "") {
     document.getElementById("outputCard").innerHTML += info
       .map(
         item =>
           `
-      <div id="innerOutput">
-      
-     
-      <h3 id="jobOutput"></h3>
+            <div id="innerOutput">
+              <h3 id="jobOutput"></h3>
+              
+              <h3 id="nameOutput">${item.Company}</h3>
+              <h3 id="companyOutput">${item.Job}</h3>
+              
+              <img src="${apiUrl}" id="companyImage" />
+              
+              <div id="time">
+                <button 
+                  value="${buttonOption}" 
+                  class="appendedButton" 
+                  id="${buttonOption}" 
+                  disabled
+                >
+                  ${buttonOption}
+                </button>
 
-          <h3 id="nameOutput">${item.Company}</h3>
-          <h3 id="companyOutput">${item.Job}</h3>
-          <img src='${apiUrl}' id="companyImage"/>
-              <div id='time'>
-                         
-
-                        <button value='${buttonOption}' class='appendedButton' id='${buttonOption}' disabled>${buttonOption}</button>
-
-                  <h4>${d.getMonth()}/${d.getDate()}/${d.getFullYear()}</h4>
-                 
-                  <h5>${hr}:${d.getMinutes()}${amPm}</h5>
+                <h4>${d.getMonth()}/${d.getDate()}/${d.getFullYear()}</h4>
+                <h5>${hr}:${d.getMinutes()}${amPm}</h5>
               </div>
-              <div id='deleteAndEdit'>
-                  
-                  <div>
-                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="red"><path class='delete' d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
-                  </div>
+
+              <div id="deleteAndEdit">
+                <div>
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    height="24px" 
+                    viewBox="0 -960 960 960" 
+                    width="24px" 
+                    fill="red"
+                  >
+                    <path 
+                      class="delete" 
+                      d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"
+                    />
+                  </svg>
+                </div>
               </div>
-      </div>
-  `
+            </div>
+
+
+          `
       )
       .join("");
     //getData()
-
-
-
-
     document.getElementById("name").value = "";
     document.getElementById("jobTitle").value = "";
     document.getElementById("company").value = "";
-
   }
 })
-
-
 
 let dd = document.getElementById('statusbuttons')
 dd.addEventListener('click', () => {
@@ -153,9 +158,6 @@ dd.addEventListener('click', () => {
   }
 })
 
-
-
-
 ///NEW DELETE FUNCTION, NEED TO FIX MULT CLICKS FOR ONE DELETE
 document.addEventListener("click", (ev) => {
   ev.stopPropagation()
@@ -167,26 +169,17 @@ document.addEventListener("click", (ev) => {
 
     i.addEventListener('click', (event) => {
       event.stopPropagation()
- 
-
-
-
-
-
 
       i.addEventListener("click", e => {
         e.stopPropagation()
-
         console.log("made it thru 4");
-        e.currentTarget.parentNode.parentNode.parentNode.parentNode.remove();
+        e.currentTarget.closest("#innerOutput").classList.add("fade-out");
+        setTimeout(() => {
+          e.currentTarget.closest("#innerOutput").remove()
+        }, 500);
       })
     })
   });
-  let numberOfApps = document.getElementById('numberOfApplications')
-
-
-  console.log('hi')
-
 });
 
 

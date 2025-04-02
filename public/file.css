@@ -404,3 +404,9 @@ box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
   display: none;
  }
 }
+
+.fade-out {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 1s ease-out, visibility 0s 3s;
+}
