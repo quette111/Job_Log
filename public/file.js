@@ -42,8 +42,7 @@ function apiCall() {
 
 let newInfo = [];
 
-///note to self: this code is all over the place, implementing functionality first for learning purposes
-function sendData(e) {
+document.querySelector('form').addEventListener('submit', (e)=> {
   let d = new Date();
   e.preventDefault()
   e.stopPropagation()
@@ -55,7 +54,16 @@ function sendData(e) {
       Company: `${document.getElementById("company").value}`
     }
   ];
-
+  let start = 0;
+  let numberOfApps = document.getElementById('numberOfApplications')
+  if (document.getElementById('jobTitle').value == '' || document.getElementById('company').value == '') {
+    alert('Error: Please enter job title to continue');
+    
+  } else {
+    start += 1;
+    console.log('hi');
+    //numberOfApps.innerText = ` ${start}`;
+  }
   fetch('/api/submit', {
     method: 'POST',
     headers: { "Content-Type": "application/json" },
@@ -130,11 +138,7 @@ function sendData(e) {
     document.getElementById("company").value = "";
 
   }
-
-
-}
-
-
+})
 
 
 
@@ -163,7 +167,7 @@ document.addEventListener("click", (ev) => {
 
     i.addEventListener('click', (event) => {
       event.stopPropagation()
-      console.lg
+ 
 
 
 
@@ -184,19 +188,7 @@ document.addEventListener("click", (ev) => {
   console.log('hi')
 
 });
-let start = 0;
-let numberOfApps = document.getElementById('numberOfApplications')
-document.getElementById('submitForm').addEventListener('click', (event) => {
-  event.stopPropagation(); // Prevents the event from bubbling up the DOM tree
 
-  if (document.getElementById('jobTitle').value == '' || document.getElementById('company').value == '') {
-    alert('Error: Please enter job title to continue');
-  } else {
-    start += 1;
-    console.log('hi');
-    //numberOfApps.innerText = ` ${start}`;
-  }
-});
 
 
 
