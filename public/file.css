@@ -319,9 +319,11 @@ h5 {
 
 #outputCard .appendedButton {
   right: 270%;
+  padding: 10%;
+  
   position: relative;
   top: 400%;
-  width: 100%;
+  width: 145%;
 }
 
 #outputCard #exit {
