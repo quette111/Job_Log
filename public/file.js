@@ -3,7 +3,6 @@ fetch('/api/config')  // Get the API_KEY or other necessary data
   .then(data => {
     // Now you can use the API_KEY that was returned by the server
     window.apiKey = data.apiKey;
-    console.log(apiKey);  // You can use the API key, but it's only available on the frontend at runtime
   })
   .catch(error => console.error('Error fetching config:', error));
 
@@ -57,7 +56,7 @@ function sendData(e) {
     }
   ];
 
-  fetch('/apii/submit', {
+  fetch('/api/submit', {
     method: 'POST',
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(info)
@@ -195,7 +194,7 @@ document.getElementById('submitForm').addEventListener('click', (event) => {
   } else {
     start += 1;
     console.log('hi');
-    numberOfApps.innerText = ` ${start}`;
+    //numberOfApps.innerText = ` ${start}`;
   }
 });
 

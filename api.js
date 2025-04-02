@@ -9,7 +9,7 @@ router.get('/data.json', (req, res) => {
         if (err) {
             return res.status(500).json({ error: 'Error reading file' });
         }
-        res.json(JSON.parse(jsonString.info));
+        res.json(JSON.parse(jsonString));
     });
 });
 
