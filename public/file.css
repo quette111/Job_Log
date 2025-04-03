@@ -251,6 +251,11 @@ h5 {
   display: inline-flex;
   width: 100%;
 }
+#navigationArea div {
+  padding-left: 5%;
+  border: solid black 1px;
+}
+
 
 @media (max-width: 900px) {
   body {
@@ -270,6 +275,7 @@ h5 {
   }
   #navigationArea div {
     font-size: 0.75em;
+    border: solid black 1px;
   }
 }
 #outputCard button {

@@ -50,16 +50,13 @@ document.querySelector('form').addEventListener('submit', (e) => {
       Company: `${document.getElementById("company").value}`
     }
   ];
-  let start = 0;
-  let numberOfApps = document.getElementById('numberOfApplications')
   if (document.getElementById('jobTitle').value == '' || document.getElementById('company').value == '') {
     alert('Error: Please enter job title to continue');
 
   } else {
-    start += 1;
-    console.log('hi');
-    //numberOfApps.innerText = ` ${start}`;
-  }
+   
+    
+ 
   fetch('/api/submit', {
     method: 'POST',
     headers: { "Content-Type": "application/json" },
@@ -144,7 +141,7 @@ document.querySelector('form').addEventListener('submit', (e) => {
     document.getElementById("name").value = "";
     document.getElementById("jobTitle").value = "";
     document.getElementById("company").value = "";
-  }
+  }}
 })
 
 let dd = document.getElementById('statusbuttons')
@@ -185,5 +182,68 @@ document.addEventListener("click", (ev) => {
 
 
 
+/*let start = 0
+document.querySelector('form').addEventListener('submit', () => {
+   
+    console.log('ilds')
+    start+=1
+  
+ document.getElementById('ap').innerHTML = start
+  //let selection = document.querySelector('select').value
+
+  
+  console.log('wokred')
+  
+})
+
+let start = 0
+let start2 = 0
+let start3 = 0
+let start4 = 0
+*/
+document.querySelector('form').addEventListener('submit', () => {
 
 
+  console.log('clickedreview')
+
+
+let selection = document.querySelector('select').value
+console.log(selection)
+  if (selection === 'Applied') {
+    console.log('hit1st')
+    document.getElementById('ap').innerText = start
+    start += 1
+  } else if (selection === 'Interested') {
+    document.getElementById('in').innerText = start2
+    start2 += 1
+  } else if (selection === 'Interview') {
+    document.getElementById('int').innerText = start3
+    start3 += 1
+  } else if (selection === 'Rejected') {
+    console.log('hit2')
+    document.getElementById('rej').innerText = start4
+    start4 += 1
+  } else {
+    return
+  }
+
+})
+/*let selection = document.querySelector('select').value
+
+//if the inner html of the elemnt equals value of dropdown, start +1
+if(selection === 'Applied'){
+  document.getElementById('ap').innerText = start
+  start += 1
+}else if(selection === 'Interested'){
+  document.getElementById('in').innerText = start
+  start += 1
+}else if(selection === 'Interview'){
+  document.getElementById('int').innerText = start
+  start += 1
+}else if(selection === 'Rejected'){
+  document.getElementById('rej').innerText = start
+  start += 1
+}else{
+  
+}
+*/

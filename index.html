@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>Job Log</title>
     <link rel="stylesheet" href="/file.css" />
   </head>
   <body>
     <div class="pattern"></div>
-    <h1>JobLog</h1>
+    <h1 id="title">JobLog</h1>
     <form>
       <div>
         <label for="name">Status:</label>
@@ -44,10 +44,12 @@
         <div class="column" id="stats">
           <h3>Month In Review:</h3>
           <h3></h3>
-          <h4>Applied:</h4>
-          <h4>Interested:</h4>
-          <h4>Interview:</h4>
-          <h4>Rejected:</h4>
+
+          <h4>Applied:<h3 id="ap">0</h3></h4>
+          <h4>Interested:<h3 id="in">0</h3></h4>
+          <h4>Interview:<h3 id="int">0</h3></h4>
+          <h4">Rejected:<h3 id="rej">0</h3></h4>
+
         </div>
 
         <div class="column" id="status">
