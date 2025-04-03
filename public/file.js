@@ -1,4 +1,5 @@
-fetch('/api/config')  
+//then chaining to fetch API key from env file
+fetch('/api/config')
   .then(response => response.json())
   .then(data => {
 
@@ -8,6 +9,7 @@ fetch('/api/config')
     console.error('Error fetching config:', error)
   });
 
+//call to logo.dev to retrieve company logo when user enters name (MOSTLY foolproof)
 function apiCall() {
 
   const headers = {
@@ -37,7 +39,7 @@ function apiCall() {
 }
 
 let newInfo = [];
-
+//Putting together element of job card (date, time, etc)
 document.querySelector('form').addEventListener('submit', (e) => {
   let d = new Date();
   e.preventDefault()
@@ -54,46 +56,46 @@ document.querySelector('form').addEventListener('submit', (e) => {
     alert('Error: Please enter job title to continue');
 
   } else {
-   
-    
- 
-  fetch('/api/submit', {
-    method: 'POST',
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(info)
 
-  })
-    .then((response) => response.json())
-    .then((data2) => {
-      console.log("Response from server:", data2)
+
+    //Fetching frontend user data to send to backend, data is sent to .json file
+    fetch('/api/submit', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(info)
+
     })
-    .catch((error) => console.log('Error:', error));
+      .then((response) => response.json())
+      .then((data2) => {
+        console.log("Response from server:", data2)
+      })
+      .catch((error) => console.log('Error:', error));
 
-  localStorage.setItem("ggs", info);
-  let g = localStorage.getItem("ggs");
-  let amPm;
-  let hr = d.getHours();
-  if (hr > 12) {
-    amPm = "PM";
-    hr = hr - 12;
-  } else {
-    amPm = "AM";
-    hr = hr;
-  }
+    localStorage.setItem("ggs", info);
+    let g = localStorage.getItem("ggs");
+    let amPm;
+    let hr = d.getHours();
+    if (hr > 12) {
+      amPm = "PM";
+      hr = hr - 12;
+    } else {
+      amPm = "AM";
+      hr = hr;
+    }
 
-  e.preventDefault();
+    e.preventDefault();
 
-  apiCall()
+    apiCall()
 
-  let buttonOption = document.querySelector('select').value
-  newInfo += info
-
-  if (document.querySelector("input").value != "") {
-    document.getElementById("outputCard").innerHTML += info
-      .map(
-        item =>
-          `
-            <div id="innerOutput">
+    window.buttonOption = document.querySelector('select').value
+    newInfo += info
+    //handling user input to be consistently appended to the DOM each time a valid submit is made
+    if (document.querySelector("input").value != "") {
+      document.getElementById("outputCard").innerHTML += info
+        .map(
+          item =>
+            `
+            <div value='${buttonOption}' id="innerOutput">
               <h3 id="jobOutput"></h3>
               
               <h3 id="nameOutput">${item.Company}</h3>
@@ -135,15 +137,17 @@ document.querySelector('form').addEventListener('submit', (e) => {
 
 
           `
-      )
-      .join("");
-    //getData()
-    document.getElementById("name").value = "";
-    document.getElementById("jobTitle").value = "";
-    document.getElementById("company").value = "";
-  }}
+        )
+        .join("");
+      //getData()
+      document.getElementById("name").value = "";
+      document.getElementById("jobTitle").value = "";
+      document.getElementById("company").value = "";
+    }
+  }
 })
 
+//unfinished
 let dd = document.getElementById('statusbuttons')
 dd.addEventListener('click', () => {
   console.log('listening')
@@ -155,21 +159,20 @@ dd.addEventListener('click', () => {
   }
 })
 
-///NEW DELETE FUNCTION, NEED TO FIX MULT CLICKS FOR ONE DELETE
+///NEED TO FIX EVENT BUBBLING
 document.addEventListener("click", (ev) => {
   ev.stopPropagation()
   const deleteButton = document.querySelectorAll(".delete");
-  console.log(deleteButton)
 
   deleteButton.forEach(i => {
-    console.log("made it thru 3");
+
 
     i.addEventListener('click', (event) => {
       event.stopPropagation()
 
       i.addEventListener("click", e => {
         e.stopPropagation()
-        console.log("made it thru 4");
+
         e.currentTarget.closest("#innerOutput").classList.add("fade-out");
         setTimeout(() => {
           e.currentTarget.closest("#innerOutput").remove()
@@ -179,48 +182,23 @@ document.addEventListener("click", (ev) => {
   });
 });
 
+let start = 1
+let start2 = 1
+let start3 = 1
+let start4 = 1
 
-
-
-/*let start = 0
-document.querySelector('form').addEventListener('submit', () => {
-   
-    console.log('ilds')
-    start+=1
-  
- document.getElementById('ap').innerHTML = start
-  //let selection = document.querySelector('select').value
-
-  
-  console.log('wokred')
-  
-})
-
-let start = 0
-let start2 = 0
-let start3 = 0
-let start4 = 0
-*/
 document.querySelector('form').addEventListener('submit', () => {
 
-
-  console.log('clickedreview')
-
-
-let selection = document.querySelector('select').value
-console.log(selection)
-  if (selection === 'Applied') {
-    console.log('hit1st')
+  if (buttonOption === 'Applied') {
     document.getElementById('ap').innerText = start
     start += 1
-  } else if (selection === 'Interested') {
+  } else if (buttonOption === 'Interested') {
     document.getElementById('in').innerText = start2
     start2 += 1
-  } else if (selection === 'Interview') {
+  } else if (buttonOption === 'Interview') {
     document.getElementById('int').innerText = start3
     start3 += 1
-  } else if (selection === 'Rejected') {
-    console.log('hit2')
+  } else if (buttonOption === 'Rejected') {
     document.getElementById('rej').innerText = start4
     start4 += 1
   } else {
@@ -228,22 +206,12 @@ console.log(selection)
   }
 
 })
-/*let selection = document.querySelector('select').value
 
-//if the inner html of the elemnt equals value of dropdown, start +1
-if(selection === 'Applied'){
-  document.getElementById('ap').innerText = start
-  start += 1
-}else if(selection === 'Interested'){
-  document.getElementById('in').innerText = start
-  start += 1
-}else if(selection === 'Interview'){
-  document.getElementById('int').innerText = start
-  start += 1
-}else if(selection === 'Rejected'){
-  document.getElementById('rej').innerText = start
-  start += 1
-}else{
-  
-}
-*/
+
+//array would be better
+document.querySelectorAll('span#statusButtons').addEventListener('click', (e) => {
+    if(document.getElementById('innerOutput').value != e.currentTarget.value){
+      document.getElementById('innerOutput').remove()
+    }
+
+})

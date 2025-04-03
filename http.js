@@ -5,7 +5,7 @@ const fs = require('fs');
 require('dotenv').config();
 const apiRouter = require('./api'); // Import the router for serving JSON data
 const app = express();
-const PORT = process.env.PORT || 1119;
+const PORT = process.env.PORT || 1120;
 
 // Serve static files from the 'public' folder
 app.use(express.static(path.join(__dirname, 'public')));

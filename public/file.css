@@ -209,6 +209,10 @@ h5 {
 
 #stats {
   border: 0.5px solid rgb(0, 0, 0);
+  font-weight: 250;
+}
+#stats h3{
+  font-weight: 250;
 }
 #status {
   border: 0.5px solid rgb(0, 0, 0);
@@ -417,4 +421,16 @@ box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
   visibility: hidden;
   opacity: 0;
   transition: opacity 1s ease-out, visibility 0s 3s;
+}
+#ap{
+color: green;
+}
+#in{
+color: rgb(255, 242, 0);
+}
+#int{
+color: blue;
+}
+#rej{
+color: red;
 }
