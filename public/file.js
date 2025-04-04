@@ -93,7 +93,7 @@ document.querySelector('form').addEventListener('submit', (e) => {
     if (document.querySelector("input").value != "") {
       e.preventDefault()
       e.stopPropagation()
-      document.getElementById("outputCard").innerHTML += info
+      document.getElementById("outputCard").innerHTML += window.info
         .map(
           item =>
             `
@@ -141,6 +141,7 @@ document.querySelector('form').addEventListener('submit', (e) => {
       document.getElementById("company").value = "";
     }
   }
+
 })
 
 //unfinished
@@ -155,7 +156,6 @@ dd.addEventListener('click', () => {
   }
 })
 
-///NEED TO FIX EVENT BUBBLING
 document.addEventListener("click", (event) => {
   if (event.target.closest(".delete")) {
     console.log("Delete button clicked!");
@@ -197,11 +197,19 @@ document.querySelector('form').addEventListener('submit', () => {
 
 })
 
+//start of filtering of cards based on buttons
+const result = buttonOption.filter((stuff) => stuff != 'Applied')
+   
+console.log(result)
+
+
 
 //array would be better
-document.querySelectorAll('span#statusButtons').addEventListener('click', (e) => {
+/*document.querySelectorAll('span#statusButtons').addEventListener('click', (e) => {
     if(document.getElementById('innerOutput').value != e.currentTarget.value){
       document.getElementById('innerOutput').remove()
     }
 
 })
+*/
+
