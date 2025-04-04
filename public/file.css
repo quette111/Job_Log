@@ -282,7 +282,7 @@ h5 {
     border: solid black 1px;
   }
 }
-#outputCard button {
+.appendedButton {
   right: 16%;
   top: 330px;
   position: relative;
@@ -433,4 +433,51 @@ color: blue;
 }
 #rej{
 color: red;
+}
+
+.btn {
+  display: flex;
+  bottom: 5%;
+  align-items: center;
+  background: none;
+  border: 1px solid #b3b3b3; /* Lightened gray */
+  height: 10px;
+
+  letter-spacing: 0.25px;
+  border-radius: 24px;
+  cursor: pointer;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn .mdi {
+  margin-right: 8px;
+}
+
+.delete {
+  font-size: 16px;
+  color: red;
+  position: relative;
+}
+
+.delete .mdi-delete-empty {
+  display: none;
+}
+
+.delete:hover {
+  background-color: #ffcccc; /* Approximate lighten(red, 48%) */
+}
+
+.delete:hover .mdi-delete-empty {
+  display: block;
+}
+
+.delete:hover .mdi-delete {
+  display: none;
+}
+
+.delete:focus {
+  box-shadow: 0 0 0 4px #ff9999; /* Approximate lighten(red, 40%) */
 }

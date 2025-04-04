@@ -91,6 +91,8 @@ document.querySelector('form').addEventListener('submit', (e) => {
     newInfo += info
     //handling user input to be consistently appended to the DOM each time a valid submit is made
     if (document.querySelector("input").value != "") {
+      e.preventDefault()
+      e.stopPropagation()
       document.getElementById("outputCard").innerHTML += info
         .map(
           item =>
@@ -102,7 +104,7 @@ document.querySelector('form').addEventListener('submit', (e) => {
               <h3 id="companyOutput">${item.Job}</h3>
               
               <img src="${apiUrl}" id="companyImage" />
-              
+  
               <div id="time">
                 <button 
                   value="${buttonOption}" 
@@ -112,28 +114,22 @@ document.querySelector('form').addEventListener('submit', (e) => {
                 >
                   ${buttonOption}
                 </button>
-
+ 
                 <h4>${d.getMonth()}/${d.getDate()}/${d.getFullYear()}</h4>
                 <h5>${hr}:${d.getMinutes()}${amPm}</h5>
+               
               </div>
 
-              <div id="deleteAndEdit">
-                <div>
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    height="24px" 
-                    viewBox="0 -960 960 960" 
-                    width="24px" 
-                    fill="red"
-                  >
-                    <path 
-                      class="delete" 
-                      d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"
-                    />
-                  </svg>
-                </div>
-              </div>
+                     <button class="btn delete">
+  <span class="mdi mdi-delete mdi-24px"></span>
+  <span class="mdi mdi-delete-empty mdi-24px"></span>
+  <span>Delete</span>
+</button> 
+                  
+   
+              
             </div>
+      
 
 
           `
@@ -160,27 +156,21 @@ dd.addEventListener('click', () => {
 })
 
 ///NEED TO FIX EVENT BUBBLING
-document.addEventListener("click", (ev) => {
-  ev.stopPropagation()
-  const deleteButton = document.querySelectorAll(".delete");
+document.addEventListener("click", (event) => {
+  if (event.target.closest(".delete")) {
+    console.log("Delete button clicked!");
 
-  deleteButton.forEach(i => {
-
-
-    i.addEventListener('click', (event) => {
-      event.stopPropagation()
-
-      i.addEventListener("click", e => {
-        e.stopPropagation()
-
-        e.currentTarget.closest("#innerOutput").classList.add("fade-out");
-        setTimeout(() => {
-          e.currentTarget.closest("#innerOutput").remove()
-        }, 500);
-      })
-    })
-  });
+    // Example: Remove the parent element if needed
+    const itemToRemove = event.target.closest("#innerOutput");
+    if (itemToRemove) {
+      itemToRemove.classList.add("fade-out");
+      setTimeout(() => {
+        itemToRemove.remove();
+      }, 500);
+    }
+  }
 });
+
 
 let start = 1
 let start2 = 1
