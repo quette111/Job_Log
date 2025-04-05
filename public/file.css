@@ -215,6 +215,9 @@ h5 {
   border: 0.5px solid rgb(0, 0, 0);
   font-weight: 250;
 }
+#firstRev:hover{
+  background-color: rgb(2, 166, 2);
+}
 #firstRev{
   border-left: 1.5px solid black;
   border-bottom: 0.75px solid black;
@@ -223,6 +226,9 @@ h5 {
   color: white;
 margin-left: 10%;
 background-color: rgb(0, 128, 0);
+}
+#secRev:hover{
+  background-color: rgb(255, 235, 54);
 }
 #secRev{
   border-left: 1.5px solid black;
@@ -233,6 +239,9 @@ background-color: rgb(0, 128, 0);
   margin-left: 25%;
   background-color: rgb(255, 208, 0);
 }
+#thirdRev:hover{
+  background-color: rgb(48, 114, 255);
+}
 #thirdRev{
   border-left: 1.5px solid black;
   border-bottom: 0.75px solid black;
@@ -241,6 +250,9 @@ background-color: rgb(0, 128, 0);
   color: white;
   margin-left: 40%;
 background-color: rgb(16, 83, 230);
+}
+#fourthRev:hover{
+  background-color: rgb(255, 93, 65);
 }
 #fourthRev{
   border-left: 1.5px solid black;

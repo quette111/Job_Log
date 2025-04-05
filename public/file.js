@@ -97,7 +97,7 @@ document.querySelector('form').addEventListener('submit', (e) => {
         .map(
           item =>
             `
-            <div value='${buttonOption}' id="innerOutput">
+            <div value='${buttonOption}' id="innerOutput" class='card'>
               <h3 id="jobOutput"></h3>
               
               <h3 id="nameOutput">${item.Company}</h3>
@@ -136,6 +136,9 @@ document.querySelector('form').addEventListener('submit', (e) => {
         )
         .join("");
       //getData()
+
+
+
       document.getElementById("name").value = "";
       document.getElementById("jobTitle").value = "";
       document.getElementById("company").value = "";
@@ -197,10 +200,33 @@ document.querySelector('form').addEventListener('submit', () => {
 
 })
 
+
+function filtered(e) {
+
+
+  if (e.target.closest(".realG").style.cssText != 'border:3px solid black' || card.name != e.target.closest(".realG").value) { ///if it doesnt have a border
+    e.target.closest(".realG").style.cssText = 'border:1px solid black'
+    //for loop may be better?
+    document.getElementsByClassName('card').hidden = true
+
+  } else {
+    e.target.closest(".realG").style.cssText = 'border:none'
+    card.name.hidden = false
+  }
+}
+
+
+document.querySelector('.realG').addEventListener('click', (e) => {
+
+  info.filter(filtered);
+
+
+
+})
+
+
 //start of filtering of cards based on buttons
-const result = buttonOption.filter((stuff) => stuff != 'Applied')
-   
-console.log(result)
+
 
 
 
