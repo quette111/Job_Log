@@ -218,13 +218,34 @@ function filtered(e) {
 
 document.querySelector('.realG').addEventListener('click', (e) => {
 
-  info.filter(filtered);
+  return info.filter(filtered);
 
 
 
 })
 
 
+
+/*document.querySelector('.realG').addEventListener('click', (e) => {
+
+return info.filter( item => item.Name === e.target.closest(".realG").value)
+
+
+
+})
+
+/*document.querySelector('.realG').addEventListener('click', (e) => {
+ let find = document.getElementsByClassName('appendedButton').value
+  info.forEach((element) => {
+    if(element.Name === e.target.closest(".realG").value){
+
+    }else{
+      
+      element.hidden = true
+    }
+  })
+  //document.getElementsByClassName('appendedButton').value
+})
 //start of filtering of cards based on buttons
 
 
