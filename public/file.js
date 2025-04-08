@@ -1,3 +1,5 @@
+
+
 //then chaining to fetch API key from env file
 fetch('/api/config')
   .then(response => response.json())
@@ -8,6 +10,15 @@ fetch('/api/config')
   .catch(error => {
     console.error('Error fetching config:', error)
   });
+
+
+  let appendedButton = document.querySelector('.appendedButton');
+
+
+  let statusChange = appendedButton.addEventListener('mouseenter', (e) => {
+    e.currentTarget.append('Change Status?');
+  });
+
 
 //call to logo.dev to retrieve company logo when user enters name (MOSTLY foolproof)
 function apiCall() {
@@ -144,7 +155,7 @@ document.querySelector('form').addEventListener('submit', (e) => {
       document.getElementById("company").value = "";
     }
   }
-
+statusChange()
 })
 
 //unfinished
@@ -175,13 +186,18 @@ document.addEventListener("click", (event) => {
 });
 
 
+
+
+
+
+
 let start = 1
 let start2 = 1
 let start3 = 1
 let start4 = 1
 
 document.querySelector('form').addEventListener('submit', () => {
-
+ 
   if (buttonOption === 'Applied') {
     document.getElementById('ap').innerText = start
     start += 1
@@ -200,17 +216,22 @@ document.querySelector('form').addEventListener('submit', () => {
 
 })
 
+/*document.querySelectorAll('.appendedButton').addEventListener('click', () => {
 
+})
+  */
+
+
+/*
 function filtered(e) {
 
-
-  if (e.target.closest(".realG").style.cssText != 'border:3px solid black' || card.name != e.target.closest(".realG").value) { ///if it doesnt have a border
+  if (e.currentTarget.style.cssText != 'border:3px solid black' || card.name != e.target.closest(".realG").value) { ///if it doesnt have a border
     e.target.closest(".realG").style.cssText = 'border:1px solid black'
     //for loop may be better?
     document.getElementsByClassName('card').hidden = true
 
   } else {
-    e.target.closest(".realG").style.cssText = 'border:none'
+    e.currentTarget.style.cssText = 'border:none'
     card.name.hidden = false
   }
 }
@@ -226,22 +247,22 @@ document.querySelector('.realG').addEventListener('click', (e) => {
 
 
 
-/*document.querySelector('.realG').addEventListener('click', (e) => {
+document.querySelector('.realG').addEventListener('click', (e) => {
 
 return info.filter( item => item.Name === e.target.closest(".realG").value)
 
 
 
 })
-
-/*document.querySelector('.realG').addEventListener('click', (e) => {
+*/
+document.querySelector('.realG').addEventListener('click', (e) => {
  let find = document.getElementsByClassName('appendedButton').value
   info.forEach((element) => {
     if(element.Name === e.target.closest(".realG").value){
 
     }else{
-      
-      element.hidden = true
+     console.log(element)
+     
     }
   })
   //document.getElementsByClassName('appendedButton').value
