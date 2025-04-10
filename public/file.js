@@ -174,7 +174,7 @@ document.addEventListener("click", (event) => {
   if (event.target.closest(".delete")) {
     console.log("Delete button clicked!");
 
-    // Example: Remove the parent element if needed
+   
     const itemToRemove = event.target.closest("#innerOutput");
     if (itemToRemove) {
       itemToRemove.classList.add("fade-out");
@@ -190,7 +190,7 @@ document.addEventListener("click", (event) => {
 
 
 
-
+//
 let start = 1
 let start2 = 1
 let start3 = 1
