@@ -3,15 +3,15 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 require('dotenv').config();
-const apiRouter = require('./api'); // Import the router for serving JSON data
+const { router } = require('./routers/api'); // Import the router for serving JSON data
 const app = express();
 const PORT = process.env.PORT || 1157;
-
+app.use(express.json());
 // Serve static files from the 'public' folder
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Use the API router for handling `/data.json` route
-app.use(apiRouter, express.json());
+app.use(router);
 
 // Serve index.html for the root route
 app.get('/', (req, res) => {
@@ -24,17 +24,7 @@ app.get('/api/config', (req, res) => {
   });
 });
 
-app.post('/api/submit', (req, res) => {
-  var usersData = req.body
-  console.log(req.body)
-  try {
-    //fs.appendFileSync('./userData.json', JSON.parse(usersData))
-    fs.appendFileSync('./userData.json', JSON.stringify(usersData))
 
-  } catch (err) {
-    console.log(err)
-  }
-})
 
 
 

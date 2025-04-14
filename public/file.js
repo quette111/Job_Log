@@ -15,10 +15,10 @@ fetch('/api/config')
   let appendedButton = document.querySelector('.appendedButton');
 
 
-  let statusChange = appendedButton.addEventListener('mouseenter', (e) => {
+ /* let statusChange = appendedButton.addEventListener('mouseenter', (e) => {
     e.currentTarget.append('Change Status?');
   });
-
+*/
 
 //call to logo.dev to retrieve company logo when user enters name (MOSTLY foolproof)
 function apiCall() {
@@ -70,7 +70,7 @@ document.querySelector('form').addEventListener('submit', (e) => {
 
 
     //Fetching frontend user data to send to backend, data is sent to .json file
-    fetch('/api/submit', {
+    fetch('/api/v1/users', {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(info)
@@ -155,7 +155,7 @@ document.querySelector('form').addEventListener('submit', (e) => {
       document.getElementById("company").value = "";
     }
   }
-statusChange()
+//statusChange()
 })
 
 //unfinished
