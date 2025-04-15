@@ -1,4 +1,4 @@
-const ctx = document.getElementById('myChart');
+/*const ctx = document.getElementById('myChart');
 let chart
 let jsonData
 let graphButtonValue = document.querySelectorAll('.graph')
