@@ -28,7 +28,7 @@ function apiCall() {
     'Content-Type': 'application/json'
   };
 
-  let companyName = info[0].Company
+  let companyName = info[0].company
   let companyName2 = companyName.replaceAll(' ', '').toLowerCase()
   window.apiUrl = `https://img.logo.dev/${companyName2}.com?token=${apiKey}`
 
@@ -58,9 +58,9 @@ document.querySelector('form').addEventListener('submit', (e) => {
 
   window.info = [
     {
-      Name: `${document.getElementById("name").value}`,
-      Job: `${document.getElementById("jobTitle").value}`,
-      Company: `${document.getElementById("company").value}`
+      name: `${document.getElementById("name").value}`,
+      job: `${document.getElementById("jobTitle").value}`,
+      company: `${document.getElementById("company").value}`
     }
   ];
   if (document.getElementById('jobTitle').value == '' || document.getElementById('company').value == '') {
@@ -111,8 +111,8 @@ document.querySelector('form').addEventListener('submit', (e) => {
             <div value='${buttonOption}' id="innerOutput" class='card'>
               <h3 id="jobOutput"></h3>
               
-              <h3 id="nameOutput">${item.Company}</h3>
-              <h3 id="companyOutput">${item.Job}</h3>
+              <h3 id="nameOutput">${item.company}</h3>
+              <h3 id="companyOutput">${item.job}</h3>
               
               <img src="${apiUrl}" id="companyImage" />
   
@@ -258,7 +258,7 @@ return info.filter( item => item.Name === e.target.closest(".realG").value)
 document.querySelector('.realG').addEventListener('click', (e) => {
  let find = document.getElementsByClassName('appendedButton').value
   info.forEach((element) => {
-    if(element.Name === e.target.closest(".realG").value){
+    if(element.name === e.target.closest(".realG").value){
 
     }else{
      console.log(element)

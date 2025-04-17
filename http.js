@@ -2,10 +2,11 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const { connectDB } = require('./db.js')
 require('dotenv').config();
 const { router } = require('./routers/api'); // Import the router for serving JSON data
 const app = express();
-const PORT = process.env.PORT || 1157;
+const PORT = process.env.PORT || 1158;
 app.use(express.json());
 // Serve static files from the 'public' folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -33,13 +34,13 @@ app.all('*', (req, res) => {
   res.status(404).send('Resource not found');
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-}).on('error', (err) => {
-  if (err.code === 'EADDRINUSE') {
-    console.log(`Port ${PORT} is already in use. Trying another port...`);
-    app.listen(0, () => console.log(`New port assigned: ${server.address().port}`));
-  } else {
-    console.error(err);
+const start = async () => {
+  try{
+      await connectDB(process.env.MONGO_URI)
+      app.listen(PORT, console.log(`Server is listening on port ${PORT}...`))
+  } catch(error) {
+      console.log(error)
   }
-});
+}
+
+start()

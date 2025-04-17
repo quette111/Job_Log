@@ -1,25 +1,20 @@
-let { userData } = require("../userData.js")
+//let { userData } = require("./userData.js")
 
+//const { Name, Job, Company } = req.body;
 
-
+const { User } = require('/Users/edwardmarquettewilhite/Desktop/Job App/models/User.js')
 
 
 const getData = (req, res) => {
 res.send(userData)
 }
 
-const postData =  async (req, res) => {
-try{
-userData.push(req.body)
-
-
-res.send(userData)
-console.log(userData)
-}
-catch(error){
-    console.log(error)
-}
-}
+const postData = async (req, res) => {
+    const firstItem = req.body[0]; // pull out the object
+    const task = await User.create(firstItem); // create using that object
+    res.status(201).json({ task });
+  };
+  
 
 const putData = (req, res) => {
 
