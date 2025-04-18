@@ -9,8 +9,9 @@ const getData = (req, res) => {
 res.send(userData)
 }
 
+//async code so app doesnt freeze when user makes request 
 const postData = async (req, res) => {
-    const firstItem = req.body[0]; // pull out the object
+    const firstItem = req.body[0]; // pull out the object bc it is not just array
     const task = await User.create(firstItem); // create using that object
     res.status(201).json({ task });
   };

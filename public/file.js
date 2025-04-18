@@ -70,8 +70,8 @@ document.querySelector('form').addEventListener('submit', (e) => {
 
 
     //Fetching frontend user data to send to backend, data is sent to .json file
-    fetch('/api/v1/users', {
-      method: 'POST',
+    fetch('/api/v1/users', {    //fetch the route provided by the backend
+      method: 'POST',   
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(info)
 
