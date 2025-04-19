@@ -21,8 +21,8 @@ fetch('/api/config')
 */
 
 //call to logo.dev to retrieve company logo when user enters name (MOSTLY foolproof)
-function apiCall() {
-
+async function apiCall() {
+try{
   const headers = {
     'Authorization': `Bearer: ${apiKey}`,
     'Content-Type': 'application/json'
@@ -31,7 +31,11 @@ function apiCall() {
   let companyName = info[0].company
   let companyName2 = companyName.replaceAll(' ', '').toLowerCase()
   window.apiUrl = `https://img.logo.dev/${companyName2}.com?token=${apiKey}`
-
+}catch(error){
+  if(error){
+    console.error(`Error fetching data:`, error)
+  }
+}
   async function getData() {
     try {
       const response = await fetch(apiUrl, {
