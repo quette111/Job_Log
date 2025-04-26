@@ -101,6 +101,8 @@ document.querySelector('form').addEventListener('submit', (e) => {
     e.preventDefault();
 
     apiCall()
+   
+  
 
     window.buttonOption = document.querySelector('select').value
     newInfo += info
@@ -108,6 +110,13 @@ document.querySelector('form').addEventListener('submit', (e) => {
     if (document.querySelector("input").value != "") {
       e.preventDefault()
       e.stopPropagation()
+      window.fetchUsers = async() => {
+        window.response = await fetch('/api/v1/users/allUsers')
+        window.users = await response.json()
+        console.log(users[0]._id)
+       
+      
+    
       document.getElementById("outputCard").innerHTML += window.info
         .map(
           item =>
@@ -135,7 +144,7 @@ document.querySelector('form').addEventListener('submit', (e) => {
                
               </div>
 
-                     <button class="btn delete">
+                     <button class="btn delete" data-id="${users._id}">
   <span class="mdi mdi-delete mdi-24px"></span>
   <span class="mdi mdi-delete-empty mdi-24px"></span>
   <span>Delete</span>
@@ -159,8 +168,9 @@ document.querySelector('form').addEventListener('submit', (e) => {
       document.getElementById("company").value = "";
     }
   }
-//statusChange()
-})
+  fetchUsers()
+}}
+)
 
 //unfinished
 let dd = document.getElementById('statusbuttons')
@@ -174,27 +184,36 @@ dd.addEventListener('click', () => {
   }
 })
 
-document.addEventListener("click", async (event) => {
-
+document.addEventListener("click", async(event) => {
    if (event.target.closest(".delete")) {
     console.log("Delete button clicked!");
 
    
     const itemToRemove = event.target.closest("#innerOutput");
+    const targetedButton = event.target.closest(".btn.delete");
+console.log(targetedButton)
+const id = targetedButton.getAttribute('data-id');
     if (itemToRemove) {
       itemToRemove.classList.add("fade-out");
       setTimeout(() => {
         itemToRemove.remove();
       }, 500);
-  await fetch('/api/v1/users', {    //fetch the route provided by the backend
-  method: 'DELETE',   
-  headers: { "Content-Type": "application/json" },
-
-})
-    }
+    } 
+    console.log('Deleting user with id:', id);
+  await fetch(`/api/v1/users/${id}`, {    //fetch the route provided by the backend
+    method: 'DELETE',   
+    headers: { "Content-Type": "application/json" },
+  
+  })
   }
-
 });
+
+
+
+
+
+    
+   
 
 
 

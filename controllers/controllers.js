@@ -5,8 +5,13 @@
 const { User } = require('/Users/edwardmarquettewilhite/Desktop/Job App/models/User.js')
 
 
-const getData = (req, res) => {
-res.send(userData)
+const getData = async (req, res) => {
+try{
+  const users = await User.find({});
+  res.status(200).json(users)
+}catch (error) {
+  res.status(500).json({ msg: 'Server error' });
+}
 }
 
 //async code so app doesnt freeze when user makes request 
@@ -25,6 +30,7 @@ const postData = async (req, res) => {
 
 const deleteDB = async(req, res) => {
   try{
+
  const del = await User.findByIdAndDelete(req.params.id)
  res.status(201).json(del)
   } catch(error){
