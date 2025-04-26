@@ -174,8 +174,9 @@ dd.addEventListener('click', () => {
   }
 })
 
-document.addEventListener("click", (event) => {
-  if (event.target.closest(".delete")) {
+document.addEventListener("click", async (event) => {
+
+   if (event.target.closest(".delete")) {
     console.log("Delete button clicked!");
 
    
@@ -185,11 +186,15 @@ document.addEventListener("click", (event) => {
       setTimeout(() => {
         itemToRemove.remove();
       }, 500);
+  await fetch('/api/v1/users', {    //fetch the route provided by the backend
+  method: 'DELETE',   
+  headers: { "Content-Type": "application/json" },
+
+})
     }
   }
+
 });
-
-
 
 
 

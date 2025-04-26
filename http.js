@@ -1,18 +1,23 @@
 // server.js
 const express = require('express');
-const path = require('path');
-const fs = require('fs');
-const { connectDB } = require('./db.js')
-require('dotenv').config();
-const { router } = require('./routers/api'); // Import the router for serving JSON data
+const mongoose = require('mongoose');
 const app = express();
-const PORT = process.env.PORT || 1158;
+const PORT = process.env.PORT || 1159;
+
 app.use(express.json());
+
+const path = require('path');
+
+
+require('dotenv').config();
+const { router } = require('./routers/api.js'); // Import the router for serving JSON data
+
+
 // Serve static files from the 'public' folder
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Use the API router for handling `/data.json` route
-app.use(router);
+app.use('/api/v1/users', router);
 
 // Serve index.html for the root route
 app.get('/', (req, res) => {
@@ -35,11 +40,11 @@ app.all('*', (req, res) => {
 });
 
 const start = async () => {
-  try{
-      await connectDB(process.env.MONGO_URI)
-      app.listen(PORT, console.log(`Server is listening on port ${PORT}...`))
-  } catch(error) {
-      console.log(error)
+  try {
+    await mongoose.connect(process.env.MONGO_URI)
+    app.listen(PORT, console.log(`Server is listening on port ${PORT}...`))
+  } catch (error) {
+    console.log(error)
   }
 }
 

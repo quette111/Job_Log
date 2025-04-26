@@ -1,12 +1,12 @@
 const express = require('express');
 const  router  = express.Router();
-const { getData, postData } = require('../controllers/controllers');
+const { getData, postData, deleteDB } = require('../controllers/controllers');
 
 
 
 
-router.get('/api/v1/users', getData);
-
-router.post('/api/v1/users', postData)
+router.get('/', getData);
+router.delete('/:id', deleteDB)
+router.post('/', postData)
 
 module.exports = { router } ;

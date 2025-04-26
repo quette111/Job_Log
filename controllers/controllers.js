@@ -11,18 +11,28 @@ res.send(userData)
 
 //async code so app doesnt freeze when user makes request 
 const postData = async (req, res) => {
-    const firstItem = req.body[0]; // pull out the object bc it is not just array
+  try{
+    const firstItem = req.body; // pull out the object bc it is not just array
     const task = await User.create(firstItem); // create using that object
-    res.status(201).json({ task });
+    res.status(201).json(task)
+  } catch(error){
+    console.log('Error', error)
+  }
+    
+    //res.status(201).json({ task });
   };
   
 
-const putData = (req, res) => {
+const deleteDB = async(req, res) => {
+  try{
+ const del = await User.findByIdAndDelete(req.params.id)
+ res.status(201).json(del)
+  } catch(error){
+    console.log('Error', error)
+  }
 
 }
 
-const deleteData = (req, res) => {
 
-}
 
-module.exports = {getData, postData, putData, deleteData}
+module.exports = {getData, postData, deleteDB}
