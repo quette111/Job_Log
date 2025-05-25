@@ -176,6 +176,7 @@ writeDB()
 
       })
     }
+    return buttonOption
   }
 
 
@@ -277,31 +278,39 @@ document.addEventListener("click", async (event) => {
 
 //
 
-let start = 1
-let start2 = 1
-let start3 = 1
-let start4 = 1
-/*
-document.querySelector('form').addEventListener('submit', () => {
+
+
+document.getElementById('submitForm').addEventListener('click', async() => {
+  console.log('crwairfpijr')
+  const buttonOption = await createCard()
+console.log(buttonOption)
+let start = 0
+let start2 = 0
+let start3 = 0
+let start4 = 0
+
+document.getElementById('ap').innerText = start
+  document.getElementById('in').innerText = start2 
+  document.getElementById('int').innerText = start3
+   document.getElementById('rej').innerText = start4
 
   if (buttonOption === 'Applied') {
-    document.getElementById('ap').innerText = start
-    start += 1
+    console.log('reviewed')
+    start++
   } else if (buttonOption === 'Interested') {
-    document.getElementById('in').innerText = start2
-    start2 += 1
+  
+    start2++
   } else if (buttonOption === 'Interview') {
-    document.getElementById('int').innerText = start3
-    start3 += 1
+   
+    start3++
   } else if (buttonOption === 'Rejected') {
-    document.getElementById('rej').innerText = start4
-    start4 += 1
+   
+    start4++
   } else {
     return
   }
-
 })
-*/
+
 /*document.querySelectorAll('.appendedButton').addEventListener('click', () => {
 
 })
