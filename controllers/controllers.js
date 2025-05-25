@@ -19,6 +19,7 @@ const postData = async (req, res) => {
   try{
     const firstItem = req.body; // pull out the object bc it is not just array
     const task = await User.create(firstItem); // create using that object
+    task.save()
     res.status(201).json(task)
   } catch(error){
     console.log('Error', error)

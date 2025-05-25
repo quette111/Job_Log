@@ -1,0 +1,202 @@
+@import url('./navbar.css');
+
+*{
+  margin:0;
+  padding: 0;
+}
+
+#jlDescription{
+   color: var(--secondary-text);
+}
+#menuButton{
+  cursor: pointer;
+}
+
+
+#closeMenuButton{
+    cursor: pointer;
+}
+
+#create{text-align: center;
+    background-color: #6fcdf8;
+
+display: flex;
+align-items: center;
+text-align: center;}
+
+
+#hideLog{
+    background-color: #6fcdf8b0;
+    padding: 15%;
+    border: 1px solid #29b3f3;
+    border-radius: 50px;
+    margin-top: 5%;
+
+}
+
+#blobs{
+  position: relative;
+  left: 20%;
+  padding: 0;
+  margin: 0;
+  top: 40%;
+  z-index: -100;
+  filter: var(--img-filter);
+}
+
+#imgContainer{
+   display: flex;
+ justify-content: flex-end;
+ flex-direction: column;
+position: relative;
+left: 0%;
+}
+
+#imgContainer img{
+  margin: 5%;
+  height: 35vh;
+  width:100%;
+  padding: 3%;
+  background: rgba(255, 255, 255, 0.2);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(70, 70, 70, 0.465);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+}
+#track{
+
+ height: 25%;
+ width: 35%;
+
+ 
+ display: flex;
+ justify-content: flex-end;
+ flex-direction: column;
+}
+
+#username{
+width: 50%;
+}
+
+#last{
+width: 50%;
+}
+
+#aligning{
+    display: flex;
+    flex-direction: row;
+   
+}
+
+button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#info{
+    color:blueviolet;
+}
+
+#block{
+    background-color: red;
+}
+
+#landingDiv{
+   
+    margin-left: 15%;
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    width: 45%;
+
+}
+
+#landingDiv h2{
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    width: 45%;
+    
+}
+
+#landingDiv h1{
+    margin-top: 0%;
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+  font-size: min(100px, 16vw);
+   line-height: 0.8em; 
+   letter-spacing: -0.05em;
+   width:100%
+}
+
+#landingDiv h3{
+    margin-top: 0%;
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    width: 45%;
+}
+#landingDiv button{
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    width: 45%;
+    
+}
+
+.button-20 {
+  
+  background-color: #6fcdf8;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, .15), rgba(255, 255, 255, 0));
+  border: 1px solid #29b3f3;
+  border-radius: 1rem;
+  box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0 inset,rgba(46, 54, 80, 0.075) 0 1px 1px;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Inter,sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+  padding: .5rem 1rem;
+  text-align: center;
+  text-transform: none;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.button-20:focus:not(:focus-visible),
+.button-20:focus {
+  outline: 0;
+}
+
+.button-20:hover {
+  background-color: #0ca8f0;
+  border-color: #05a5f0;
+}
+
+
+.button-20:disabled {
+  background-image: none;
+  box-shadow: none;
+  opacity: .65;
+  pointer-events: none;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+

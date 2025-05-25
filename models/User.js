@@ -4,6 +4,7 @@ const userSchema = new mongoose.Schema({   //userSchema set up per mongoose docs
     name: String,
     job: String,
     company: String,
+    
 })
 
 const User = mongoose.model('userData', userSchema)   //creating instance of model data

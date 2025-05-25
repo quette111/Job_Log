@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Job Log</title>
-    <link rel="stylesheet" href="/file.css" />
+    <link rel="stylesheet" href="../styles/file.css" />
   </head>
   <body>
-    <div class="pattern"></div>
-    <h1 id="title">JobLog</h1>
-    <form>
+   
+<%- include('partials/nav') %>
+
+    <form id="formDiv">
       <div>
         <label for="name">Status:</label>
         <select autofocus id="name" name="name">
@@ -88,11 +89,15 @@
       </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script src="/charts.js"></script>
+    <script src="./scripts/charts.js"></script>
 
-    <script src="/file.js"></script>
+    <script src="./scripts/navBar.js"></script>
+
+    <script src="./scripts/file.js"></script>
   </body>
 </html>
 

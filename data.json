@@ -1,9 +1,0 @@
- [
-    {"status": "Applied", "amount": 30 },
-    {"status": "Interested", "amount": 21 },
-    {"status": "Closed", "amount": 12 },
-    {"status": "Assessment", "amount": 43 },
-    {"status": "Interview", "amount": 66 },
-    {"status": "Rejected", "amount": 9 }
-
-  ]

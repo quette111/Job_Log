@@ -7,6 +7,7 @@ const { getData, postData, deleteDB } = require('../controllers/controllers');
 
 router.get('/allUsers', getData);
 router.delete('/:id', deleteDB)
-router.post('/', postData)
+router.post('/writeDB', postData)
 
-module.exports = { router } ;
+
+module.exports = router  ;

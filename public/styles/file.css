@@ -1,3 +1,8 @@
+@import url('./navbar.css');
+
+
+
+
 body {
   /* Center the form on the page */
   text-align: center;
@@ -5,24 +10,39 @@ body {
   overflow-x: hidden;
   padding-left: 5%;
   padding-right: 5%;
+
   font-weight: 250;
+  min-height: 100vh;
+  background-color: var(--base-color);
+  color: var(--text-color);
+
+
+
 }
+
+
 .pattern {
-  position: fixed;
+  position:fixed;
   width: 100vw;
   height: 100vh;
   z-index: -100;
-  background-color: #ffffff;
+  background-color: #d7d4d4;
   opacity: 0.05;
   background-image: linear-gradient(#535353 1.8px, transparent 1.8px),
     linear-gradient(to right, #6d6d6d 1.8px, #ffffff 1.8px);
-  background-size: 36px 36px;
+ 
+  background-repeat: repeat;
+
+  background-size: auto;
+  background-attachment: scroll;
 }
+
 
 form {
   text-align: center;
 
   display: flex;
+
   flex-direction: column;
   padding: 1em;
   background-color: #6fcdf8;
@@ -30,7 +50,7 @@ form {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
-  border: 1px solid black;
+   border: 1px solid #29b3f3;
 }
 form div {
   margin: 0.5%;
@@ -422,7 +442,7 @@ body button {
   margin: 0 auto;
   
   position: absolute;
-  top: 120%;
+  top: 130%;
   left: 2%;
 
   transition: all 0.75s ease;
@@ -529,4 +549,44 @@ color: rgb(255, 255, 255);
 
 .delete:focus {
   box-shadow: 0 0 0 4px #ff9999; /* Approximate lighten(red, 40%) */
+}
+
+
+.darkmode{
+  --base-color: #060b1c;
+  --nav-color: #38405d;
+  --text-color: rgb(255, 255, 255);
+  --hover-color:#42485d;
+  --img-filter:brightness(0.80);
+  --secondary-text: #e0e5ff;
+}
+
+
+#theme-switch{
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+  padding: 0;
+  border-radius: 50%;
+  background-color: var(--base-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-color: #05a6f000;
+}
+
+#theme-switch svg{
+  fill: var(--text-color)
+}
+
+#theme-switch svg:last-child{
+  display: none;
+}
+
+.darkmode #theme-switch svg:first-child{
+  display: none;
+}
+
+.darkmode #theme-switch svg:last-child{
+  display: block;
 }
