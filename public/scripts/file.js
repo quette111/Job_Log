@@ -1,52 +1,10 @@
 
 
- const call = (r) => {
-
+const call = (r) => {
   return axios.get('/api/config').then(response => response.data)
-  /*
- axios.get('/api/config')
-  .then(response => {
-console.log('1')
-    const apiKey = response.data.apiKey;
-    console.log(apiKey)
-    return apiKey
-  } )
-
-  .catch(error => {
-    console.error('Error fetching config:', error)
-  });
-  
-  */
 }
-//then chaining to fetch API key from env file
-
 
 let appendedButton = document.querySelector('.appendedButton');
-
-
-/* let statusChange = appendedButton.addEventListener('mouseenter', (e) => {
-   e.currentTarget.append('Change Status?');
- });
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//call to logo.dev to retrieve company logo when user enters name (MOSTLY foolproof)
-
-
 
 
 fetchUsers = async () => {
@@ -58,10 +16,6 @@ fetchUsers = async () => {
   return users
 
 }
-
-
-
-
 
 function getInfoForCards() {
 
@@ -80,7 +34,7 @@ function getInfoForCards() {
 
 writeDB = async () => {
   const info = getInfoForCards()
-console.log(info[0].name)
+  console.log(info[0].name)
   const response = await axios.post('/api/v1/users/writeDB', {
     name: info[0].name,
     job: info[0].job,
@@ -90,14 +44,14 @@ console.log(info[0].name)
 
 
 async function apiCall() {
-let response = await call()
+  let response = await call()
 
-const apiKey = response.apiKey
+  const apiKey = response.apiKey
 
   const info = getInfoForCards()
-  
+
   try {
- 
+
     let companyName = info[0].company
     let companyName2 = companyName.replaceAll(' ', '').toLowerCase()
     let apiUrl = `https://img.logo.dev/${companyName2}.com?token=${apiKey}`
@@ -123,22 +77,22 @@ async function createCard(users, info) {
 
   apiCall()
 
-    window.buttonOption = document.querySelector('select').value
+  window.buttonOption = document.querySelector('select').value
 
-    if (document.querySelector("input").value != "") {
+  if (document.querySelector("input").value != "") {
 
-      const outputCard = document.getElementById('outputCard');
-      const info = getInfoForCards();
-writeDB()
-      info.forEach(item => {
+    const outputCard = document.getElementById('outputCard');
+    const info = getInfoForCards();
+    writeDB()
+    info.forEach(item => {
 
-        const users = fetchUsers()
-        const card = document.createElement('div');
+      const users = fetchUsers()
+      const card = document.createElement('div');
 
-        card.className = 'card'
-        card.setAttribute("value", buttonOption)
+      card.className = 'card'
+      card.setAttribute("value", buttonOption)
 
-        card.innerHTML = 
+      card.innerHTML =
         `
             <div value='${buttonOption}' id="innerOutput" class='card'>
               <h3 id="jobOutput"></h3>
@@ -162,22 +116,22 @@ writeDB()
                 <h5>FIX DATE</h5>
               </div>
 
-              <button class="btn delete" data-id="${users._id}">            
+              <button class="btn delete" id='deleteButton' data-id="${users._id}">            
                 <span class="mdi mdi-delete mdi-24px"></span>
                 <span class="mdi mdi-delete-empty mdi-24px"></span>
                 <span>Delete</span>
               </button> 
             </div>`
 
-        outputCard.appendChild(card)
-        document.getElementById("name").value = "";
-        document.getElementById("jobTitle").value = "";
-        document.getElementById("company").value = "";
+      outputCard.appendChild(card)
+      document.getElementById("name").value = "";
+      document.getElementById("jobTitle").value = "";
+      document.getElementById("company").value = "";
 
-      })
-    }
-    return buttonOption
+    })
   }
+  return buttonOption
+}
 
 
 
@@ -185,50 +139,27 @@ writeDB()
 //Putting together element of job card (date, time, etc)
 document.querySelector('form').addEventListener('submit', (e) => {
 
-    e.preventDefault()
-    e.stopPropagation()
+  e.preventDefault()
+  e.stopPropagation()
 
-     if (document.getElementById('jobTitle').value == '' || document.getElementById('company').value == '') {
-      alert('Error: Please enter job title to continue');   /////////better error handling on UI
+  if (document.getElementById('jobTitle').value == '' || document.getElementById('company').value == '') {
+    alert('Error: Please enter job title to continue');   /////////better error handling on UI
 
   } else {
 
     createCard()
 
-    }
   }
+}
 )
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*
 //unfinished
 let dd = document.getElementById('statusbuttons')
 dd.addEventListener('click', () => {
+
   console.log('listening')
   for (let i = 0; i < dd.length; i++) {
     if (currentButton.innerText != dd.childNodes[i].innerText) {
@@ -237,12 +168,12 @@ dd.addEventListener('click', () => {
     }
   }
 })
-
-
-
-
+*/
 
 document.addEventListener("click", async (event) => {
+  event.preventDefault()
+   // const buttonOption = createCard()
+    
   if (event.target.closest(".delete")) {
     console.log("Delete button clicked!");
 
@@ -267,50 +198,76 @@ document.addEventListener("click", async (event) => {
 });
 
 
-
-
-
-
-
-
-
-
-
 //
-
-
-
-document.getElementById('submitForm').addEventListener('click', async() => {
-  console.log('crwairfpijr')
+async function countForMonthInReview(){
+    console.log('crwairfpijr')
   const buttonOption = await createCard()
-console.log(buttonOption)
-let start = 0
-let start2 = 0
-let start3 = 0
-let start4 = 0
 
-document.getElementById('ap').innerText = start
-  document.getElementById('in').innerText = start2 
-  document.getElementById('int').innerText = start3
-   document.getElementById('rej').innerText = start4
-
-  if (buttonOption === 'Applied') {
+  if (buttonOption == 'Applied') {
     console.log('reviewed')
-    start++
+    document.getElementById('ap').innerText++
   } else if (buttonOption === 'Interested') {
-  
-    start2++
+
+    document.getElementById('in').innerText++
+
   } else if (buttonOption === 'Interview') {
-   
-    start3++
+
+
+    document.getElementById('int').innerText++
   } else if (buttonOption === 'Rejected') {
-   
-    start4++
+
+    document.getElementById('rej').innerText++
   } else {
     return
   }
+
+}
+ function reduceCountForMonthInReview()
+{
+
+
+    console.log('quettedel')
+  const buttonOption =  createCard()
+
+  if (buttonOption == 'Applied') {
+    console.log('reviewed')
+    document.getElementById('ap').innerText--
+  } else if (buttonOption === 'Interested') {
+
+    document.getElementById('in').innerText++
+
+  } else if (buttonOption === 'Interview') {
+
+
+    document.getElementById('int').innerText++
+  } else if (buttonOption === 'Rejected') {
+
+    document.getElementById('rej').innerText++
+  } else {
+    return
+  }
+
+}
+
+document.getElementById('submitForm').addEventListener('click',  (e) => {
+  e.preventDefault()
+  countForMonthInReview()
+
+
+
 })
 
+//////////////////////////M.I.R. REDUCE, NOT FINISHED
+/*setTimeout(()=> {
+  listenForDelete()
+}, 1000)
+
+
+const listenForDelete = () => document.getElementById('deleteButton').addEventListener('click',  (e) => {
+  e.preventDefault()
+  reduceCountForMonthInReview()
+})
+*/
 /*document.querySelectorAll('.appendedButton').addEventListener('click', () => {
 
 })
@@ -349,7 +306,7 @@ return info.filter( item => item.Name === e.target.closest(".realG").value)
 
 
 })
-*/
+*//*
 document.querySelector('.realG').addEventListener('click', (e) => {
   let find = document.getElementsByClassName('appendedButton').value
   info.forEach((element) => {
@@ -364,7 +321,7 @@ document.querySelector('.realG').addEventListener('click', (e) => {
 })
 //start of filtering of cards based on buttons
 
-
+*/
 
 
 //array would be better
