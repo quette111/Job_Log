@@ -20,6 +20,7 @@
   "description": "",
   "dependencies": {
     "axios": "^1.9.0",
+    "bcryptjs": "^3.0.2",
     "chart.js": "^4.4.8",
     "chokidar": "^4.0.3",
     "cors": "^2.8.5",
@@ -30,6 +31,8 @@
     "express-rate-limit": "^7.5.0",
     "helmet": "^8.1.0",
     "hpp": "^0.2.3",
+    "http-status-codes": "^2.3.0",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.15.0",
     "mongoose": "^8.13.2",
     "open": "^10.1.0",

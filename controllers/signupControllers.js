@@ -1,4 +1,5 @@
 const {loginUser} = require('../models/loginModel')
+const {StatusCodes} = require('http-status-codes')
 
 const postUserData = async (req, res) => {
  
@@ -9,7 +10,10 @@ const postUserData = async (req, res) => {
     
     try{
     const task = await loginUser.create({first, last, email, password}); // create using that object
-    res.status(201).json(task)
+    const token = task.createJWT()
+      
+res.status(StatusCodes.CREATED).json({user: { name: `${task.first} ${task.last}` }, token})
+
   } catch(error){
     console.log('Error', error)
   }
@@ -29,17 +33,20 @@ const postUserData = async (req, res) => {
     try{
 
       const user = await loginUser.findOne({email})
+
       if(!user){
               return res.status(400).json({ error: "Incorrect email...."})
 
       }
-      if(user.password != password){
-              return res.status(401).json({ message: 'Incorrect password'});
 
-      }
+     const isPasswordCorrect = await user.comparePassword(password)
+('good!')
+    if(!isPasswordCorrect){
+       console.log('error')
+    }
 
-    res.status(200).json({ message: 'Login successful' });
-
+    const token = user.createJWT()
+res.status(StatusCodes.OK).json({user: { name: `${email}` }, token})
 
     } catch (error){
       console.log('Error', error)

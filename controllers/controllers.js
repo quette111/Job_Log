@@ -14,12 +14,16 @@ try{
 }
 }
 
+
 //async code so app doesnt freeze when user makes request 
 const postData = async (req, res) => {
+  console.log(req.body)
   try{
-    const firstItem = req.body; // pull out the object bc it is not just array
-    const task = await User.create(firstItem); // create using that object
-    task.save()
+    const {name, job, company} = req.body
+
+   // pull out the object bc it is not just array
+    const task = await User.create(name, job, company); // create using that object
+console.log('yes')
     res.status(201).json(task)
   } catch(error){
     console.log('Error', error)
