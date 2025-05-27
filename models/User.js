@@ -1,9 +1,14 @@
 const mongoose = require('mongoose') //require mongoose 
 
-const userSchema = new mongoose.Schema({   //userSchema set up per mongoose docs, used to set up data format
+const userDataSchema = new mongoose.Schema({   //userSchema set up per mongoose docs, used to set up data format
     name: String,
     job: String,
     company: String,
+    createdBy: {
+        type: mongoose.Types.ObjectId,
+        ref: 'loginData',
+        required: true
+    },
 
     
 },
@@ -11,6 +16,6 @@ const userSchema = new mongoose.Schema({   //userSchema set up per mongoose docs
   timestamps: true
 })
 
-const User = mongoose.model('userData', userSchema)   //creating instance of model data
+const UserData = mongoose.model('UserData', userDataSchema)   //creating instance of model data
 
-module.exports = { User }  //exporting for public use
+module.exports = UserData   //exporting for public use

@@ -4,7 +4,8 @@
   "main": "api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node app.js",
+    "dev":"nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.15.0",
     "mongoose": "^8.13.2",
+    "nodemon": "^3.1.10",
     "open": "^10.1.0",
     "xss-clean": "^0.1.4"
   }

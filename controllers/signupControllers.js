@@ -1,4 +1,4 @@
-const {loginUser} = require('../models/loginModel')
+const loginUser = require('../models/loginModel')
 const {StatusCodes} = require('http-status-codes')
 
 const postUserData = async (req, res) => {
@@ -21,7 +21,9 @@ res.status(StatusCodes.CREATED).json({user: { name: `${task.first} ${task.last}`
 
 
   const loginTheUser = async (req, res) => {
+
     console.log('controller hit')
+
     const {email, password} = req.body
 
 
@@ -40,9 +42,11 @@ res.status(StatusCodes.CREATED).json({user: { name: `${task.first} ${task.last}`
       }
 
      const isPasswordCorrect = await user.comparePassword(password)
-('good!')
+
     if(!isPasswordCorrect){
-       console.log('error')
+
+      return res.status(400).json({ error: "Incorrect password...."})
+
     }
 
     const token = user.createJWT()

@@ -2,29 +2,34 @@
 
 //const { Name, Job, Company } = req.body;
 
-const { User } = require('/Users/edwardmarquettewilhite/Desktop/Job App/models/User.js')
+const UserData = require('../models/User')
 
-
+/*
 const getData = async (req, res) => {
 try{
-  const users = await User.find({});
+  const users = await UserData.find({});
   res.status(200).json(users)
 }catch (error) {
   res.status(500).json({ msg: 'Server error' });
 }
 }
 
-
+*/
 //async code so app doesnt freeze when user makes request 
 const postData = async (req, res) => {
-  console.log(req.body)
-  try{
-    const {name, job, company} = req.body
 
+
+ const {name, job, company} = req.body
+
+  if(!name || !job || !company){
+    return res.status(401).json({error: "error bro"})
+   }
+
+   try{
    // pull out the object bc it is not just array
-    const task = await User.create(name, job, company); // create using that object
-console.log('yes')
-    res.status(201).json(task)
+    const task = await UserData.create({name, job, company, createdBy: req.user.userId}); // create using that object
+
+    res.status(201).json({task})
   } catch(error){
     console.log('Error', error)
   }
@@ -36,7 +41,7 @@ console.log('yes')
 const deleteDB = async(req, res) => {
   try{
 
- const del = await User.findByIdAndDelete(req.params.id)
+ const del = await UserData.findByIdAndDelete(req.params.id)
  res.status(201).json(del)
   } catch(error){
     console.log('Error', error)
@@ -46,4 +51,4 @@ const deleteDB = async(req, res) => {
 
 
 
-module.exports = {getData, postData, deleteDB}
+module.exports = { postData, deleteDB}

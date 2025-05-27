@@ -43,6 +43,7 @@ userSchema.pre('save', async function (next){
 })
 
 userSchema.methods.createJWT = function () {
+    
   return jwt.sign(
     { userId: this._id, name: `${this.first} ${this.last}` },
     process.env.JWT_SECRET,
@@ -60,6 +61,6 @@ userSchema.methods.comparePassword = async function (userPassword) {
 }
 
 
-const loginUser = mongoose.model('loginData', userSchema)   //creating instance of model data
+const loginUser = mongoose.model('LoginData', userSchema)   //creating instance of model data
 
-module.exports = { loginUser }  //exporting for public use
+module.exports = loginUser   //exporting for public us
