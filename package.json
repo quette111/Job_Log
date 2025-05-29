@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "dev":"nodemon app.js"
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
     "chart.js": "^4.4.8",
     "chokidar": "^4.0.3",
     "cors": "^2.8.5",
+    "dayjs": "^1.11.13",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.2",

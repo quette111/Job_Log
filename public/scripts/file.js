@@ -1,4 +1,6 @@
-import {verify} from './loginUser.js';
+import { verify } from './loginUser.js';
+
+
 
 
 const call = (r) => {
@@ -39,24 +41,24 @@ function getInfoForCards() {
 const writeDB = async () => {
   const info = getInfoForCards()
 
- const item = localStorage.getItem('Bearer')
+  const item = localStorage.getItem('Bearer')
   const response = await axios.post(
-    '/api/v1/users/writeDB', 
+    '/api/v1/users/writeDB',
     {
-    name: info[0].name,
-    job: info[0].job,
-    company: info[0].company,
+      name: info[0].name,
+      job: info[0].job,
+      company: info[0].company,
     },
-  {
-   headers: {
-      'Authorization': `Bearer ${item}`
-   }
-  })
-  .then(response => {
-   
- return response.data.task._id
+    {
+      headers: {
+        'Authorization': `Bearer ${item}`
+      }
+    })
+    .then(response => {
 
-  })
+      return response.data.task._id
+
+    })
 
   return response
 
@@ -90,29 +92,32 @@ async function apiCall() {
 
 
 
-function confirmCreation(){
+function confirmCreation() {
   document.getElementById(submitForm).innerText = 'Entry added . . . '
 }
 
 
 
 async function createCard(users, info) {
- 
+
   let apiUrl = await apiCall()
 
-  
+
 
   apiCall()
- writeDB()
+  //writeDB()
 
   window.buttonOption = document.querySelector('select').value
 
   if (document.querySelector("input").value != "") {
 
+    const now = dayjs()
+
+    const formatted = now.format('MMM D, YYYY <br> h:mm A')
     const outputCard = document.getElementById('outputCard');
     const info = getInfoForCards();
-   const jobId = await writeDB()
-   
+    const jobId = await writeDB()
+
     info.forEach(item => {
 
       const users = fetchUsers()
@@ -141,8 +146,8 @@ async function createCard(users, info) {
                   ${buttonOption}
                 </button>
 
-                <h4>FIX DATE</h4>
-                <h5>FIX DATE</h5>
+                <h4></h4>
+                <h5 id='dateAndTime'>${formatted}</h5>
               </div>
 
               <button class="btn delete" id='deleteButton' data-id="${jobId}">            
@@ -176,7 +181,7 @@ document.querySelector('form').addEventListener('submit', (e) => {
   } else {
 
     createCard()
-   
+
   }
 }
 )
@@ -200,21 +205,21 @@ dd.addEventListener('click', () => {
 
 
 
- 
+
 
 
 
 
 document.addEventListener("click", async (event) => {
   event.preventDefault()
-   // const buttonOption = createCard()
-    
+  // const buttonOption = createCard()
+
   if (event.target.closest(".delete")) {
     console.log("Delete button clicked!");
 
-event.target.closest(".delete").innerText = "Confirm deletion"
+    event.target.closest(".delete").innerText = "Confirm deletion"
 
-const item = localStorage.getItem('Bearer')
+    const item = localStorage.getItem('Bearer')
 
     const itemToRemove = event.target.closest("#innerOutput");
     const targetedButton = event.target.closest(".btn.delete");
@@ -228,19 +233,19 @@ const item = localStorage.getItem('Bearer')
     }
     console.log('Deleting user with id:', id);
     await axios.delete(`/api/v1/users/${id}`,
- {
-   headers: {
-      'Authorization': `Bearer ${item}`
-   }
-  }
+      {
+        headers: {
+          'Authorization': `Bearer ${item}`
+        }
+      }
     )
   }
 });
 
 
 //
-async function countForMonthInReview(){
-    console.log('crwairfpijr')
+async function countForMonthInReview() {
+  console.log('crwairfpijr')
   const buttonOption = await createCard()
 
   if (buttonOption == 'Applied') {
@@ -262,12 +267,11 @@ async function countForMonthInReview(){
   }
 
 }
- function reduceCountForMonthInReview()
-{
+function reduceCountForMonthInReview() {
 
 
-    console.log('quettedel')
-  const buttonOption =  createCard()
+  console.log('quettedel')
+  const buttonOption = createCard()
 
   if (buttonOption == 'Applied') {
     console.log('reviewed')
@@ -289,7 +293,7 @@ async function countForMonthInReview(){
 
 }
 
-document.getElementById('submitForm').addEventListener('click',  (e) => {
+document.getElementById('submitForm').addEventListener('click', (e) => {
   e.preventDefault()
   countForMonthInReview()
 

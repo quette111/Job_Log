@@ -591,3 +591,14 @@ color: rgb(255, 255, 255);
 .darkmode #theme-switch svg:last-child{
   display: block;
 }
+
+#dateAndTime{
+  display: flex;
+  width: 135%;
+  margin-right: 10px;
+  
+position: absolute;
+bottom: 0;
+top: 100%;
+
+}
