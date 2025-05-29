@@ -1,4 +1,6 @@
-async function verify() {
+
+
+ export async function verify() {
    /* if (!response) {
         let unauthText = document.createElement("p")
         unauthText.style.cssText = 'color:red';
@@ -6,9 +8,13 @@ async function verify() {
         document.getElementById('verificationBlock').appendChild(unauthText)
 
     }
-      
+           
     else {  */
+    
+   
+ 
         try {
+
             console.log('hit function')
             /*const token = localStorage.getItem('token');
 
@@ -17,23 +23,31 @@ async function verify() {
                     'Authorization': `Bearer ${token}`
                 }
             })*/
-           await axios.post('/api/v1/login/loginTheUser', {
+         const res = await axios.post('/api/v1/login/loginTheUser', {
             email: document.getElementById('email').value,
             password: document.getElementById('password').value,
            })
 
-               window.location.href = '/log'   
+           
+            localStorage.setItem('Bearer', res.data.token);
+   
+
+            window.location.href = '/log'   
+    
+   
            
         } catch (error) {
             console.log('Error fetching secret data', error)
         }
     }
 //}
-document.getElementById('loginButton').addEventListener('click', (e) => {
-    e.preventDefault()
-    console.log('hit first')
-    verify()
-})
+
+
+ 
+
+ 
+
+
 
 
 

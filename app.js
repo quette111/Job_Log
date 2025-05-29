@@ -10,7 +10,7 @@ const hpp = require('hpp');
 const path = require('path');
 const app = express();
 const mongoose = require('mongoose');
-const PORT = process.env.PORT || 1159;
+const PORT = process.env.PORT || 3000;
 
 app.use(helmet());
 app.use(cors({ origin: 'https://localhost1159', credentials: true }));

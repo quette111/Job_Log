@@ -32,8 +32,7 @@ async function postData() {
             para.innerHTML = "Successfully created an account . . .";
             document.body.appendChild(para)
             // After login success
-            window.localStorage.setItem('token', response.data);
-            console.log(response.data)
+          
             setTimeout(() => {
              window.location.href = '/loginUser'   
             }, 1000);

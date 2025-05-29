@@ -10,7 +10,8 @@ body {
   overflow-x: hidden;
   padding-left: 5%;
   padding-right: 5%;
-
+  margin-top: 0;
+  margin-bottom: 2%;
   font-weight: 250;
   min-height: 100vh;
   background-color: var(--base-color);

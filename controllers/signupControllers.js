@@ -10,9 +10,9 @@ const postUserData = async (req, res) => {
     
     try{
     const task = await loginUser.create({first, last, email, password}); // create using that object
-    const token = task.createJWT()
+  
       
-res.status(StatusCodes.CREATED).json({user: { name: `${task.first} ${task.last}` }, token})
+res.status(StatusCodes.CREATED).json({user: { name: `${task.first} ${task.last}` }})
 
   } catch(error){
     console.log('Error', error)
@@ -25,7 +25,7 @@ res.status(StatusCodes.CREATED).json({user: { name: `${task.first} ${task.last}`
     console.log('controller hit')
 
     const {email, password} = req.body
-
+console.log(password)
 
     if(!email, !password){
             return res.status(400).json({ error: "Missing required fields...."})
@@ -42,7 +42,7 @@ res.status(StatusCodes.CREATED).json({user: { name: `${task.first} ${task.last}`
       }
 
      const isPasswordCorrect = await user.comparePassword(password)
-
+console.log(isPasswordCorrect)
     if(!isPasswordCorrect){
 
       return res.status(400).json({ error: "Incorrect password...."})

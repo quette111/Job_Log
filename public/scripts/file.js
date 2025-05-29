@@ -1,3 +1,4 @@
+import {verify} from './loginUser.js';
 
 
 const call = (r) => {
@@ -7,7 +8,7 @@ const call = (r) => {
 let appendedButton = document.querySelector('.appendedButton');
 
 
-fetchUsers = async () => {
+const fetchUsers = async () => {
   const response = await fetch('/api/v1/users/allUsers')
   const users = await response.json()
 
@@ -32,15 +33,36 @@ function getInfoForCards() {
 
 }
 
-writeDB = async () => {
+
+
+
+const writeDB = async () => {
   const info = getInfoForCards()
-  console.log(info[0].name)
-  const response = await axios.post('/api/v1/users/writeDB', {
+
+ const item = localStorage.getItem('Bearer')
+  const response = await axios.post(
+    '/api/v1/users/writeDB', 
+    {
     name: info[0].name,
     job: info[0].job,
     company: info[0].company,
+    },
+  {
+   headers: {
+      'Authorization': `Bearer ${item}`
+   }
   })
+  .then(response => {
+   
+ return response.data.task._id
+
+  })
+
+  return response
+
 }
+
+
 
 
 async function apiCall() {
@@ -68,14 +90,20 @@ async function apiCall() {
 
 
 
+function confirmCreation(){
+  document.getElementById(submitForm).innerText = 'Entry added . . . '
+}
 
 
 
 async function createCard(users, info) {
-
+ 
   let apiUrl = await apiCall()
 
+  
+
   apiCall()
+ writeDB()
 
   window.buttonOption = document.querySelector('select').value
 
@@ -83,7 +111,8 @@ async function createCard(users, info) {
 
     const outputCard = document.getElementById('outputCard');
     const info = getInfoForCards();
-    writeDB()
+   const jobId = await writeDB()
+   
     info.forEach(item => {
 
       const users = fetchUsers()
@@ -116,7 +145,7 @@ async function createCard(users, info) {
                 <h5>FIX DATE</h5>
               </div>
 
-              <button class="btn delete" id='deleteButton' data-id="${users._id}">            
+              <button class="btn delete" id='deleteButton' data-id="${jobId}">            
                 <span class="mdi mdi-delete mdi-24px"></span>
                 <span class="mdi mdi-delete-empty mdi-24px"></span>
                 <span>Delete</span>
@@ -135,7 +164,6 @@ async function createCard(users, info) {
 
 
 
-
 //Putting together element of job card (date, time, etc)
 document.querySelector('form').addEventListener('submit', (e) => {
 
@@ -148,7 +176,7 @@ document.querySelector('form').addEventListener('submit', (e) => {
   } else {
 
     createCard()
-
+   
   }
 }
 )
@@ -170,6 +198,13 @@ dd.addEventListener('click', () => {
 })
 */
 
+
+
+ 
+
+
+
+
 document.addEventListener("click", async (event) => {
   event.preventDefault()
    // const buttonOption = createCard()
@@ -177,6 +212,9 @@ document.addEventListener("click", async (event) => {
   if (event.target.closest(".delete")) {
     console.log("Delete button clicked!");
 
+event.target.closest(".delete").innerText = "Confirm deletion"
+
+const item = localStorage.getItem('Bearer')
 
     const itemToRemove = event.target.closest("#innerOutput");
     const targetedButton = event.target.closest(".btn.delete");
@@ -189,11 +227,13 @@ document.addEventListener("click", async (event) => {
       }, 500);
     }
     console.log('Deleting user with id:', id);
-    await fetch(`/api/v1/users/${id}`, {    //fetch the route provided by the backend
-      method: 'DELETE',
-      headers: { "Content-Type": "application/json" },
-
-    })
+    await axios.delete(`/api/v1/users/${id}`,
+ {
+   headers: {
+      'Authorization': `Bearer ${item}`
+   }
+  }
+    )
   }
 });
 

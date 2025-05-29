@@ -1,4 +1,4 @@
-const ctx = document.getElementById('myChart');
+/*const ctx = document.getElementById('myChart');
 let chart
 let jsonData
 let graphButtonValue = document.querySelectorAll('.graph')
@@ -65,7 +65,7 @@ console.log(e.currentTarget.value)
  createTable()
 
 })
-*/
+
 document.querySelectorAll('.graph').forEach((i)=> {
 
 i.addEventListener('click', (e) =>{
@@ -78,4 +78,4 @@ i.addEventListener('click', (e) =>{
 }
 )
 })
-
+*/
