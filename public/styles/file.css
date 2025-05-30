@@ -8,8 +8,7 @@ body {
   text-align: center;
   max-width: 100%;
   overflow-x: hidden;
-  padding-left: 5%;
-  padding-right: 5%;
+  
   margin-top: 0;
   margin-bottom: 2%;
   font-weight: 250;
@@ -19,6 +18,10 @@ body {
 
 
 
+}
+
+#mainBody{
+  padding:3%;
 }
 
 
@@ -161,7 +164,7 @@ textarea {
 
 #outputCard {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 400px);
+  grid-template-columns: repeat(auto-fill, 400px);
   justify-content: center;
   height: 300px;
   margin: 2%;

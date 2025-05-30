@@ -107,7 +107,7 @@ async function createCard(users, info) {
   apiCall()
   //writeDB()
 
-  window.buttonOption = document.querySelector('select').value
+ const buttonOption = document.querySelector('select').value
 
   if (document.querySelector("input").value != "") {
 
@@ -217,18 +217,21 @@ document.addEventListener("click", async (event) => {
   if (event.target.closest(".delete")) {
     console.log("Delete button clicked!");
 
-    event.target.closest(".delete").innerText = "Confirm deletion"
+    event.target.closest(".delete").innerText = "Confirm deletion?"
 
     const item = localStorage.getItem('Bearer')
 
-    const itemToRemove = event.target.closest("#innerOutput");
+    const itemToRemove = document.querySelector(".card"); 
     const targetedButton = event.target.closest(".btn.delete");
+
     console.log(targetedButton)
     const id = targetedButton.getAttribute('data-id');
     if (itemToRemove) {
       itemToRemove.classList.add("fade-out");
       setTimeout(() => {
+        console.log('removing from the DOM')
         itemToRemove.remove();
+         itemToRemove.remove();
       }, 500);
     }
     console.log('Deleting user with id:', id);
@@ -239,8 +242,13 @@ document.addEventListener("click", async (event) => {
         }
       }
     )
+
+
   }
 });
+
+
+
 
 
 //

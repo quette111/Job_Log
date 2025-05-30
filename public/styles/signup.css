@@ -12,7 +12,7 @@
 margin-top: 4.5%;
 margin-left: 33.5%;
  border: 1px solid white;
-width: 450px;
+width: 500px;
 filter: drop-shadow(
     1px 2px 4px hsl(0, 1%, 81%)
   );
@@ -82,4 +82,20 @@ label{
   z-index: 100;
   font-weight: 100;
   font-size: 27px;
+ }
+
+ #firstAndLastName{
+  display: flex;
+
+ }
+
+ #firstNameLabel{
+  position:relative;
+  top: 50%;
+ }
+
+ #lastNameLabel{
+  position: relative;
+  left: 50%;
+  margin-bottom: 0%;
  }
