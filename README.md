@@ -9,7 +9,7 @@
 - Company Name
 - Job Status (Applied, Interested, Closed, Assessment, Rejected, Interview)
 
-Once added, the app displays job entries as cards, incorporating the **logo.dev API** to fetch and display company logos dynamically. Additionally, **GraphQL** is used to visualize job application statuses in graphs, allowing users to track their progress at a glance.
+Once added, the app displays job entries as cards, incorporating the **logo.dev API** to fetch and display company logos dynamically. Additionally, **Chart.js** is used to visualize job application statuses in graphs, allowing users to track their progress at a glance.
 
 This project is currently a **work in progress**.
 
