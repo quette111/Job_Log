@@ -162,6 +162,8 @@ textarea {
   background: none;
 }
 
+
+
 #outputCard {
   display: grid;
   grid-template-columns: repeat(auto-fill, 400px);

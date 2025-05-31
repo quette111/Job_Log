@@ -128,7 +128,7 @@ async function createCard(users, info) {
 
       card.innerHTML =
         `
-            <div value='${buttonOption}' id="innerOutput" class='card'>
+            <div value='${buttonOption}' id="innerOutput">
               <h3 id="jobOutput"></h3>
   
               <h3 id="nameOutput">${item.company}</h3>
@@ -221,17 +221,19 @@ document.addEventListener("click", async (event) => {
 
     const item = localStorage.getItem('Bearer')
 
-    const itemToRemove = document.querySelector(".card"); 
+    const itemToRemove = event.target.closest(".card"); 
     const targetedButton = event.target.closest(".btn.delete");
 
-    console.log(targetedButton)
+
+console.log(itemToRemove.parentElement.id)
+    console.log(`Hello quette . .  .${itemToRemove.parentElement.id}`)
     const id = targetedButton.getAttribute('data-id');
     if (itemToRemove) {
       itemToRemove.classList.add("fade-out");
       setTimeout(() => {
         console.log('removing from the DOM')
         itemToRemove.remove();
-         itemToRemove.remove();
+ 
       }, 500);
     }
     console.log('Deleting user with id:', id);
@@ -298,28 +300,33 @@ function reduceCountForMonthInReview() {
   } else {
     return
   }
-
 }
+
+
+
 
 document.getElementById('submitForm').addEventListener('click', (e) => {
   e.preventDefault()
   countForMonthInReview()
+//setTimeout(() => {
+  //listenForDelete()
 
-
+//}, 2000);
 
 })
 
-//////////////////////////M.I.R. REDUCE, NOT FINISHED
-/*setTimeout(()=> {
-  listenForDelete()
-}, 1000)
 
 
-const listenForDelete = () => document.getElementById('deleteButton').addEventListener('click',  (e) => {
+
+/*
+function listenForDelete(){
+  document.getElementById('deleteButton').addEventListener('click',  (e) => {
   e.preventDefault()
   reduceCountForMonthInReview()
 })
+}
 */
+
 /*document.querySelectorAll('.appendedButton').addEventListener('click', () => {
 
 })

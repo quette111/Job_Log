@@ -1,7 +1,7 @@
 # JobLog
 
-![JobLog Screenshot](public/SS1.png)
-![JobLog Screenshot](public/SS2.png)
+![JobLog Screenshot](public/images/displayJobLog1.png)
+![JobLog Screenshot](public/images/displayJobLog2.png)
 
 ## Description
 **JobLog** is a web application that helps users track their job applications. Users can enter job details, including:
@@ -22,7 +22,7 @@ This project is currently a **work in progress**.
 ## Technologies Used
 - **JavaScript** (Frontend & Backend)
 - **Express.js** (Backend framework)
-- **GraphQL** (Data querying and visualization)
+- **Chart.js** (Data querying and visualization)
 - **HTML/CSS** (Frontend structure and styling)
 
 ## Installation & Setup
