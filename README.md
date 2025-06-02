@@ -9,7 +9,7 @@
 - Company Name
 - Job Status (Applied, Interested, Closed, Assessment, Rejected, Interview)
 
-Once added, the app displays job entries as cards, incorporating the **logo.dev API** to fetch and display company logos dynamically. Additionally, **GraphQL** is used to visualize job application statuses in graphs, allowing users to track their progress at a glance.
+Once added, the app displays job entries as cards, incorporating the **logo.dev API** to fetch and display company logos dynamically. Additionally, **Chart.js** is used to visualize job application statuses in graphs, allowing users to track their progress at a glance.
 
 This project is currently a **work in progress**.
 
@@ -17,7 +17,7 @@ This project is currently a **work in progress**.
 - Add job applications with relevant details.
 - Automatically fetch company logos using **logo.dev API**.
 - Display job applications as interactive cards.
-- Visualize job status distribution with **GraphQL-powered graphs**.
+- Visualize job status distribution with **Chart.js-powered graphs**.
 
 ## Technologies Used
 - **JavaScript** (Frontend & Backend)
@@ -42,9 +42,13 @@ This project is currently a **work in progress**.
 4. Open the app in your browser.
 
 ## Roadmap
-- [ ] Improve UI/UX
-- [ ] Implement user authentication
-- [ ] Add filtering & sorting functionality
+- [✅] Improve UI/UX
+- [✅] Implement user authentication
+- [ ] Persist data currently in Mongoose when users login
+- [✅] Security middleware
+- [ ] Error handling
+- [ ] Implement filter by status feature
+- [ ] Finish Chart.js data visualization
 
 ---
 **Author:** Marquette Hanson
