@@ -49,6 +49,30 @@ const deleteDB = async(req, res) => {
 
 }
 
+const editData = async (req, res) => {
+   const {name} = req.body
+
+  try{
+    console.log('hello')
+    const edit = await UserData.findOneAndUpdate({_id: req.params.id}, {name}, {new: true})
+    res.status(201).json(edit)
+  } catch(error){
+    console.log(error)
+  }
+}
+
+const editAllData = async (req, res) => {
+   const {name, job, company} = req.body
+
+  try{
+    console.log('hello')
+    const edit = await UserData.findOneAndUpdate({_id: req.params.id}, {name, job, company}, {new: true})
+    res.status(201).json(edit)
+  } catch(error){
+    console.log(error)
+  }
+}
 
 
-module.exports = { postData, deleteDB}
+
+module.exports = { postData, deleteDB, editData}

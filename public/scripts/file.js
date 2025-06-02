@@ -128,27 +128,46 @@ async function createCard(users, info) {
 
       card.innerHTML =
         `
-            <div value='${buttonOption}' id="innerOutput">
-              <h3 id="jobOutput"></h3>
+        <div value='${buttonOption}' id="innerOutput">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg>
+
+        <h3 id="jobOutput"></h3>
   
               <h3 id="nameOutput">${item.company}</h3>
               <h3 id="companyOutput">${item.job}</h3>
               
               <img src="${apiUrl}" id="companyImage" />
   
-              <div id="time">
+              <div class="time">
+
+             
                 <button 
                   value="${buttonOption}" 
                   class="appendedButton" 
                   id="${buttonOption}" 
-                  disabled
+                  
                 >
                   ${buttonOption}
                 </button>
+             
+            
 
+
+           
                 <h4></h4>
                 <h5 id='dateAndTime'>${formatted}</h5>
               </div>
+
+ <select name="subject" id="subject" class='subject' data-id="${jobId}">
+    
+      <option value="" selected='${buttonOption}'>Change Status</option>
+      <option value="Applied"> Applied</option>
+        <option value="Interested">Interested</option>
+          <option value="Closed" >Closed</option>
+            <option value="Assessment" >Assessment</option>
+              <option value="Rejected" >Rejected</option>
+                <option value="Interview">Interview</option>
+  </select>
 
               <button class="btn delete" id='deleteButton' data-id="${jobId}">            
                 <span class="mdi mdi-delete mdi-24px"></span>
@@ -161,11 +180,59 @@ async function createCard(users, info) {
       document.getElementById("name").value = "";
       document.getElementById("jobTitle").value = "";
       document.getElementById("company").value = "";
+      
+
 
     })
   }
+  //createEventListener()
   return buttonOption
 }
+
+
+document.addEventListener('change', async function (e) {
+  if (!e.target.matches('.subject')) return;
+
+  console.log('Subject changed:', e.target.value);
+
+  const row = e.target.closest('div');
+  if (!row) {
+    console.warn('No .time container found');
+    return;
+  }
+
+  const btn = row.querySelector('.appendedButton');
+  if (!btn) {
+    console.warn('No .appendedButton found in row');
+    return;
+  }
+
+  const value = e.target.value;
+  btn.setAttribute('value', value);
+  btn.setAttribute('id', value);
+  btn.innerText = value;
+
+  const targetedButton = e.target.closest(".subject");
+  console.log(targetedButton)
+  
+const id = targetedButton.getAttribute('data-id');
+console.log(id)
+ const item = localStorage.getItem('Bearer')
+  await axios.patch(`/api/v1/users/${id}`, {
+    name: e.target.value,
+  },
+  {
+ headers: {
+          'Authorization': `Bearer ${item}`
+        }
+})
+
+});
+
+
+
+
+
 
 
 
@@ -181,10 +248,15 @@ document.querySelector('form').addEventListener('submit', (e) => {
   } else {
 
     createCard()
+  console.log('create card')
+ 
 
+    console.log('evemt lostem')
   }
 }
 )
+
+
 
 
 
@@ -214,7 +286,9 @@ document.addEventListener("click", async (event) => {
   event.preventDefault()
   // const buttonOption = createCard()
 
+
   if (event.target.closest(".delete")) {
+
     console.log("Delete button clicked!");
 
     event.target.closest(".delete").innerText = "Confirm deletion?"

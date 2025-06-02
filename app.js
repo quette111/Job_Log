@@ -11,6 +11,7 @@ const path = require('path');
 const app = express();
 const mongoose = require('mongoose');
 const PORT = process.env.PORT || 3000;
+const authorizationMiddleware = require('./middleware/auth.js')
 
 app.use(helmet());
 app.use(cors({ origin: 'https://localhost1159', credentials: true }));
