@@ -24,7 +24,7 @@ app.use(express.json());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-const appRoutes  = require('./routers/api.js'); // Import the router for serving JSON data
+const appRoutes  = require('./routers/api.js');
 const loginRoutes = require('./routers/loginRoutes.js')
 
 app.use(
@@ -33,15 +33,13 @@ app.use(
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", "https://cdn.jsdelivr.net"],
       imgSrc: ["'self'", "data:", "https://img.logo.dev"],
-      // add more as needed: styleSrc, connectSrc, etc.
+    
     },
   })
 );
 
-// Serve static files from the 'public' folder
 app.use(express.static('./public'));
 
-// Use the API router for handling `/data.json` route
 app.use('/api/v1/users', appRoutes);
 app.use('/api/v1/login', loginRoutes)
 
@@ -73,7 +71,6 @@ app.get('/api/config', (req, res) => {
   });
 });
 
-// Handle 404 for other routes
 app.all('*', (req, res) => {
   res.status(404).send('Resource not found');
 });

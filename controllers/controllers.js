@@ -73,6 +73,15 @@ const editAllData = async (req, res) => {
   }
 }
 
+const fetchUserData = async (req, res) => {
+  //const {name} = req.body
 
+  try{
+    const userStatusData = await UserData.find({})
+    res.status(201).json(userStatusData)
+  } catch(error){
+    console.log(error)
+  }
+}
 
-module.exports = { postData, deleteDB, editData}
+module.exports = { postData, deleteDB, editData, fetchUserData}

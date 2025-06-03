@@ -10,15 +10,7 @@ const call = (r) => {
 let appendedButton = document.querySelector('.appendedButton');
 
 
-const fetchUsers = async () => {
-  const response = await fetch('/api/v1/users/allUsers')
-  const users = await response.json()
 
-  const info = getInfoForCards()
-  createCard(users, info)
-  return users
-
-}
 
 function getInfoForCards() {
 
@@ -120,7 +112,7 @@ async function createCard(users, info) {
 
     info.forEach(item => {
 
-      const users = fetchUsers()
+    
       const card = document.createElement('div');
 
       card.className = 'card'
