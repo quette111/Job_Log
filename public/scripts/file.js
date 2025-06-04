@@ -9,7 +9,7 @@ const call = (r) => {
   return axios.get('/api/config').then(response => response.data)
 }
 
-let appendedButton = document.querySelector('.appendedButton');
+const appendedButton = document.querySelector('.appendedButton');
 
 
 
@@ -62,7 +62,7 @@ const writeDB = async () => {
 
 
 async function apiCall() {
-  let response = await call()
+  const response = await call()
 
   const apiKey = response.apiKey
 
@@ -70,9 +70,9 @@ async function apiCall() {
 
   try {
 
-    let companyName = info[0].company
-    let companyName2 = companyName.replaceAll(' ', '').toLowerCase()
-    let apiUrl = `https://img.logo.dev/${companyName2}.com?token=${apiKey}`
+    const companyName = info[0].company
+    const companyName2 = companyName.replaceAll(' ', '').toLowerCase()
+    const apiUrl = `https://img.logo.dev/${companyName2}.com?token=${apiKey}`
     console.log(apiUrl)
     return apiUrl
   } catch (error) {
@@ -94,7 +94,7 @@ function confirmCreation() {
 
 async function createCard(users, info) {
 
-  let apiUrl = await apiCall()
+  const apiUrl = await apiCall()
 
 
 

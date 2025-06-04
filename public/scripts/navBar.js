@@ -36,7 +36,7 @@ if(!localStorage.getItem('Bearer')){
     logButtonSwitch.innerText = 'Logout'
     logButtonSwitch.addEventListener('click', (e)=>{
         e.preventDefault()
-        window.href = '/loginUser'
+        window.location.href = '/loginUser'
     })
 }
 
