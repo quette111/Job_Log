@@ -1,3 +1,5 @@
+//NOTE TO SELF: MODULARIZE CODE, IMPROVE VARIABLE NAMES
+
 import { verify } from './loginUser.js';
 
 
