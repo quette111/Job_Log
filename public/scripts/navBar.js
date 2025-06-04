@@ -27,3 +27,16 @@ const changeDisplayMode = () => {
 document.getElementById('theme-switch').addEventListener('click', ()=>{
 changeDisplayMode()
 })
+
+const logButtonSwitch = document.getElementById('loginA')
+
+if(!localStorage.getItem('Bearer')){
+    console.log('no token')
+}else{
+    logButtonSwitch.innerText = 'Logout'
+    logButtonSwitch.addEventListener('click', (e)=>{
+        e.preventDefault()
+        window.href = '/loginUser'
+    })
+}
+
