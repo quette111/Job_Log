@@ -1,16 +1,39 @@
 const mongoose = require('mongoose') //require mongoose 
 
 const userDataSchema = new mongoose.Schema({   //userSchema set up per mongoose docs, used to set up data format
-    name: String,
-    job: String,
-    company: String,
+    name:{
+    type:String,
+    require:[true, 'Please status of application'],
+    },
+    job:{
+      type:String,
+        require:[true, 'Please job title'],
+    },
+    company:{
+      type:String,
+      require:[true, 'Please company name'],
+    },
     createdBy: {
         type: mongoose.Types.ObjectId,
         ref: 'loginData',
-        required: true
+        require: true
+    },
+     connectedOnLI:{
+        type: Boolean,
+        require: false,
+       
+    },
+    inquire:{
+        type: Boolean,
+        require: false,
+       
+    },
+    userNotes:{
+        type: String,
+        require: false,
+       
     },
 
-    
 },
 {
   timestamps: true

@@ -1,27 +1,21 @@
 //NOTE TO SELF: MODULARIZE CODE, IMPROVE VARIABLE NAMES
 
-import { verify } from './loginUser.js';
 
-
-
-
-const call = (r) => {
+const callForKey = (r) => {
   return axios.get('/api/config').then(response => response.data)
 }
 
-const appendedButton = document.querySelector('.appendedButton');
-
-
-
 
 function getInfoForCards() {
-
+  const name = document.getElementById("name").value
+  const job = document.getElementById("jobTitle").value
+  const company = document.getElementById("company").value
 
   const info = [
     {
-      name: `${document.getElementById("name").value}`,
-      job: `${document.getElementById("jobTitle").value}`,
-      company: `${document.getElementById("company").value}`
+      name: `${name}`,
+      job: `${job}`,
+      company: `${company}`
     }
   ]
 
@@ -30,12 +24,11 @@ function getInfoForCards() {
 }
 
 
-
-
 const writeDB = async () => {
-  const info = getInfoForCards()
 
+  const info = getInfoForCards()
   const item = localStorage.getItem('Bearer')
+
   const response = await axios.post(
     '/api/v1/users/writeDB',
     {
@@ -59,22 +52,19 @@ const writeDB = async () => {
 }
 
 
+async function logoApiCall() {
 
-
-async function apiCall() {
-  const response = await call()
-
+  const response = await callForKey()
   const apiKey = response.apiKey
-
   const info = getInfoForCards()
+  const companyName = info[0].company
+  const companyName2 = companyName.replaceAll(' ', '').toLowerCase()
 
   try {
 
-    const companyName = info[0].company
-    const companyName2 = companyName.replaceAll(' ', '').toLowerCase()
-    const apiUrl = `https://img.logo.dev/${companyName2}.com?token=${apiKey}`
-    console.log(apiUrl)
+    const apiUrl = await `https://img.logo.dev/${companyName2}.com?token=${apiKey}`
     return apiUrl
+
   } catch (error) {
     if (error) {
       console.error(`Error fetching data:`, error)
@@ -84,223 +74,178 @@ async function apiCall() {
 }
 
 
-
-
-function confirmCreation() {
+/*function confirmCreation() {
   document.getElementById(submitForm).innerText = 'Entry added . . . '
+}
+*/
+
+
+function createCardHTML(item, apiUrl, jobId, buttonOption, formattedDate) {
+
+  return `<div value='${buttonOption}' id="innerOutput">
+
+  <h3 id="jobOutput"></h3>
+
+  <h3 id="nameOutput">${item.company}</h3>
+  <h3 id="companyOutput">${item.job}</h3>
+
+  <img src="${apiUrl}" id="companyImage" />
+
+  <div class="time">
+    <button 
+      value="${buttonOption}" 
+      class="appendedButton" 
+      id="${buttonOption}"
+    >
+      ${buttonOption}
+    </button>
+
+    <h4></h4>
+    <h5 id='dateAndTime'>${formattedDate}</h5>
+  </div>
+
+  <select name="subject" id="subject" class='subject' data-id="${jobId}">
+    <option value="" selected='${buttonOption}'>Change Status</option>
+    <option value="Applied">Applied</option>
+    <option value="Interested">Interested</option>
+    <option value="Closed">Closed</option>
+    <option value="Assessment">Assessment</option>
+    <option value="Rejected">Rejected</option>
+    <option value="Interview">Interview</option>
+  </select>
+
+  <button class="btn delete" id='deleteButton' data-id="${jobId}">            
+    <span class="mdi mdi-delete mdi-24px"></span>
+    <span class="mdi mdi-delete-empty mdi-24px"></span>
+    <span>Delete</span>
+  </button> 
+
+  <button class='openModalButton'>DROP</button
+</div>
+
+<div id="jobModal" class='modal'>
+  <form method="POST" action="/add-note" id='userNotes'>
+    <h3>Early Stages:</h3>
+    <br>
+    <label for="linkedInConnect">
+      <input type="checkbox" id="linkedInConnect" name="linkedInConnect" value="linkedInConnect">
+      Connected on linkedIn
+    </label>
+    <br>
+    <input type="checkbox" id="proactiveAction" name="proactiveAction" value="proactiveAction">
+    <label for="proactiveAction">Inquired proactively</label>
+    <br>
+
+    <h3>Late Stages:</h3>
+    <br>
+    <input type="checkbox" id="followUp" name="followUp" value="followUp">
+    <label for="followUp">I have followed up</label>
+    <br>
+    <br>
+    <input type="checkbox" id="thankYou" name="thankYou" value="thankYou">
+    <label for="thankYou">Sent a thank you email or letter</label>
+    <br>
+    <br>
+    <textarea name="notes" placeholder="Add your notes here..."></textarea>
+
+    <button type="submit">Save Note</button>
+  </form>
+</div>
+`
 }
 
 
+async function createCard() {
 
-async function createCard(users, info) {
-
-  const apiUrl = await apiCall()
-
-
-
-  apiCall()
-  //writeDB()
-
- const buttonOption = document.querySelector('select').value
+  const apiUrl = await logoApiCall()
+  const buttonOption = document.querySelector('select').value
+  const now = dayjs()
+  const formattedDate = now.format('MMM D, YYYY <br> h:mm A')
+  const outputCard = document.getElementById('outputCard');
+  const info = getInfoForCards();
+  const jobId = await writeDB()
 
   if (document.querySelector("input").value != "") {
 
-    const now = dayjs()
-
-    const formatted = now.format('MMM D, YYYY <br> h:mm A')
-    const outputCard = document.getElementById('outputCard');
-    const info = getInfoForCards();
-    const jobId = await writeDB()
-
     info.forEach(item => {
 
-    
       const card = document.createElement('div');
-
       card.className = 'card'
       card.setAttribute("value", buttonOption)
-
-      card.innerHTML =
-        `
-        <div value='${buttonOption}' id="innerOutput">
-        <svg class='openModalButton' xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg>
-
-        <h3 id="jobOutput"></h3>
-  
-              <h3 id="nameOutput">${item.company}</h3>
-              <h3 id="companyOutput">${item.job}</h3>
-              
-              <img src="${apiUrl}" id="companyImage" />
-  
-              <div class="time">
-
-             
-                <button 
-                  value="${buttonOption}" 
-                  class="appendedButton" 
-                  id="${buttonOption}" 
-                  
-                >
-                  ${buttonOption}
-                </button>
-             
-            
-
-           
-                <h4></h4>
-                <h5 id='dateAndTime'>${formatted}</h5>
-              </div>
-
- <select name="subject" id="subject" class='subject' data-id="${jobId}">
-    
-      <option value="" selected='${buttonOption}'>Change Status</option>
-      <option value="Applied"> Applied</option>
-        <option value="Interested">Interested</option>
-          <option value="Closed" >Closed</option>
-            <option value="Assessment" >Assessment</option>
-              <option value="Rejected" >Rejected</option>
-                <option value="Interview">Interview</option>
-  </select>
-
-              <button class="btn delete" id='deleteButton' data-id="${jobId}">            
-                <span class="mdi mdi-delete mdi-24px"></span>
-                <span class="mdi mdi-delete-empty mdi-24px"></span>
-                <span>Delete</span>
-              </button> 
-            </div>`
-
+      card.innerHTML = createCardHTML(item, apiUrl, jobId, buttonOption, formattedDate)
       outputCard.appendChild(card)
+
       document.getElementById("name").value = "";
       document.getElementById("jobTitle").value = "";
       document.getElementById("company").value = "";
-      
-
-
     })
   }
-  //createEventListener()
   return buttonOption
 }
 
 
 document.addEventListener('change', async function (e) {
-  if (!e.target.matches('.subject')) return;
-
-  console.log('Subject changed:', e.target.value);
 
   const row = e.target.closest('div');
-  if (!row) {
-    console.warn('No .time container found');
-    return;
-  }
-
   const btn = row.querySelector('.appendedButton');
-  if (!btn) {
-    console.warn('No .appendedButton found in row');
-    return;
-  }
-
   const value = e.target.value;
+  const targetedButton = e.target.closest(".subject");
+  const id = targetedButton.getAttribute('data-id');
+  const item = localStorage.getItem('Bearer')
+
+  if (!e.target.matches('.subject')) return;
+  if (!row) return;
+  if (!btn)return;
+
   btn.setAttribute('value', value);
   btn.setAttribute('id', value);
   btn.innerText = value;
-
-  const targetedButton = e.target.closest(".subject");
-  console.log(targetedButton)
-  
-const id = targetedButton.getAttribute('data-id');
-console.log(id)
- const item = localStorage.getItem('Bearer')
+ 
   await axios.patch(`/api/v1/users/${id}`, {
     name: e.target.value,
   },
-  {
- headers: {
-          'Authorization': `Bearer ${item}`
-        }
-})
-
+    {
+      headers: {
+        'Authorization': `Bearer ${item}`
+      }
+    })
 });
 
 
-
-
-
-
-
-
-//Putting together element of job card (date, time, etc)
 document.querySelector('form').addEventListener('submit', (e) => {
 
   e.preventDefault()
   e.stopPropagation()
 
   if (document.getElementById('jobTitle').value == '' || document.getElementById('company').value == '') {
-    alert('Error: Please enter job title to continue');   /////////better error handling on UI
+    alert('Error: Please enter job title to continue');  
 
   } else {
-
     createCard()
-  console.log('create card')
- 
-
-    console.log('evemt lostem')
-  }
-}
-)
-
-
-
-
-
-/*
-//unfinished
-let dd = document.getElementById('statusbuttons')
-dd.addEventListener('click', () => {
-
-  console.log('listening')
-  for (let i = 0; i < dd.length; i++) {
-    if (currentButton.innerText != dd.childNodes[i].innerText) {
-      console.log(currentButton.parentNode)
-      currentButton.parentNode.remove()
-    }
   }
 })
-*/
-
-
-
-
-
-
 
 
 document.addEventListener("click", async (event) => {
   event.preventDefault()
-  // const buttonOption = createCard()
-
 
   if (event.target.closest(".delete")) {
-
-    console.log("Delete button clicked!");
 
     event.target.closest(".delete").innerText = "Confirm deletion?"
 
     const item = localStorage.getItem('Bearer')
-
-    const itemToRemove = event.target.closest(".card"); 
+    const itemToRemove = event.target.closest(".card");
     const targetedButton = event.target.closest(".btn.delete");
-
-
-console.log(itemToRemove.parentElement.id)
-    console.log(`Hello quette . .  .${itemToRemove.parentElement.id}`)
     const id = targetedButton.getAttribute('data-id');
+
+    console.log(itemToRemove.parentElement.id)
+    console.log(`Hello quette . .  .${itemToRemove.parentElement.id}`)
+
     if (itemToRemove) {
       itemToRemove.classList.add("fade-out");
       setTimeout(() => {
         console.log('removing from the DOM')
         itemToRemove.remove();
- 
       }, 500);
     }
     console.log('Deleting user with id:', id);
@@ -316,11 +261,6 @@ console.log(itemToRemove.parentElement.id)
   }
 });
 
-
-
-
-
-//
 async function countForMonthInReview() {
   console.log('crwairfpijr')
   const buttonOption = await createCard()
@@ -369,112 +309,53 @@ function reduceCountForMonthInReview() {
   }
 }
 
-
-
-
 document.getElementById('submitForm').addEventListener('click', (e) => {
   e.preventDefault()
   countForMonthInReview()
-//setTimeout(() => {
-  //listenForDelete()
-
-//}, 2000);
-
 })
 
+document.addEventListener("click", (e) => {
+  e.preventDefault()
+  // const buttonOption = createCard()
 
-/* POP UP 
-const buttons = document.getElementsByClassName('openModalButton');
 
-Array.from(buttons).forEach(button => {
-  console.log('level1')
-  button.addEventListener('click', (e) => {
-    console.log('level2')
-    e.preventDefault();
-    document.getElementsByClassName('modal').style.display = 'flex'
-    console.log('level3')
-  });
+  if (e.target.closest(".openModalButton")) {
+
+    //const item = localStorage.getItem('Bearer')
+
+
+    console.log(e.target.parentElement.querySelector('.modal'))
+    //const id = targetedButton.getAttribute('data-id');
+    if (!e.target.parentElement.querySelector('.modal.active') || !e.target.parentElement.querySelector('.openModalButton.active')) {
+
+
+      e.target.parentElement.querySelector('.modal').classList.add('active')
+      e.target.parentElement.querySelector('.openModalButton').classList.add('active')
+
+    }
+
+    else if (e.target.parentElement.querySelector('.modal.active') || e.target.parentElement.querySelector('.openModalButton.active')) {
+
+      e.target.parentElement.querySelector('.modal').classList.remove('active')
+      e.target.parentElement.querySelector('.openModalButton').classList.remove('active')
+
+    }
+
+  }
 });
 
-document.getElementById('closeModal').addEventListener('click', (e) => {
-e.preventDefault()
-document.getElementById('jobModal').classList.add('hidden')
-})
-*/
-
-/*
-function listenForDelete(){
-  document.getElementById('deleteButton').addEventListener('click',  (e) => {
-  e.preventDefault()
-  reduceCountForMonthInReview()
-})
-}
-*/
-
-/*document.querySelectorAll('.appendedButton').addEventListener('click', () => {
-
-})
-  */
-
-
-/*
-function filtered(e) {
-
-  if (e.currentTarget.style.cssText != 'border:3px solid black' || card.name != e.target.closest(".realG").value) { ///if it doesnt have a border
-    e.target.closest(".realG").style.cssText = 'border:1px solid black'
-    //for loop may be better?
-    document.getElementsByClassName('card').hidden = true
-
-  } else {
-    e.currentTarget.style.cssText = 'border:none'
-    card.name.hidden = false
-  }
-}
-
-
-document.querySelector('.realG').addEventListener('click', (e) => {
-
-  return info.filter(filtered);
 
 
 
-})
 
 
 
-document.querySelector('.realG').addEventListener('click', (e) => {
-
-return info.filter( item => item.Name === e.target.closest(".realG").value)
 
 
 
-})
-*//*
-document.querySelector('.realG').addEventListener('click', (e) => {
-  let find = document.getElementsByClassName('appendedButton').value
-  info.forEach((element) => {
-    if (element.name === e.target.closest(".realG").value) {
-
-    } else {
-      console.log(element)
-
-    }
-  })
-  //document.getElementsByClassName('appendedButton').value
-})
-//start of filtering of cards based on buttons
-
-*/
 
 
-//array would be better
-/*document.querySelectorAll('span#statusButtons').addEventListener('click', (e) => {
-    if(document.getElementById('innerOutput').value != e.currentTarget.value){
-      document.getElementById('innerOutput').remove()
-    }
 
-})
-*/
 
 
 

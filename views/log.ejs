@@ -14,7 +14,8 @@
 <%- include('partials/nav') %>
 <div id="mainBody">
     <form id="formDiv">
-      <div>
+      <div id="formWrapper">
+<div id="formMain">
         <label for="name">Status:</label>
         <select autofocus id="name" name="name">
           <option>--Please choose a job status--</option>
@@ -25,22 +26,19 @@
           <option value="Rejected">Rejected</option>
           <option value="Interview">Interview</option>
         </select>
-      </div>
-      <div>
+  <br>
         <label for="jobTitle">Job Title:</label>
         <input name="job" id="jobTitle" />
-      </div>
-      <div>
+   <br>
         <label for="company">Company:</label>
         <input name="company" id="company" />
       </div>
-
+</div>
       <button id="submitForm" class="submit" type="submit">Add Job</button>
+   
     </form>
 
-    <div id="searchBarDiv">
-      <input id="searchBar" placeholder="search" />
-    </div>
+
 
     <div id="bigBox">
       <div id="navigationArea">
@@ -92,11 +90,6 @@
     </div>
 </div>
 
-<div id="jobModal" class='modal'>
-<input type="checkbox" id="followUp" name="followUp" value="followUp">
-  <label for="checkbox"> I have followed up</label><br>
-  <button id="closeModal">Close</button>
-</div>
 
    <script src="./js/axios.min.js"></script>
 
