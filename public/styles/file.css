@@ -40,7 +40,7 @@ body {
   background-attachment: scroll;
 }
 
-#userNotes{
+.userNotes{
    text-align: center;
 
   display: flex;
@@ -111,6 +111,13 @@ textarea {
 
 #formDiv div{
 
+}
+.subject{
+  display: flex;
+  margin-bottom: 5%;
+  align-self: center;
+  align-items: center;
+  margin-left: 37%;
 }
 
 #submitForm {
@@ -202,7 +209,7 @@ textarea {
   cursor: pointer;
 }
 
-#innerOutput {
+.innerOutput {
   background: rgba(255, 255, 255, 0.753);
   border-radius: 16px;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
@@ -210,20 +217,16 @@ textarea {
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
-#innerOutput:hover {
+.innerOutput:hover {
   border: 1px solid black;
 }
 
-#innerOutput h2 {
+.innerOutput h2 {
   font-size: 2em;
 }
 
-.time {
-  position: relative;
-  margin-left: 80%;
-  top: 10%;
-  color: rgb(90, 90, 90);
-  margin-right: 5%;
+.appendedButton{
+
 }
 .time h4,
 h5 {
@@ -260,52 +263,57 @@ h5 {
   font-weight: 250;
 }
 #firstRev:hover{
-  background-color: rgb(2, 166, 2);
+  margin-left: 0%;
 }
 #firstRev{
   border-left: 1.5px solid black;
   border-bottom: 0.75px solid black;
   border-top: 0.75px solid black;
   padding: 2%;
-  color: white;
+  color: black;
 margin-left: 10%;
 background-color: rgb(0, 128, 0);
+transition: margin-left 0.3s ease; 
 }
 #secRev:hover{
-  background-color: rgb(255, 235, 54);
+margin-left: 0%;
 }
 #secRev{
   border-left: 1.5px solid black;
   border-bottom: 0.75px solid black;
   border-top: 0.75px solid black;
   padding: 2%;
-  color: white;
+  color: black;
   margin-left: 25%;
   background-color: rgb(255, 208, 0);
+  transition: margin-left 0.3s ease; 
 }
 #thirdRev:hover{
-  background-color: rgb(48, 114, 255);
+ margin-left: 0%;
 }
 #thirdRev{
   border-left: 1.5px solid black;
   border-bottom: 0.75px solid black;
   border-top: 0.75px solid black;
   padding: 2%;
-  color: white;
+  color: black;
   margin-left: 40%;
 background-color: rgb(16, 83, 230);
+transition: margin-left 0.3s ease; 
 }
 #fourthRev:hover{
-  background-color: rgb(255, 93, 65);
+
+  margin-left: 0%;
 }
 #fourthRev{
   border-left: 1.5px solid black;
   border-bottom: 0.75px solid black;
   border-top: 0.75px solid black;
   padding: 2%;
-  color: white;
+  color: black;
 margin-left: 60%;
 background-color: rgb(255, 0, 0);
+transition: margin-left 0.3s ease; 
 }
 #status {
   border: 0.5px solid rgb(0, 0, 0);
@@ -318,8 +326,8 @@ background-color: rgb(255, 0, 0);
   height: 13%;
   border-radius: 15px;
 }
-#statusbuttons button {
-  border: solid white 0.5px;
+.statusbuttons button {
+  border: solid black 0.5px;
   text-align: center;
   margin: 3%;
   height: 13%;
@@ -375,42 +383,41 @@ background-color: rgb(255, 0, 0);
     border: solid black 1px;
   }
 }
-.appendedButton {
-  right: 16%;
-  top: 330px;
-  position: relative;
-}
-#Applied {
+
+
+.Applied {
   background-color: green;
-  color: white;
+  color: rgb(0, 0, 0);
+  
 }
-#Interested {
-  color: white;
+.Interested {
+  color: black;
   background-color: rgb(255, 208, 0);
 }
-#Closed {
-  color: white;
+.Closed {
+  color: black;
   background-color: rgb(255, 145, 0);
 }
-#Assessment {
-  color: white;
+.Assessment {
+  color: black;
   background-color: rgb(234, 0, 255);
 }
-#Rejected {
-  color: white;
+.Rejected {
+  color: black;
   background-color: red;
 }
-#Interview {
-  color: white;
+.Interview {
+  border:solid 0.5px black;
+  color: black;
   background-color: rgb(16, 83, 230);
 }
 
-#jobOutput,
-#companyOutput {
+.jobOutput,
+.companyOutput {
   font-weight: 250;
 }
 
-#jobOutput {
+.jobOutput {
   position: relative;
   left: 50%;
 }
@@ -530,12 +537,13 @@ color: rgb(255, 255, 255);
 
 .btn {
   display: flex;
-  bottom: 5%;
+  bottom: 0%;
+  position: absolute;
   align-items: center;
   background: none;
   border: 1px solid #b3b3b3;
   height: 10px;
-
+margin-top: 85%;
   letter-spacing: 0.25px;
   border-radius: 24px;
   cursor: pointer;
@@ -550,9 +558,12 @@ color: rgb(255, 255, 255);
 }
 
 .delete {
+  margin-top: 85%;
+  bottom: 0%;
   font-size: 16px;
   color: red;
-  position: relative;
+
+  position: absolute;
 }
 
 .delete .mdi-delete-empty {
@@ -615,14 +626,15 @@ color: rgb(255, 255, 255);
   display: block;
 }
 
-#dateAndTime{
+.dateAndTime{
   display: flex;
   width: 135%;
   margin-right: 10px;
   
 position: absolute;
 bottom: 0;
-top: 100%;
+left: 75%;
+
 
 }
 

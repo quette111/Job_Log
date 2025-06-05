@@ -82,29 +82,30 @@ async function logoApiCall() {
 
 function createCardHTML(item, apiUrl, jobId, buttonOption, formattedDate) {
 
-  return `<div value='${buttonOption}' id="innerOutput">
+  return `<div value='${buttonOption}' class="innerOutput">
 
-  <h3 id="jobOutput"></h3>
+  <h3 class="jobOutput"></h3>
 
-  <h3 id="nameOutput">${item.company}</h3>
-  <h3 id="companyOutput">${item.job}</h3>
+  <h3 class="nameOutput">${item.company}</h3>
+  <h3 class="companyOutput">${item.job}</h3>
 
-  <img src="${apiUrl}" id="companyImage" />
+  <img src="${apiUrl}" class="companyImage" />
 
   <div class="time">
     <button 
       value="${buttonOption}" 
+      class="${buttonOption}"
       class="appendedButton" 
-      id="${buttonOption}"
+      
     >
       ${buttonOption}
     </button>
+ </div>
 
-    <h4></h4>
-    <h5 id='dateAndTime'>${formattedDate}</h5>
-  </div>
+    <h5 class='dateAndTime'>${formattedDate}</h5>
+ 
 
-  <select name="subject" id="subject" class='subject' data-id="${jobId}">
+  <select name="subject" class='subject' data-id="${jobId}">
     <option value="" selected='${buttonOption}'>Change Status</option>
     <option value="Applied">Applied</option>
     <option value="Interested">Interested</option>
@@ -114,7 +115,7 @@ function createCardHTML(item, apiUrl, jobId, buttonOption, formattedDate) {
     <option value="Interview">Interview</option>
   </select>
 
-  <button class="btn delete" id='deleteButton' data-id="${jobId}">            
+  <button class="btn delete" data-id="${jobId}">            
     <span class="mdi mdi-delete mdi-24px"></span>
     <span class="mdi mdi-delete-empty mdi-24px"></span>
     <span>Delete</span>
@@ -123,32 +124,32 @@ function createCardHTML(item, apiUrl, jobId, buttonOption, formattedDate) {
   <button class='openModalButton'>DROP</button
 </div>
 
-<div id="jobModal" class='modal'>
-  <form method="POST" action="/add-note" id='userNotes'>
+<div class='modal'>
+  <form method="POST" action="/add-note" class='userNotes'>
     <h3>Early Stages:</h3>
     <br>
     <label for="linkedInConnect">
-      <input type="checkbox" id="linkedInConnect" name="linkedInConnect" value="linkedInConnect">
+      <input type="checkbox" name="linkedInConnect" value="linkedInConnect">
       Connected on linkedIn
     </label>
     <br>
-    <input type="checkbox" id="proactiveAction" name="proactiveAction" value="proactiveAction">
+    <input type="checkbox" class="proactiveAction" name="proactiveAction" value="proactiveAction">
     <label for="proactiveAction">Inquired proactively</label>
     <br>
 
     <h3>Late Stages:</h3>
     <br>
-    <input type="checkbox" id="followUp" name="followUp" value="followUp">
+    <input type="checkbox" class="followUp" name="followUp" value="followUp">
     <label for="followUp">I have followed up</label>
     <br>
     <br>
-    <input type="checkbox" id="thankYou" name="thankYou" value="thankYou">
+    <input type="checkbox" class="thankYou" name="thankYou" value="thankYou">
     <label for="thankYou">Sent a thank you email or letter</label>
     <br>
     <br>
-    <textarea name="notes" placeholder="Add your notes here..."></textarea>
+    <textarea name="notes" class='notes' placeholder="Add your notes here..."></textarea>
 
-    <button type="submit">Save Note</button>
+    <button class='saveNotes' type="submit">Save Note</button>
   </form>
 </div>
 `
@@ -343,13 +344,6 @@ document.addEventListener("click", (e) => {
 
   }
 });
-
-
-
-
-
-
-
 
 
 
