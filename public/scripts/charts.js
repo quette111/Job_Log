@@ -1,3 +1,5 @@
+
+
 async function createChart(){
 
 const item = localStorage.getItem('Bearer');
@@ -58,10 +60,18 @@ animations: {
     }
   });
 
+ 
+
 document.getElementById('submitForm').addEventListener('click', (e) =>{
 e.preventDefault()
-dataVisualizationChart.destroy()
-createChart()
+
+if(dataVisualizationChart){
+  dataVisualizationChart.destroy()
+  createChart()
+}else{
+  createChart()
+}
+
 
 })
 }
@@ -72,3 +82,107 @@ createChart()
 
 
 
+
+async function createSecondChart(){
+
+const item = localStorage.getItem('Bearer');
+
+console.log('working')
+   const response = await axios.get('/api/v1/users',
+  {
+ headers: {
+          'Authorization': `Bearer ${item}`
+        }
+      
+      })
+
+
+const userData = response.data
+
+ const statusCounts = {};
+
+userData.forEach(user => {
+  const status = user.name;
+  statusCounts[status] = (statusCounts[status] || 0) + 1;
+}); 
+ 
+
+  
+
+ const ctxTwo = document.getElementById('mySecondChart');
+
+
+
+const dataVisualizationPie = new Chart(ctxTwo, {
+    type: 'pie',
+    data: {
+      labels: Object.keys(statusCounts),
+      datasets: [{
+        label: 'Job Status',
+        data: Object.values(statusCounts),
+        borderWidth: 1
+      }]
+    },
+    options: 
+    {
+       responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+   
+    },
+animations: {
+      tension: {
+        duration: 1000,
+        easing: 'easeInOutCubic',
+        from: 1,
+        to: 0,
+        loop: true
+      }
+    },
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+
+    }
+  })
+
+
+ 
+
+document.getElementById('submitForm').addEventListener('click', (e) =>{
+e.preventDefault()
+
+if(dataVisualizationPie){
+  dataVisualizationPie.destroy()
+  createSecondChart()
+}else{
+  createSecondChart()
+}
+
+createSecondChart()
+dataVisualizationPie.update('active')
+
+
+})
+}
+
+
+createSecondChart()
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
