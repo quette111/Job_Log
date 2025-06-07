@@ -125,6 +125,8 @@ function createCardHTML(item, apiUrl, jobId, buttonOption, formattedDate) {
 </div>
 
 <div class='modal'>
+    <button class='closeModalButton'></button>
+
   <form method="POST" action="/add-note" class='userNotes'>
     <h3>Early Stages:</h3>
     <br>
@@ -341,14 +343,33 @@ document.addEventListener("click", (e) => {
       e.target.parentElement.querySelector('.openModalButton').classList.remove('active')
 
     }
-
   }
+
+  
 });
 
 
 
+document.addEventListener("click", (e) => {
+  e.preventDefault()
+  // const buttonOption = createCard()
+
+  if(e.target.closest('.closeModalButton')){
+        e.target.parentElement.querySelector('.modal').classList.remove('active')
+  }
 
 
+    if(e.target.parentElement.parentElement.querySelector('.modal.active')){
+      console.log(e.target.parentElement)
+
+    e.target.querySelector('.modal').classList.remove('active')
+      e.target.querySelector('.openModalButton').classList.remove('active')
+    }
+
+
+
+  
+})
 
 
 
