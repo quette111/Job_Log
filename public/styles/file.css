@@ -222,7 +222,8 @@ textarea {
   grid-template-columns: repeat(auto-fill, 400px);
   justify-content: center;
   height: 400px;
-  margin: 2%;
+  margin-top: 6%;
+  margin: 3%;
   margin-left: 20%;
   gap: 15px;
   width: 100%;
@@ -287,11 +288,12 @@ h5 {
   display: grid;
   grid-template-rows: repeat(4, 1fr);
   justify-content: flex-start;
-  margin-top: 2%;
+  margin-top: 4%;
   margin-bottom: 2%;
   margin-right: 0%;
   gap: 15px;
   flex-wrap: wrap;
+  width: 16vw;
 }
 #navigationArea div {
   width: 300%;
@@ -310,6 +312,7 @@ h5 {
 #stats {
   border: 0.5px solid rgb(0, 0, 0);
   font-weight: 250;
+  height: 315px;
 }
 #firstRev:hover{
   margin-left: 0%;
