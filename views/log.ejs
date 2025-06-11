@@ -10,9 +10,12 @@
 
   </head>
   <body>
-   
+  
 <%- include('partials/nav') %>
+  <div class="overlay" hidden></div>
+
 <div id="mainBody">
+  <div>
     <form id="formDiv">
       <div id="formWrapper">
 <div id="formMain">
@@ -37,8 +40,16 @@
       <button id="submitForm" class="submit" type="submit">Add Job</button>
    
     </form>
+ <div class="chart">
 
+      <canvas id="myChart"></canvas>
 
+    </div>
+    <div id="chartWrapper">
+           <canvas id="mySecondChart"></canvas>
+    </div>
+
+</div>
 
     <div id="bigBox">
       <div id="navigationArea">
@@ -53,47 +64,16 @@
 
         </div>
 
-        <div class="column" id="status">
-          <h3>Filter by Status:</h3>
-          <span class="statusbuttons">
-            <button value="Applied" class="Applied">Applied</button>
-            <button value="Interested" class="Interested">
-              Interested</button
-            ><br />
-            <button value="Closed" class="Closed">Closed</button>
-            <button value="Assessment" class="Assessment">
-              Assessment</button
-            ><br />
-            <button value="Rejected" class="Rejected">
-              Rejected
-            </button>
-            <button value="Interview" class="Interview">
-              Interview
-            </button>
-          </span>
-        </div>
         
       </div>
 
       <div id="outputCard"></div>
     </div>
 
-    <div class="chart">
-
-      <canvas id="myChart"></canvas>
-      <div id="chartTypes">
-     
-      </div>
-    
-
-    </div>
-    <div id="chartWrapper">
-           <canvas id="mySecondChart"></canvas>
-    </div>
-
+   
 </div>
 
-
+<%- include('partials/footer') %>
    <script src="./js/axios.min.js"></script>
 
 <script src="/js/chart.min.js"></script>

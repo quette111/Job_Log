@@ -25,20 +25,6 @@ body{
  
 }
 
-.darkmode{
-  --base-color: #060b1c;
-  --nav-color: #38405d;
-  --text-color: rgb(255, 255, 255);
-  --hover-color:#42485d;
-  --img-filter:brightness(0.80);
-  --secondary-text: #e0e5ff;
-  --tab-color:rgb(44, 44, 44);
-   --tab-colorSecondary:rgb(207, 207, 207);
-   --tab-colorThird:rgb(44, 10, 211);
-    --gradient-color:#c3ecff00;
-   --gradient-colorSecondary:  #c7edff35;
-   --gradient-colorThird: #d7f2ff;
-}
 
 
 #theme-switch{
@@ -90,10 +76,11 @@ body{
 nav{
   width: 100%;
   height: 8vh;
-  margin-bottom: 2%;
+position: absolute;
+bottom: 0;
   background-color: var(--nav-color);
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
-
+margin-bottom: 0;
 }
 
 nav, ul{

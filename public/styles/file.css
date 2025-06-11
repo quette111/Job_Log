@@ -1,5 +1,5 @@
 @import url('./navbar.css');
-
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
 
 
 
@@ -10,11 +10,14 @@ body {
   
   margin-top: 0;
   margin-bottom: 2%;
-  font-weight: 250;
+
   min-height: 100vh;
   background-color: var(--base-color);
   color: var(--text-color);
-
+ font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 
 
 }
@@ -67,11 +70,19 @@ text-shadow: #000 0px 5px 5px 5px;
   flex-direction: column;
 width: 100%;
 
-
-
+ 
 
 }
 
+.userNotes > *:not(input):not(button):not(label) {
+  pointer-events: none;
+}
+
+.userNotes input[type="checkbox"],
+.userNotes button,
+.userNotes label {
+  pointer-events: auto;
+}
 
 
 #formWrapper{
@@ -87,10 +98,12 @@ padding-bottom: 1%;
 display: flex;
 align-items: center;
 align-self: center;
+margin-left: 3%;
+z-index: 100000987656789000;
 }
 
 #formDiv {
-  z-index: 10000000;
+  z-index: 100000987656789000;
   text-align: center;
 margin-top: 5vh;
   display: flex;
@@ -135,6 +148,7 @@ textarea {
 }
 
 #submitForm {
+  z-index: 100000987656789000;
   appearance: button;
   background-color: #676869;
   border: solid transparent;
@@ -207,13 +221,13 @@ textarea {
   display: grid;
   grid-template-columns: repeat(auto-fill, 400px);
   justify-content: center;
-  height: 300px;
+  height: 400px;
   margin: 2%;
   margin-left: 20%;
   gap: 15px;
   width: 100%;
   flex-wrap: wrap;
-
+font-weight: 900;
   padding: 1rem;
 }
 
@@ -224,12 +238,14 @@ textarea {
 }
 
 .innerOutput {
+  position: relative;
   background: rgba(255, 255, 255, 0.753);
   border-radius: 16px;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
+   overflow: hidden;
 }
 .innerOutput:hover {
   border: 1px solid black;
@@ -240,7 +256,26 @@ textarea {
 }
 
 .appendedButton{
+display: flex;
+border: solid black 0.75px;
+align-items: flex-start;
 
+position: absolute;
+justify-content: flex-start;
+top: -2%;
+left: -10%;
+height: 2vh;
+padding-left: 10%;
+padding-bottom: 1.3%;
+padding-right: 6%;
+width: 200px;
+transform: rotate(-40deg);
+text-align: center;
+
+}
+
+.appendedButton:hover{
+  color: white;
 }
 .time h4,
 h5 {
@@ -286,7 +321,7 @@ h5 {
   padding: 2%;
   color: black;
 margin-left: 10%;
-background-color: rgb(0, 128, 0);
+background-color: #36a3ebd8;
 transition: margin-left 0.3s ease; 
 }
 #secRev:hover{
@@ -299,7 +334,7 @@ margin-left: 0%;
   padding: 2%;
   color: black;
   margin-left: 25%;
-  background-color: rgb(255, 208, 0);
+  background-color: #ff6486d8;
   transition: margin-left 0.3s ease; 
 }
 #thirdRev:hover{
@@ -312,7 +347,7 @@ margin-left: 0%;
   padding: 2%;
   color: black;
   margin-left: 40%;
-background-color: rgb(16, 83, 230);
+background-color: #ffa040d8;
 transition: margin-left 0.3s ease; 
 }
 #fourthRev:hover{
@@ -326,20 +361,14 @@ transition: margin-left 0.3s ease;
   padding: 2%;
   color: black;
 margin-left: 60%;
-background-color: rgb(255, 0, 0);
+background-color: #4cc0c0d8;
 transition: margin-left 0.3s ease; 
 }
 #status {
   border: 0.5px solid rgb(0, 0, 0);
   padding-bottom: 20%;
 }
-#outputCard button {
-  border: solid white 0.5px;
 
-  margin: 3%;
-  height: 13%;
-  border-radius: 15px;
-}
 .statusbuttons button {
   border: solid black 0.5px;
   text-align: center;
@@ -385,6 +414,7 @@ transition: margin-left 0.3s ease;
   body {
     max-width: 100%;
     overflow-x: hidden;
+    display: grid;
   }
   #outputCard {
     transform: scale(0.8);
@@ -392,10 +422,13 @@ transition: margin-left 0.3s ease;
     margin-left: 7%;
   }
   #bigBox {
-    display: none;
+display: grid;
   }
   #navigationArea {
     display: flex;
+      transform: scale(0.8);
+    transform-origin: 0 0;
+    margin-left: 7%;
   }
   #navigationArea div {
     font-size: 0.75em;
@@ -405,13 +438,13 @@ transition: margin-left 0.3s ease;
 
 
 .Applied {
-  background-color: green;
+  background-color: #36a2eb;
   color: rgb(0, 0, 0);
   
 }
 .Interested {
   color: black;
-  background-color: rgb(255, 208, 0);
+  background-color: #ff6485;
 }
 .Closed {
   color: black;
@@ -423,12 +456,12 @@ transition: margin-left 0.3s ease;
 }
 .Rejected {
   color: black;
-  background-color: red;
+  background-color: #4cc0c0;
 }
 .Interview {
   border:solid 0.5px black;
   color: black;
-  background-color: rgb(16, 83, 230);
+  background-color: #ff9f40;
 }
 
 .jobOutput,
@@ -446,14 +479,6 @@ transition: margin-left 0.3s ease;
 #appendedButton {
 }
 
-#outputCard .appendedButton {
-  right: 270%;
-  padding: 10%;
-  
-  position: relative;
-  top: 400%;
-  width: 145%;
-}
 
 #outputCard #exit {
   color: white;
@@ -469,25 +494,29 @@ transition: margin-left 0.3s ease;
 }
 
 body button {
-  cursor: pointer;
+
 }
 
 #myChart{
-  display: flex;
+  display: grid;
  height: 300px;
  color: black;
  margin-top: 1vh;
+ z-index: 100000000;
 
 }
 
-.chart {
-z-index: -5;
 
+
+.chart {
+ 
+ z-index: 100000000;
+display: grid;
   background-image:
   radial-gradient(
-    #6fcdf800,
-    #6fcdf81a,
-    #9bdefd
+    var(--gradient-color),
+    var(--gradient-colorSecondary),
+    var(--gradient-colorThird)
   );
   border-radius: 16px;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
@@ -509,15 +538,16 @@ z-index: -5;
 }
 
 #chartWrapper{
+
     left: 70%;
-    display: flex;
+    display: grid;
 height: 35vh;
 width: 55vw;
 
-
+ z-index: 100000000;
  color: black;
 
- z-index: 10000;
+
  position: absolute;
 top: 13%;
 }
@@ -557,7 +587,7 @@ box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
 
 @media (max-width: 1000px) {
  .chart{
-  display: flex;
+  display: grid;
  }
 }
 
@@ -585,9 +615,10 @@ color: rgb(255, 255, 255);
   position: absolute;
   align-items: center;
   background: none;
-  border: 1px solid #b3b3b3;
-  height: 10px;
-margin-top: 85%;
+margin-left: 5%;
+padding: 0.5%;
+padding-right: 1.5%;
+margin-bottom: 4%;
   letter-spacing: 0.25px;
   border-radius: 24px;
   cursor: pointer;
@@ -606,7 +637,7 @@ margin-top: 85%;
   bottom: 0%;
   font-size: 16px;
   color: red;
-
+border: none;
   position: absolute;
 }
 
@@ -615,6 +646,7 @@ margin-top: 85%;
 }
 
 .delete:hover {
+  border: 1px solid #b3b3b3;
   background-color: #ffcccc; 
 }
 
@@ -638,6 +670,7 @@ margin-top: 85%;
   --hover-color:#42485d;
   --img-filter:brightness(0.80);
   --secondary-text: #e0e5ff;
+
 }
 
 
@@ -688,7 +721,22 @@ left: 75%;
   margin-right: 20px;
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 999998;
+
+  pointer-events: auto; /* Blocks background clicks */
+}
+
+
 .modal{
+
   z-index:10000000;
   border: 0.75px solid black;
   border-radius: 16px;
@@ -706,6 +754,9 @@ left: 75%;
 
 }
 
+.modal.active input{
+  pointer-events: auto;
+}
 
 .modal.active{
  position: fixed;
@@ -716,17 +767,16 @@ left: 75%;
 
 
   background-color: #b9b9b9;
-  z-index: 10000000;
-  display: flex;
-  z-index: 1000;
+  display: grid;
+  z-index: 50000234400;
   justify-content: center;
   align-items: center;
   border-top: 1px solid black;
   flex-direction: column;
   opacity: 1;
   visibility: visible;
+pointer-events: auto;
 
- 
     align-self: center;
     
 }
@@ -737,39 +787,26 @@ left: 75%;
 padding: 3%;
   background-size: 20px;
   background-position: center;
+  border: none;
 }
 
 .openModalButton:hover{
     background: url("../images/expand.png") no-repeat scroll 0 0 transparent;
     color: rgba(255, 255, 255, 0);
 padding: 3%;
-  background-color: #6768696f;
-   background-size: 25px;
+border-radius: 15px;
+  background-color: #67686917;
+   background-size: 22px;
   background-position: center;
 }
 
-.openModalButton.active{
-    background: url("../images/arrowUp.png") no-repeat scroll 0 0 transparent;
-    color: rgba(255, 255, 255, 0);
-  cursor: pointer;
 
-  background-size: 35px;
-  background-position: center;
-}
 
-.openModalButton.active:hover{
-    background: url("../images/arrowUp.png") no-repeat scroll 0 0 transparent;
-    color: rgba(255, 255, 255, 0);
-
-  background-color: #6768696f;
-   background-size: 40px;
-  background-position: center;
-}
 
 
 .closeModalButton{
-    background: url("../images/close.png") no-repeat scroll 0 0 transparent;
-    color: rgb(0, 0, 0);
+    background: url("../images/close.svg") no-repeat scroll 0 0 transparent;
+    color: rgba(0, 0, 0, 0);
   cursor: pointer;
 padding: 3%;
   background-size: 20px;
@@ -777,5 +814,46 @@ padding: 3%;
   z-index: 5000000000;
   display: flex;
   align-self: flex-end;
-  
+margin-bottom: 80%;
+align-items: flex-start;
+bottom: 0%;
+left: 100%;
+border: none;
+padding:1em;
+
+border:0.16em solid rgba(255,255,255,0);
+text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+text-align:center;
+transition: all 0.2s;
+}
+
+.closeModalButton:hover{
+  border-radius: 15px;
+   background-color: #b4b4b447;
+   border-color: rgba(255,255,255,1);
+}
+
+
+
+
+
+.new{
+  z-index: 10039287839048789;
+}
+
+select{
+border-radius: 20px;
+}
+
+input{
+border-radius: 20px;
+}
+
+
+input[type="checkbox"] {
+    appearance: auto;
+  -webkit-appearance: auto;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #333;
 }

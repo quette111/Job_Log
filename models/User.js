@@ -28,9 +28,11 @@ const userDataSchema = new mongoose.Schema({   //userSchema set up per mongoose 
         require: false,
        
     },
-    userNotes:{
-        type: String,
+    salary:{
+        type: Number,
         require: false,
+        min: 0,
+        max:500000
        
     },
 

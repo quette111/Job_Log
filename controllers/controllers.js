@@ -19,7 +19,7 @@ try{
 const postData = async (req, res) => {
 
 
- const {name, job, company, connectedOnLI, inquire, userNotes} = req.body
+ const {name, job, company, connectedOnLI, inquire, salary} = req.body
 
   if(!name || !job || !company){
     return res.status(401).json({error: "error bro"})
@@ -27,7 +27,7 @@ const postData = async (req, res) => {
 
    try{
    // pull out the object bc it is not just array
-    const task = await UserData.create({name, job, company, connectedOnLI, inquire, userNotes, createdBy: req.user.userId}); // create using that object
+    const task = await UserData.create({name, job, company, connectedOnLI, inquire, salary, createdBy: req.user.userId}); // create using that object
 
     res.status(201).json({task})
   } catch(error){
@@ -54,7 +54,7 @@ const editData = async (req, res) => {
 
   try{
     console.log('hello')
-    const edit = await UserData.findOneAndUpdate({_id: req.params.id}, {name}, {new: true})
+    const edit = await UserData.findOneAndUpdate({_id: req.params.id}, {name}, {new: true},  { runValidators: true })
     res.status(201).json(edit)
   } catch(error){
     console.log(error)
@@ -66,7 +66,7 @@ const editAllData = async (req, res) => {
 
   try{
     console.log('hello')
-    const edit = await UserData.findOneAndUpdate({_id: req.params.id}, {name, job, company}, {new: true})
+    const edit = await UserData.findOneAndUpdate({_id: req.params.id}, {name, job, company}, {new: true},  { runValidators: true })
     res.status(201).json(edit)
   } catch(error){
     console.log(error)

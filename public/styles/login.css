@@ -1,5 +1,12 @@
 @import url('./navbar.css');
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
 
+body{
+   font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
 *{
   margin:0;
   padding: 0;

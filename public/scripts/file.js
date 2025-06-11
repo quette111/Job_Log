@@ -91,16 +91,15 @@ function createCardHTML(item, apiUrl, jobId, buttonOption, formattedDate) {
 
   <img src="${apiUrl}" class="companyImage" />
 
-  <div class="time">
-    <button 
+
+    <div 
       value="${buttonOption}" 
-      class="${buttonOption}"
-      class="appendedButton" 
+      class="appendedButton ${buttonOption} " 
       
     >
       ${buttonOption}
-    </button>
- </div>
+    </div>
+
 
     <h5 class='dateAndTime'>${formattedDate}</h5>
  
@@ -121,38 +120,47 @@ function createCardHTML(item, apiUrl, jobId, buttonOption, formattedDate) {
     <span>Delete</span>
   </button> 
 
-  <button class='openModalButton'>DROP</button
+  <button class='openModalButton'>DROP</button>
 </div>
 
-<div class='modal'>
-    <button class='closeModalButton'></button>
 
-  <form method="POST" action="/add-note" class='userNotes'>
-    <h3>Early Stages:</h3>
+<div class='modal'>
+  
+<button class='closeModalButton'></button>
+  <form action="/add-note" class='userNotes'>
+    
+    <h3>Early Stages with ${item.company}:</h3>
     <br>
+    
+   
     <label for="linkedInConnect">
-      <input type="checkbox" name="linkedInConnect" value="linkedInConnect">
-      Connected on linkedIn
+     <input type="checkbox" id='linkedInConnect' name="linkedInConnect" value="linkedInConnect">
+    Connected on linkedIn
     </label>
+
     <br>
-    <input type="checkbox" class="proactiveAction" name="proactiveAction" value="proactiveAction">
+    <input type="checkbox" class="proactiveAction" id='proactiveAction' name="proactiveAction" value="proactiveAction">
     <label for="proactiveAction">Inquired proactively</label>
     <br>
 
     <h3>Late Stages:</h3>
     <br>
-    <input type="checkbox" class="followUp" name="followUp" value="followUp">
+    <input type="checkbox" class="followUp" name="followUp" id='followUp' value="followUp">
     <label for="followUp">I have followed up</label>
     <br>
     <br>
-    <input type="checkbox" class="thankYou" name="thankYou" value="thankYou">
+    <input type="checkbox" class="thankYou" id='thankYou' name="thankYou" value="thankYou">
     <label for="thankYou">Sent a thank you email or letter</label>
     <br>
     <br>
-    <textarea name="notes" class='notes' placeholder="Add your notes here..."></textarea>
+  <label for="salary">Estimated Compensation: </label>
+       <input type="number" class="salary" id='salary' name="salary">
+  
+
 
     <button class='saveNotes' type="submit">Save Note</button>
   </form>
+  </div>
 </div>
 `
 }
@@ -188,30 +196,44 @@ async function createCard() {
 
 
 document.addEventListener('change', async function (e) {
+  if (!e.target.matches('.subject')) return;
+
+  console.log('Subject changed:', e.target.value);
 
   const row = e.target.closest('div');
+  console.log(row)
+  if (!row) {
+    console.warn('No .time container found');
+    return;
+  }
+
   const btn = row.querySelector('.appendedButton');
+  console.log(`button?`, btn)
+  if (!btn) {
+    console.warn('No .appendedButton found in row');
+    return;
+  }
+console.log('made it')
   const value = e.target.value;
-  const targetedButton = e.target.closest(".subject");
-  const id = targetedButton.getAttribute('data-id');
-  const item = localStorage.getItem('Bearer')
-
-  if (!e.target.matches('.subject')) return;
-  if (!row) return;
-  if (!btn)return;
-
   btn.setAttribute('value', value);
   btn.setAttribute('id', value);
   btn.innerText = value;
- 
+
+  const targetedButton = e.target.closest(".subject");
+  console.log(targetedButton)
+
+const id = targetedButton.getAttribute('data-id');
+console.log(id)
+ const item = localStorage.getItem('Bearer')
   await axios.patch(`/api/v1/users/${id}`, {
     name: e.target.value,
   },
-    {
-      headers: {
-        'Authorization': `Bearer ${item}`
-      }
-    })
+  {
+ headers: {
+          'Authorization': `Bearer ${item}`
+        }
+})
+
 });
 
 
@@ -313,63 +335,59 @@ function reduceCountForMonthInReview() {
 }
 
 document.getElementById('submitForm').addEventListener('click', (e) => {
+
   e.preventDefault()
   countForMonthInReview()
 })
 
 document.addEventListener("click", (e) => {
-  e.preventDefault()
-  // const buttonOption = createCard()
+  const openButton = e.target.closest(".openModalButton");
+  if (!openButton) return;
 
 
-  if (e.target.closest(".openModalButton")) {
 
-    //const item = localStorage.getItem('Bearer')
-
-
-    console.log(e.target.parentElement.querySelector('.modal'))
-    //const id = targetedButton.getAttribute('data-id');
-    if (!e.target.parentElement.querySelector('.modal.active') || !e.target.parentElement.querySelector('.openModalButton.active')) {
+  const innerOutput = openButton.closest(".innerOutput");
 
 
-      e.target.parentElement.querySelector('.modal').classList.add('active')
-      e.target.parentElement.querySelector('.openModalButton').classList.add('active')
+  const modal = innerOutput?.nextElementSibling;
 
-    }
+  if (!modal || !modal.classList.contains("modal")) return;
 
-    else if (e.target.parentElement.querySelector('.modal.active') || e.target.parentElement.querySelector('.openModalButton.active')) {
+  const isActive = modal.classList.contains("active");
+  e.preventDefault();
 
-      e.target.parentElement.querySelector('.modal').classList.remove('active')
-      e.target.parentElement.querySelector('.openModalButton').classList.remove('active')
+  document.querySelectorAll(".modal.active").forEach(m => m.classList.remove("active"));
+  document.querySelectorAll(".openModalButton.active").forEach(b => b.classList.remove("active"));
+      document.querySelector('.overlay').style.display = 'none';
 
-    }
+
+
+  if (!isActive) {
+    modal.classList.add("active");
+    openButton.classList.add("active");
+      document.querySelector('.overlay').style.display = 'block';
+
   }
-
-  
 });
 
 
 
 document.addEventListener("click", (e) => {
+
+console.log('modalActive')
+console.log(e.target)
+console.log(e.target.classList[0])
+  if(e.target.classList[0] == 'closeModalButton'){
   e.preventDefault()
-  // const buttonOption = createCard()
+  console.log('working')
+document.querySelector('.modal.active').classList.remove('active')
+document.querySelector('.overlay').style.display = 'none'
 
-  if(e.target.closest('.closeModalButton')){
-        e.target.parentElement.querySelector('.modal').classList.remove('active')
   }
-
-
-    if(e.target.parentElement.parentElement.querySelector('.modal.active')){
-      console.log(e.target.parentElement)
-
-    e.target.querySelector('.modal').classList.remove('active')
-      e.target.querySelector('.openModalButton').classList.remove('active')
-    }
-
-
-
   
-})
+});
+
+
 
 
 
