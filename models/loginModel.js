@@ -1,8 +1,8 @@
-const mongoose = require('mongoose') //require mongoose 
+const mongoose = require('mongoose') 
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-const userSchema = new mongoose.Schema({   //userSchema set up per mongoose docs, used to set up data format
+const userSchema = new mongoose.Schema({
     first:{
         type:String,
         require:[true, 'Please provide first name'],
@@ -61,6 +61,6 @@ userSchema.methods.comparePassword = async function (userPassword) {
 }
 
 
-const loginUser = mongoose.model('LoginData', userSchema)   //creating instance of model data
+const loginUser = mongoose.model('LoginData', userSchema)
 
-module.exports = loginUser   //exporting for public us
+module.exports = loginUser

@@ -1,0 +1,114 @@
+
+import CalHeatmap from 'cal-heatmap';
+import 'cal-heatmap/cal-heatmap.css';
+import Tooltip from 'cal-heatmap/plugins/Tooltip';
+import Legend from 'cal-heatmap/plugins/Legend';
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const cal = new CalHeatmap();
+cal.paint({
+  target: '#cal-heatmap', 
+  range: 3,
+  domain: { type: 'month' },
+  subDomain: { type: 'day' },
+  date: { start: new Date() },
+  data: {
+    source: async () => {
+      const data = {};
+      const today = new Date();
+      for (let i = 0; i < 90; i++) {
+        const day = new Date(today.getTime() - i * 86400000);
+        data[day.toISOString().split('T')[0]] = Math.floor(Math.random() * 10);
+      }
+      return data;
+    },
+    type: 'json',
+  },
+});
+})
+
+
+
+/*
+document.addEventListener('DOMContentLoaded', () => {
+  const cal = new CalHeatmap();
+
+  cal.paint({
+    range: 12, // Show 12 months
+    domain: {
+      type: 'month',
+      gutter: 4,
+      label: {
+        text: 'MMM',
+        position: 'top',
+        offset: { x: 10, y: 12 },
+      },
+    },
+    subDomain: {
+      type: 'day',
+      radius: 2,
+      width: 12,
+      height: 12,
+      gutter: 2,
+      label: '',
+    },
+    scale: {
+      color: {
+        scheme: 'Greens',
+        domain: [0, 1, 3, 5, 10], // Adjust intensity
+        type: 'threshold',
+      },
+    },
+    date: {
+      start: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
+    },
+    data: {
+      source: async () => {
+        // Example: randomly generate data
+        const data = {};
+        const now = new Date();
+        for (let i = 0; i < 365; i++) {
+          const date = new Date(now.getTime() - i * 86400000);
+          data[date.toISOString().split('T')[0]] = Math.floor(Math.random() * 10);
+        }
+        return data;
+      },
+      type: 'json',
+    },
+    plugins: [
+      Tooltip(),
+      Legend({
+        tickSize: 0,
+        width: 100,
+        itemSelector: '#legend',
+        label: 'Contributions',
+      }),
+    ],
+  });
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const cal = new CalHeatmap();
+  cal.paint({
+    target: '#cal-heatmap',
+    range: 12,
+    domain: 'month',
+    
+    subDomain: {
+      type: 'day',
+      label: 'D',
+      radius: 2,
+      width: 15,
+      height: 15,
+    },
+    data: '/api/your-job-data',
+    start: new Date(),
+    legend: [2, 4, 6, 8],
+    domainLabelFormat: date =>
+      date.toLocaleDateString('default', { month: 'short' }),
+  });
+});
+
+*/

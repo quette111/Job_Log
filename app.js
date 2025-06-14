@@ -38,6 +38,8 @@ app.use(
   })
 );
 
+app.use('/scripts', express.static(path.join(__dirname, 'dist')));
+
 app.use(express.static('./public'));
 
 app.use('/api/v1/users', appRoutes);

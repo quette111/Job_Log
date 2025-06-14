@@ -15,10 +15,24 @@
   <div class="overlay" hidden></div>
 
 <div id="mainBody">
-  <div>
-    <form id="formDiv">
-      <div id="formWrapper">
-<div id="formMain">
+
+   
+
+ <div class="chart">
+
+  
+      <canvas id="myChart"></canvas>
+    <div id="cal-heatmap"></div>
+     <canvas id="mySecondChart"></canvas>
+    </div>
+   
+
+
+
+    <div id="bigBox">
+      <div id="navigationArea">
+        <div class="column" id="stats">
+        <form>
         <label for="name">Status:</label>
         <select autofocus id="name" name="name">
           <option>--Please choose a job status--</option>
@@ -33,27 +47,19 @@
         <label for="jobTitle">Job Title:</label>
         <input name="job" id="jobTitle" />
    <br>
+   
         <label for="company">Company:</label>
+
+   
         <input name="company" id="company" />
-      </div>
-</div>
-      <button id="submitForm" class="submit" type="submit">Add Job</button>
+   <button id="submitForm" class="submit" type="submit">Add Job</button>
    
     </form>
- <div class="chart">
+         
 
-      <canvas id="myChart"></canvas>
-
-    </div>
-    <div id="chartWrapper">
-           <canvas id="mySecondChart"></canvas>
-    </div>
-
-</div>
-
-    <div id="bigBox">
-      <div id="navigationArea">
-        <div class="column" id="stats">
+        </div>
+        
+         <div class="column" id="stats">
           <h3>Month In Review:</h3>
           <h3></h3>
 
@@ -64,27 +70,30 @@
 
         </div>
 
+
         
       </div>
 
-      <div id="outputCard"></div>
+      <div id="outputCard">
+    </div>
     </div>
 
    
 </div>
 
-<%- include('partials/footer') %>
-   <script src="./js/axios.min.js"></script>
 
-<script src="/js/chart.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js" integrity="sha256-nP25Pzivzy0Har7NZtMr/TODzfGWdlTrwmomYF2vQXM=" crossorigin="anonymous"></script>
 
-    <script src="./scripts/charts.js"></script>
 
-    <script src="./scripts/navBar.js"></script>
 
-    <script type="module" src="./scripts/file.js"></script>
+
+
+
+
+    
+    
+
+    <script src="/scripts/dashboard.js"></script>
   </body>
 </html>
 

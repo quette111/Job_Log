@@ -1,13 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
 
-
 body{
-
+  background-color: var(--base-color);
+  color: var(--text-color);
+  width: 100%;
    font-family: "Outfit", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+  overflow-x: hidden;
+   margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
+
+
 :root{
   --base-color: #F2F0EF;
   --nav-color: white;
@@ -76,23 +83,20 @@ body{
   display: block;
 }
 
-body{
-  background-color: var(--base-color);
-  color: var(--text-color);
-  width: 100vw;
 
-}
 
 
 
 
 
 nav{
+  display: flex;
   width: 100%;
   height: 8vh;
   margin-bottom: 2%;
   background-color: var(--nav-color);
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  z-index: 2000000000000000034356786543210000;
 
 }
 

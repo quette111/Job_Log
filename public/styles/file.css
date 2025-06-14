@@ -4,14 +4,13 @@
 
 
 body {
-  text-align: center;
-  max-width: 100%;
-  overflow-x: hidden;
-  
-  margin-top: 0;
-  margin-bottom: 2%;
-
+   width: 100%;
+   overflow-x: hidden;
+   margin: 0; 
+  padding: 0;
   min-height: 100vh;
+  text-align: center;
+
   background-color: var(--base-color);
   color: var(--text-color);
  font-family: "Outfit", sans-serif;
@@ -21,9 +20,17 @@ body {
 
 
 }
+html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 
 #mainBody{
   padding:3%;
+  
 }
 
 
@@ -31,7 +38,7 @@ body {
   position:fixed;
   width: 100vw;
   height: 100vh;
-  z-index: -100;
+  z-index: -1;
   background-color: #d7d4d4;
   opacity: 0.05;
   background-image: linear-gradient(#535353 1.8px, transparent 1.8px),
@@ -53,7 +60,7 @@ padding: 5%;
 box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
  background-image: radial-gradient( circle farthest-corner at 50.3% 47.3%,  #9bdefd 0.1%, #60b7df 90% );
   display: flex;
-  z-index: 100000000;
+  z-index: 11;
   justify-content: center;
   align-items: center;
  align-items: flex-start;
@@ -74,9 +81,6 @@ width: 100%;
 
 }
 
-.userNotes > *:not(input):not(button):not(label) {
-  pointer-events: none;
-}
 
 .userNotes input[type="checkbox"],
 .userNotes button,
@@ -84,8 +88,63 @@ width: 100%;
   pointer-events: auto;
 }
 
+#stats {
+  max-width: 500px;
+  margin: 2rem auto;
+  margin-left: -45%;
+  padding: 1.5rem;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#stats form {
+ 
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#stats label {
+   text-align: left;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+#stats input,
+#stats select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+  height: 90%;
+  box-sizing: border-box;
+}
+
+
+
+
+@media (max-width: 500px) {
+  #stats {
+    padding: 1rem;
+  }
+}
 
 #formWrapper{
+  
+z-index: 12;
+}
+
+#formDiv {
+  z-index:12;
+  text-align: center;
+margin-top: 60vh;
+
+margin-bottom: 0;
+  flex-direction: column;
+  padding: 1em;
+
   background: rgba(255, 255, 255, 0.2);
 border-radius: 16px;
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -93,23 +152,13 @@ backdrop-filter: blur(5px);
 -webkit-backdrop-filter: blur(5px);
 border: 1px solid rgba(255, 255, 255, 0.3);
 width: 30%;
-padding-top: 1%;
-padding-bottom: 1%;
+
 display: flex;
 align-items: center;
 align-self: center;
 margin-left: 3%;
-z-index: 100000987656789000;
-}
-
-#formDiv {
-  z-index: 100000987656789000;
-  text-align: center;
-margin-top: 5vh;
-  display: flex;
-margin-bottom: 0;
-  flex-direction: column;
-  padding: 1em;
+  
+  
 }
 #formDiv div {
   margin: 0.5%;
@@ -148,7 +197,7 @@ textarea {
 }
 
 #submitForm {
-  z-index: 100000987656789000;
+  z-index: 11;
   appearance: button;
   background-color: #676869;
   border: solid transparent;
@@ -157,13 +206,15 @@ textarea {
   box-sizing: border-box;
   color: #000000;
   cursor: pointer;
-  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  display: flex;
   font-family: din-round, sans-serif;
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.8px;
   line-height: 20px;
-  margin: 0;
+  margin-top: 0;
   outline: none;
   overflow: visible;
   padding: 13px 16px;
@@ -176,9 +227,10 @@ textarea {
   -webkit-user-select: none;
   vertical-align: middle;
   white-space: nowrap;
-  width: 20%;
+
   align-items: center;
   align-self: center;
+  width: 30%;
 }
 
 #submitForm:after {
@@ -216,21 +268,18 @@ textarea {
 }
 
 
-
 #outputCard {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 400px);
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   justify-content: center;
-  height: 400px;
-  margin-top: 6%;
-  margin: 3%;
-  margin-left: 20%;
   gap: 15px;
-  width: 100%;
-  flex-wrap: wrap;
-font-weight: 900;
   padding: 1rem;
+  font-weight: 900;
+  margin-top: 6%;
+  width: 100%;
+  height: auto; 
 }
+
 
 #outputCard svg {
   position: relative;
@@ -288,15 +337,15 @@ h5 {
   display: grid;
   grid-template-rows: repeat(4, 1fr);
   justify-content: flex-start;
-  margin-top: 4%;
-  margin-bottom: 2%;
+  margin-top: 2%;
+
   margin-right: 0%;
   gap: 15px;
   flex-wrap: wrap;
   width: 16vw;
 }
 #navigationArea div {
-  width: 300%;
+  width: 270%;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
@@ -402,8 +451,12 @@ transition: margin-left 0.3s ease;
 #bigBox {
 
   display: inline-flex;
-  width: 100%;
-  position:relative;
+  width: 90%;
+
+  top: 60vh;
+  
+  
+
   
 }
 #navigationArea div {
@@ -411,6 +464,8 @@ transition: margin-left 0.3s ease;
   border: solid black 1px;
  
 }
+
+
 
 
 @media (max-width: 900px) {
@@ -436,6 +491,16 @@ display: grid;
   #navigationArea div {
     font-size: 0.75em;
     border: solid black 1px;
+  }
+  #dashboard{
+  transform: scale(0.8);
+    transform-origin: 0 0;
+  }
+  #formWrapper{
+    margin-top: 10vh;
+  }
+  #dashboard div{
+        margin: 5%;
   }
 }
 
@@ -481,7 +546,10 @@ display: grid;
 
 #appendedButton {
 }
+.card{
 
+  margin-bottom: 7%;
+}
 
 #outputCard #exit {
   color: white;
@@ -500,74 +568,79 @@ body button {
 
 }
 
-#myChart{
-  display: grid;
- height: 300px;
- color: black;
- margin-top: 1vh;
- z-index: 100000000;
-
-}
-
 
 
 .chart {
- 
- z-index: 100000000;
-display: grid;
-  background-image:
-  radial-gradient(
-    var(--gradient-color),
-    var(--gradient-colorSecondary),
-    var(--gradient-colorThird)
-  );
-  border-radius: 16px;
-  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
-    rgba(0, 0, 0, 0.23) 10px 6px 6px;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border: 0.5px solid rgb(0, 0, 0);
-  width: 85vw;
-  height: 200px;
-  padding: 50px;
-  margin: 0 auto;
-  flex-direction: row;
+  border: 1px solid #ccc;
+  top: 15vh;
+left: 0;
+right: 0;
+  z-index: 10;
+  display: flex;
   justify-content: space-between;
-  position: absolute;
-  top: 12%;
-  left: 4%;
-
-  transition: all 0.75s ease;
+  align-items: flex-start;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  gap: 1rem;
+  flex-wrap: wrap;
+  height: 300px;
+ border-radius: 15px;
 }
 
-#chartWrapper{
 
-    left: 70%;
-    display: grid;
-height: 35vh;
-width: 55vw;
+.chart canvas {
+  flex: 1 1 48%;
+  max-width: 500px;
+  height: 200px;
+  display: block;
 
- z-index: 100000000;
- color: black;
-
-
- position: absolute;
-top: 13%;
+padding: 1%;
 }
 
-.chart .show {
-  width: 300px;
-  opacity: 1;
+.chart canvas:first-child{
+    border-right: 1px solid #ccc;
+
 }
 
-.chart .chart_types {
-  text-align: center;
-  margin-bottom: 30px;
+#mySecondChart{
+    border-left: 1px solid #ccc;
+
 }
 
-.chart .chart_types button {
-  padding: 10px 25px;
+.chart div{
+  margin-top: 5%;
+height: 200px;
+  display: block;
+    border: 1.5px solid #ffffff;
+  border-radius: 15px;
+padding: 2%;
+background: linear-gradient(135deg, #b0b0b0, #c5c5c5);
+
 }
+
+
+.chart > canvas:first-child {
+  margin-right: 0; 
+}
+
+
+@media (max-width: 768px) {
+  .chart {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .chart canvas {
+    width: 90%;
+    max-width: 90%;
+    flex: none;
+
+  }
+}
+
+
 #arrow {
   position: relative;
   left: 65%;
@@ -588,11 +661,7 @@ box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
   margin-top: -10%;
 }
 
-@media (max-width: 1000px) {
- .chart{
-  display: grid;
- }
-}
+
 
 .fade-out {
   visibility: hidden;
@@ -732,15 +801,15 @@ left: 75%;
   height: 100vh;
 
   background: rgba(0, 0, 0, 0.3);
-  z-index: 999998;
+  z-index: 11;
 
-  pointer-events: auto; /* Blocks background clicks */
+  pointer-events: auto; 
 }
 
 
 .modal{
 
-  z-index:10000000;
+
   border: 0.75px solid black;
   border-radius: 16px;
   display: none;
@@ -771,7 +840,7 @@ left: 75%;
 
   background-color: #b9b9b9;
   display: grid;
-  z-index: 50000234400;
+  z-index: 12;
   justify-content: center;
   align-items: center;
   border-top: 1px solid black;
@@ -814,7 +883,7 @@ border-radius: 15px;
 padding: 3%;
   background-size: 20px;
   background-position: center;
-  z-index: 5000000000;
+  z-index: 12;
   display: flex;
   align-self: flex-end;
 margin-bottom: 80%;
@@ -854,9 +923,22 @@ border-radius: 20px;
 
 
 input[type="checkbox"] {
-    appearance: auto;
-  -webkit-appearance: auto;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #333;
+  appearance: auto;
+  -webkit-appearance: checkbox;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+
+#cal-heatmap{
+
+  height: auto;
+  overflow-x: auto;
+}
+
+#cal-heatmap svg{
+  
+   width: 100% !important;
+  height: auto !important;
 }

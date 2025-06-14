@@ -4,9 +4,9 @@
   "main": "api.js",
   "scripts": {
     "build": "webpack --mode production",
-  "start": "node app.js",
-  "dev": "nodemon app.js",
-  "dev:webpack": "webpack --watch --mode development"
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "dev:webpack": "webpack --watch --mode development"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,8 @@
   "dependencies": {
     "axios": "^1.9.0",
     "bcryptjs": "^3.0.2",
-    "chart.js": "^4.4.8",
+    "cal-heatmap": "^4.2.4",
+    "chart.js": "^4.4.9",
     "chokidar": "^4.0.3",
     "cors": "^2.8.5",
     "dayjs": "^1.11.13",

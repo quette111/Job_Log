@@ -12,7 +12,7 @@ console.log(req.user)
 
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = { userId: payload.userId, name: payload.name };; // attach user info to req
+    req.user = { userId: payload.userId, name: payload.name };;
     next();
   } catch (error) {
     return res.status(401).json({ error: 'Unauthorized' });
