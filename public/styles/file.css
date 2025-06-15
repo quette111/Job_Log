@@ -88,14 +88,16 @@ width: 100%;
   pointer-events: auto;
 }
 
+
+
 #stats {
-  max-width: 500px;
-  margin: 2rem auto;
-  margin-left: -45%;
+  max-width: 450px;
+height: 40vh;
+  width: 40vw;
   padding: 1.5rem;
-  background: #f9f9f9;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+
+
 }
 
 #stats form {
@@ -185,9 +187,7 @@ textarea {
   height: 5em;
 }
 
-#formDiv div{
 
-}
 .subject{
   display: flex;
   margin-bottom: 5%;
@@ -207,7 +207,7 @@ textarea {
   color: #000000;
   cursor: pointer;
   position: absolute;
-  bottom: 0;
+bottom: -15%;
   display: flex;
   font-family: din-round, sans-serif;
   font-size: 15px;
@@ -230,7 +230,6 @@ textarea {
 
   align-items: center;
   align-self: center;
-  width: 30%;
 }
 
 #submitForm:after {
@@ -270,14 +269,16 @@ textarea {
 
 #outputCard {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   justify-content: center;
-  gap: 15px;
+  gap: 3%;
   padding: 1rem;
   font-weight: 900;
-  margin-top: 6%;
+
   width: 100%;
   height: auto; 
+ margin: 3%;
+ margin-top: 2%;
 }
 
 
@@ -333,88 +334,90 @@ h5 {
     rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
-#navigationArea {
-  display: grid;
-  grid-template-rows: repeat(4, 1fr);
-  justify-content: flex-start;
-  margin-top: 2%;
 
-  margin-right: 0%;
-  gap: 15px;
-  flex-wrap: wrap;
-  width: 16vw;
-}
-#navigationArea div {
-  width: 270%;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
 #stats span{
  position: relative;
  left: 10%;
  color: #000;
 }
-#stats {
-  border: 0.5px solid rgb(0, 0, 0);
-  font-weight: 250;
-  height: 315px;
-}
+
 #firstRev:hover{
-  margin-left: 0%;
+  margin-right: 0%;
 }
 #firstRev{
-  border-left: 1.5px solid black;
-  border-bottom: 0.75px solid black;
-  border-top: 0.75px solid black;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+
+  border-right: 1px solid #aaa9a9;
+border-top: 1px solid #aaa9a9;
+border-bottom:  1px solid #aaa9a9;
+
+
   padding: 2%;
   color: black;
-margin-left: 10%;
+margin-right: 10%;
 background-color: #36a3ebd8;
-transition: margin-left 0.3s ease; 
+transition: margin-right 0.3s ease; 
 }
 #secRev:hover{
-margin-left: 0%;
+margin-right: 0%;
 }
 #secRev{
-  border-left: 1.5px solid black;
-  border-bottom: 0.75px solid black;
-  border-top: 0.75px solid black;
+     border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+
+  border-right: 1px solid #aaa9a9;
+border-top:  1px solid #aaa9a9;
+border-bottom: 1px solid #aaa9a9;
+
   padding: 2%;
   color: black;
-  margin-left: 25%;
+  margin-right: 25%;
   background-color: #ff6486d8;
-  transition: margin-left 0.3s ease; 
+  transition: margin-right 0.3s ease; 
 }
 #thirdRev:hover{
- margin-left: 0%;
+ margin-right: 0%;
 }
 #thirdRev{
-  border-left: 1.5px solid black;
-  border-bottom: 0.75px solid black;
-  border-top: 0.75px solid black;
+     border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+
+  border-right: 1px solid #aaa9a9;
+border-top: 1px solid #aaa9a9;
+border-bottom:  1px solid #aaa9a9;
+
   padding: 2%;
   color: black;
-  margin-left: 40%;
+  margin-right: 40%;
 background-color: #ffa040d8;
-transition: margin-left 0.3s ease; 
+transition: margin-right 0.3s ease; 
 }
 #fourthRev:hover{
 
-  margin-left: 0%;
+  margin-right: 0%;
 }
 #fourthRev{
-  border-left: 1.5px solid black;
-  border-bottom: 0.75px solid black;
-  border-top: 0.75px solid black;
+     border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+
+  border-right: 1px solid #aaa9a9;
+border-top:  1px solid #aaa9a9;
+border-bottom:  1px solid #aaa9a9;
+
   padding: 2%;
   color: black;
-margin-left: 60%;
+margin-right: 60%;
 background-color: #4cc0c0d8;
-transition: margin-left 0.3s ease; 
+transition: margin-right 0.3s ease; 
 }
 #status {
   border: 0.5px solid rgb(0, 0, 0);
@@ -432,11 +435,12 @@ transition: margin-left 0.3s ease;
 }
 .column {
   text-align: left;
-  margin-top: 2%;
+
   flex: 1 1 0px;
   
-  border-radius: 10%;
+
 }
+
 .column h3 {
   margin-left: 2%;
   font-weight: 550;
@@ -450,21 +454,41 @@ transition: margin-left 0.3s ease;
 }
 #bigBox {
 
-  display: inline-flex;
-  width: 90%;
+  display: flex;
+  width: 100vw;
 
   top: 60vh;
   
+  margin-left: 0%;
   
 
   
 }
-#navigationArea div {
-  padding-left: 5%;
-  border: solid black 1px;
- 
+
+#navigationArea {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  justify-content: flex-start;
+  margin-top: 3%;
+ border: 1px solid #ccc;
+ border-radius: 15px;
+background: linear-gradient(135deg, #e3e3e3cf, #ddddddc0);
+  gap: 15px;
+height: 95vh;
+  width: 40vw;
 }
 
+#navigationArea div:first-child{
+    margin-bottom: 1.5rem;
+  
+
+}
+
+#review{
+margin-top: 15%;
+
+
+}
 
 
 
@@ -548,7 +572,8 @@ display: grid;
 }
 .card{
 
-  margin-bottom: 7%;
+width: 92%;
+
 }
 
 #outputCard #exit {
@@ -587,6 +612,7 @@ right: 0;
   flex-wrap: wrap;
   height: 300px;
  border-radius: 15px;
+ margin-top: -2%;
 }
 
 
@@ -600,12 +626,12 @@ padding: 1%;
 }
 
 .chart canvas:first-child{
-    border-right: 1px solid #ccc;
+    border-right: 1px solid #cccccc74;
 
 }
 
 #mySecondChart{
-    border-left: 1px solid #ccc;
+    border-left: 1px solid #cccccc74;
 
 }
 
@@ -613,10 +639,10 @@ padding: 1%;
   margin-top: 5%;
 height: 200px;
   display: block;
-    border: 1.5px solid #ffffff;
+ border: 1px solid #ccc;
   border-radius: 15px;
 padding: 2%;
-background: linear-gradient(135deg, #b0b0b0, #c5c5c5);
+background: linear-gradient(180deg, #e3e3e3cf, #ddddddc0);
 
 }
 
@@ -668,19 +694,26 @@ box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
   opacity: 0;
   transition: opacity 1s ease-out, visibility 0s 3s;
 }
+
 #ap{
-color: rgb(255, 255, 255);
-}
-#in{
-  color: rgb(255, 255, 255);
-}
-#int{
-  color: rgb(255, 255, 255);
-}
-#rej{
-color: rgb(255, 255, 255);
+   margin-left: 80%;
 }
 
+#in{
+     margin-left: 70%;
+}
+
+#int{
+     margin-left: 65%;
+}
+
+#rej{
+     margin-left: 50%;
+}
+#ap, #in, #int, #rej{
+   color: rgb(255, 255, 255);
+
+}
 .btn {
   display: flex;
   bottom: 0%;

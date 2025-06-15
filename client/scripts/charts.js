@@ -139,9 +139,9 @@ userData.forEach(user => {
 const dataVisualizationPie = new Chart(ctxTwo, {
     type: 'doughnut',
     data: {
-      labels: Object.keys(statusCounts),
+      labels: ['<40K', '40K-60K', '60K-80K', '80K-100K', '>100K'],
       datasets: [{
-        label: 'Job Status',
+        label: 'Salary',
         data: Object.values(statusCounts),
         borderWidth: 1
       }]
