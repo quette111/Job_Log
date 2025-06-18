@@ -10,6 +10,12 @@ const callForKey = (r) => {
 }
 
 
+
+
+
+
+
+
 function getInfoForCards() {
   const name = document.getElementById("name").value
   const job = document.getElementById("jobTitle").value
@@ -84,7 +90,7 @@ async function logoApiCall() {
 */
 
 
-function createCardHTML(item, apiUrl, jobId, buttonOption, formattedDate) {
+export function createCardHTML(item, apiUrl, jobId, buttonOption, formattedDate) {   
 
   return `<div value='${buttonOption}' class="innerOutput">
 
@@ -137,35 +143,45 @@ function createCardHTML(item, apiUrl, jobId, buttonOption, formattedDate) {
     <br>
     
    
-    <label for="linkedInConnect">
+    <label>
      <input type="checkbox" id='linkedInConnect' name="linkedInConnect" value="linkedInConnect">
     Connected on linkedIn
     </label>
 
     <br>
+     <label>
     <input type="checkbox" class="proactiveAction" id='proactiveAction' name="proactiveAction" value="proactiveAction">
-    <label for="proactiveAction">Inquired proactively</label>
+    Inquired proactively
+    </label>
     <br>
 
     <h3>Late Stages:</h3>
     <br>
-    <input type="checkbox" class="followUp" name="followUp" id='followUp' value="followUp">
-    <label for="followUp">I have followed up</label>
+
+    <label>
+    <input type="checkbox" class="followUp" name="followUp" value="followUp">
+    I have followed up
+    </label>
+    <br>
+    <br> 
+    <label>
+    <input type="checkbox" class="thankYou" name="thankYou" value="thankYou">
+   Sent a thank you email or letter
+    </label>
     <br>
     <br>
-    <input type="checkbox" class="thankYou" id='thankYou' name="thankYou" value="thankYou">
-    <label for="thankYou">Sent a thank you email or letter</label>
-    <br>
-    <br>
-  <label for="salary">Estimated Compensation: </label>
-       <input type="number" class="salary" id='salary' name="salary">
+  <label>
+       <input type="number" class="salary" name="salary">
+       Estimated Compensation: 
+  </label>
+  
   
 
 
     <button class='saveNotes' type="submit">Save Note</button>
   </form>
   </div>
-</div>
+
 `
 }
 
@@ -242,6 +258,7 @@ console.log(id)
 
 
 document.querySelector('form').addEventListener('submit', (e) => {
+if(!document.querySelector('form')) return
 
   e.preventDefault()
   e.stopPropagation()
@@ -256,10 +273,14 @@ document.querySelector('form').addEventListener('submit', (e) => {
 
 
 document.addEventListener("click", async (event) => {
-  event.preventDefault()
+
+  if(!event.target.closest){
+    return
+  }
+
 
   if (event.target.closest(".delete")) {
-
+  event.preventDefault()
     event.target.closest(".delete").innerText = "Confirm deletion?"
 
     const item = localStorage.getItem('Bearer')
@@ -339,12 +360,13 @@ function reduceCountForMonthInReview() {
 }
 
 document.getElementById('submitForm').addEventListener('click', (e) => {
-
+if(!document.getElementById('submitForm')) return
   e.preventDefault()
   countForMonthInReview()
 })
 
 document.addEventListener("click", (e) => {
+
   const openButton = e.target.closest(".openModalButton");
   if (!openButton) return;
 
@@ -378,9 +400,7 @@ document.addEventListener("click", (e) => {
 
 document.addEventListener("click", (e) => {
 
-console.log('modalActive')
-console.log(e.target)
-console.log(e.target.classList[0])
+if(!document.querySelector('.modal.active')) return
   if(e.target.classList[0] == 'closeModalButton'){
   e.preventDefault()
   console.log('working')
@@ -394,8 +414,33 @@ document.querySelector('.overlay').style.display = 'none'
 
 
 
+window.addEventListener('DOMContentLoaded', initializeDashboard);
+
+
+async function initializeDashboard() {
+  try {
+    console.log('initializing maybe')
+    
+    const userEntries = await fetchCurrentUser();
+    console.log(userEntries)
+    renderDashboard(userEntries);
+  } catch (error) {
+    console.error('Could not fetch user data:', error);
+    window.location.href = '/loginUser';
+  }
+}
 
 
 
+async function fetchCurrentUser() {
+  const res = await axios.get('/api/v1/users/getUserData', { withCredentials: true });
+  return res.data.entries; 
+}
 
-
+function renderDashboard(entries) {
+console.log('rendering maybe')
+  entries.forEach(entry => {
+   createCardHTML(entry);
+   
+  });
+}

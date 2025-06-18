@@ -227,7 +227,7 @@ bottom: -15%;
   -webkit-user-select: none;
   vertical-align: middle;
   white-space: nowrap;
-
+cursor: pointer;
   align-items: center;
   align-self: center;
 }
@@ -834,10 +834,14 @@ left: 75%;
   height: 100vh;
 
   background: rgba(0, 0, 0, 0.3);
-  z-index: 11;
+  z-index: 5;
 
   pointer-events: auto; 
 }
+.overlay.modal-open {
+  pointer-events: none !important;
+}
+
 
 
 .modal{
@@ -917,12 +921,11 @@ padding: 3%;
   background-size: 20px;
   background-position: center;
   z-index: 12;
-  display: flex;
-  align-self: flex-end;
-margin-bottom: 80%;
-align-items: flex-start;
-bottom: 0%;
-left: 100%;
+
+
+z-index: inherit;
+
+
 border: none;
 padding:1em;
 
@@ -956,12 +959,18 @@ border-radius: 20px;
 
 
 input[type="checkbox"] {
-  appearance: auto;
-  -webkit-appearance: checkbox;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
+  accent-color: #1e90ff; 
   cursor: pointer;
+ left: 25%;
 }
+
+
+
+
+
+
 
 
 #cal-heatmap{

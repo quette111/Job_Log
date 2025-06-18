@@ -11,21 +11,37 @@ const path = require('path');
 const app = express();
 const mongoose = require('mongoose');
 const PORT = process.env.PORT || 3000;
-const authorizationMiddleware = require('./middleware/auth.js')
+const cookieParser = require('cookie-parser')
+const appRoutes  = require('./routers/api.js');
+const loginRoutes = require('./routers/loginRoutes.js')
 
 app.use(helmet());
-app.use(cors({ origin: 'https://localhost1159', credentials: true }));
+app.use(cors({origin: 'http://localhost:3000', credentials: true}));
 app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
 app.use(express.json());
+app.use(cookieParser()); 
 app.use(mongoSanitize());
 app.use(xss());
 app.use(hpp());
-app.use(express.json());
+
+
+
+app.use('/api/v1/users', appRoutes);
+app.use('/api/v1/login', loginRoutes)
+
+app.use('/scripts', express.static(path.join(__dirname, 'dist')));
+app.use(express.static('./public'));
+
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-const appRoutes  = require('./routers/api.js');
-const loginRoutes = require('./routers/loginRoutes.js')
+app.use(express.json());
+
+
+
+
+
 
 app.use(
   helmet.contentSecurityPolicy({
@@ -38,12 +54,8 @@ app.use(
   })
 );
 
-app.use('/scripts', express.static(path.join(__dirname, 'dist')));
 
-app.use(express.static('./public'));
 
-app.use('/api/v1/users', appRoutes);
-app.use('/api/v1/login', loginRoutes)
 
 // Serve index.html for the root route
 app.get('/', (req, res) => {

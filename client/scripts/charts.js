@@ -8,9 +8,7 @@ const item = localStorage.getItem('Bearer');
 console.log('working')
    const response = await axios.get('/api/v1/users',
   {
- headers: {
-          'Authorization': `Bearer ${item}`
-        }
+ withCredentials: true
       
       })
 
@@ -94,7 +92,8 @@ if(dataVisualizationChart){
 }else{
   createChart()
 }
-
+createChart()
+dataVisualizationChart.update('active')
 
 })
 }
@@ -113,9 +112,7 @@ const item = localStorage.getItem('Bearer');
 console.log('working')
    const response = await axios.get('/api/v1/users',
   {
- headers: {
-          'Authorization': `Bearer ${item}`
-        }
+  withCredentials: true
       
       })
 
@@ -196,8 +193,10 @@ e.preventDefault()
 
 if(dataVisualizationPie){
   dataVisualizationPie.destroy()
+
   createSecondChart()
 }else{
+
   createSecondChart()
 }
 

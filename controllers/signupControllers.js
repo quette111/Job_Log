@@ -20,6 +20,11 @@ res.status(StatusCodes.CREATED).json({user: { name: `${task.first} ${task.last}`
   }
 
 
+
+
+
+
+
   const loginTheUser = async (req, res) => {
 
     console.log('controller hit')
@@ -50,10 +55,16 @@ console.log(isPasswordCorrect)
     }
 
     const token = user.createJWT()
-res.status(StatusCodes.OK).json({user: { name: `${email}` }, token})
-
+//res.status(StatusCodes.OK).json({user: { name: `${email}` }, token})
+res.cookie('jid', token, {
+  httpOnly: true,
+  secure: false, ///////CHANGE 
+  sameSite: 'lax', ///strict
+  maxAge: 15 * 60 * 1000
+}).json({ success: true })
+console.log('loggin in')
     } catch (error){
-      console.log('Error', error)
+      console.log('Error loggin in', error)
     }
 
   }

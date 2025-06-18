@@ -26,6 +26,7 @@
     "cal-heatmap": "^4.2.4",
     "chart.js": "^4.4.9",
     "chokidar": "^4.0.3",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dayjs": "^1.11.13",
     "dotenv": "^16.4.7",
