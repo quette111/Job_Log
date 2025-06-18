@@ -3,7 +3,7 @@
 //const { Name, Job, Company } = req.body;
 
 const UserData = require('../models/User')
-
+const loginUserData = require('../models/User')
 /*
 const getData = async (req, res) => {
 try{
@@ -74,14 +74,24 @@ const editAllData = async (req, res) => {
 }
 
 const fetchUserData = async (req, res) => {
-  //const {name} = req.body
+  try {
+    console.log('lol')
+    console.log('req.userId is:', req.userId)
+   
+       const entries = await UserData.find({ createdBy: req.userId }).lean();
 
-  try{
-    const userStatusData = await UserData.find({})
-    res.status(201).json(userStatusData)
-  } catch(error){
-    console.log(error)
+
+    if (!entries) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+    
+    res.status(200).json({ success: true, entries });
+    console.log('fething user data')
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: 'Server error' });
   }
-}
+};
+
 
 module.exports = { postData, deleteDB, editData, fetchUserData}

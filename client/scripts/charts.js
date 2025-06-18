@@ -1,4 +1,5 @@
-
+import axios from 'axios';
+import Chart from 'chart.js/auto';
 
 async function createChart(){
 
@@ -7,9 +8,7 @@ const item = localStorage.getItem('Bearer');
 console.log('working')
    const response = await axios.get('/api/v1/users',
   {
- headers: {
-          'Authorization': `Bearer ${item}`
-        }
+ withCredentials: true
       
       })
 
@@ -42,6 +41,27 @@ userData.forEach(user => {
     },
     options: 
     {
+      
+        responsive: true,
+         maintainAspectRatio: false,
+
+plugins: {
+      title: {
+        display: true,
+        text: 'Application status review ',
+        font: {
+          size: 18,
+          weight: 'bold'
+        },
+        padding: {
+          top: 10,
+          bottom: 30
+        }
+      },
+       legend: {
+        position: 'bottom',
+      },
+    },
 animations: {
       tension: {
         duration: 1000,
@@ -56,6 +76,7 @@ animations: {
           beginAtZero: true
         }
       }
+      
 
     }
   });
@@ -71,7 +92,8 @@ if(dataVisualizationChart){
 }else{
   createChart()
 }
-
+createChart()
+dataVisualizationChart.update('active')
 
 })
 }
@@ -90,9 +112,7 @@ const item = localStorage.getItem('Bearer');
 console.log('working')
    const response = await axios.get('/api/v1/users',
   {
- headers: {
-          'Authorization': `Bearer ${item}`
-        }
+  withCredentials: true
       
       })
 
@@ -114,21 +134,36 @@ userData.forEach(user => {
 
 
 const dataVisualizationPie = new Chart(ctxTwo, {
-    type: 'pie',
+    type: 'doughnut',
     data: {
-      labels: Object.keys(statusCounts),
+      labels: ['<40K', '40K-60K', '60K-80K', '80K-100K', '>100K'],
       datasets: [{
-        label: 'Job Status',
+        label: 'Salary',
         data: Object.values(statusCounts),
         borderWidth: 1
       }]
     },
     options: 
     {
+       maintainAspectRatio: false,
        responsive: true,
+
+       
     plugins: {
+      title: {
+        display: true,
+        text: 'Salary Overview',
+        font: {
+          size: 18,
+          weight: 'bold'
+        },
+        padding: {
+          top: 10,
+          bottom: 30
+        }
+      },
       legend: {
-        position: 'top',
+        position: 'bottom',
       },
    
     },
@@ -158,8 +193,10 @@ e.preventDefault()
 
 if(dataVisualizationPie){
   dataVisualizationPie.destroy()
+
   createSecondChart()
 }else{
+
   createSecondChart()
 }
 
