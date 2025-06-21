@@ -16,7 +16,7 @@ body{
   justify-content: center;
   align-items: center;
 margin-top: 4.5%;
-margin-left: 33.5%;
+margin: 0 auto;
  border: 1px solid white;
 width: 450px;
 filter: drop-shadow(
@@ -89,3 +89,43 @@ label{
   font-weight: 100;
   font-size: 27px;
  }
+
+ @media screen and (max-width: 768px) {
+  #outerForm {
+    width: 90%;
+    margin: 15% auto;
+    height: auto;
+    padding: 2rem 1rem;
+    margin-top: 20%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  h1 {
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 22px;
+    text-align: center;
+  }
+
+  p {
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  form {
+    margin-left: 0;
+  }
+
+  input, #loginButton {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+}

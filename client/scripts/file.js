@@ -46,7 +46,7 @@ const writeDB = async () => {
 
   const info = getInfoForCards();
   const now = dayjs();
-  const formattedDate = now.format('MMM D, YYYY <br> h:mm A');
+  const formattedDate = now.format('MMM D, YYYY h:mm A');
   const apiUrl = await logoApiCall();
 
   try {
@@ -215,7 +215,7 @@ async function createCard() {
     const apiUrl = await logoApiCall();
     const applicationStatus = document.querySelector('select').value;
     const now = dayjs();
-    const formattedDate = now.format('MMM D, YYYY <br> h:mm A');
+    const formattedDate = now.format('MMM D, YYYY');
     const outputCard = document.getElementById('outputCard');
     const info = getInfoForCards();
     const jobId = await writeDB()

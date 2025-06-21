@@ -198,6 +198,14 @@ button{
   pointer-events: none;
 }
 
+#blobs {
+  mix-blend-mode: multiply;
+}
+
+#landingDiv h1, #landingDiv h2, #landingDiv h3 {
+  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
+}
+
 @keyframes fadeInAnimation {
   0% {
     opacity: 0;
@@ -207,90 +215,81 @@ button{
   }
 }
 
-
-@media (max-width: 768px) {
-  /* Stack the two panels */
+@media (max-width: 1024px) {
   #aligning {
     flex-direction: column;
     align-items: center;
     padding: 1rem;
   }
 
-#landingDiv h1{
-  top: 10%;
-}
   #landingDiv {
-    width: 100%;
-    margin-left: 0;
+    width: 90%;
+    margin: 0 auto;
     text-align: center;
   }
+
   #landingDiv h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     line-height: 1.1;
+    text-align: center;
+    width: 100%;
   }
-  #landingDiv h2, #landingDiv h3 {
-    margin: 0.5rem 0;
+
+  #landingDiv h2,
+  #landingDiv h3 {
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
   }
+
   #landingDiv .button-20 {
     width: 80%;
-    margin: 1rem auto;
+    margin: 1.5rem auto 0;
   }
-
 
   #blobs {
-    height: 100%;
-    width:100%;
-    left: 60%;
-    margin-top: 10%;
-    transform: rotate(45deg);
-    margin-bottom: 0%;
+    left: 0;
+    margin: 2rem auto 1rem;
+    width: 200px;
+    height: auto;
   }
-
 
   #imgContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     margin-top: 2rem;
   }
+
   #imgContainer img {
-    width: 80%;
-    height: auto;
-    margin: 0.5rem;
-  }
-
-
-  #outerForm,
-  #hideLog {
-    width: 100%;
-    padding: 2rem 1rem;
-  }
-  #outerForm input,
-  #outerForm button {
     width: 90%;
-    max-width: 300px;
-    margin: 0.5rem auto;
-    display: block;
+    margin: 1rem auto;
   }
 }
-
 
 @media (max-width: 480px) {
-  /* Shrink headings further */
   #landingDiv h1 {
-    font-size: 4rem;
-    text-align: left;
-  }
-  #landingDiv h2 {
-    font-size: 2rem;
-  }
-  #landingDiv h3 {
-    font-size: 1rem;
+    font-size: 2.2rem;
+    text-align: center;
   }
 
-  /* Button padding/text */
+  #landingDiv h2 {
+    font-size: 1.5rem;
+  }
+
+  #landingDiv h3 {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
   .button-20 {
-    font-size: 0.9rem;
-    padding: 0.5rem 0.75rem;
+    font-size: 0.95rem;
+    padding: 0.6rem 1rem;
+  }
+
+  #blobs {
+    width: 160px;
+    height: auto;
   }
 }
+
+

@@ -38,6 +38,14 @@ userData.forEach(user => {
       datasets: [{
         label: 'Job Status',
         data: Object.values(statusCounts),
+          backgroundColor: [
+      '#36a2eb', // Applied
+      '#ff6384', // Interested
+      '#ff9f40', // Interview
+      '#4bc0c0', // Rejected
+      '#9966ff', // Closed
+      '#c9cbcf'  // Assessment
+    ],
         borderWidth: 1
       }]
     },
@@ -50,7 +58,7 @@ userData.forEach(user => {
 plugins: {
       title: {
         display: true,
-        text: 'Application status review ',
+        text: 'Application Status Review ',
         font: {
           size: 18,
           weight: 'bold'
@@ -98,6 +106,21 @@ createChart()
 dataVisualizationChart.update('active')
 
 })
+
+
+
+document.addEventListener('change', function () {
+if(dataVisualizationChart){
+  dataVisualizationChart.destroy()
+  createChart()
+}else{
+  createChart()
+}
+createChart()
+dataVisualizationChart.update('active')
+
+});
+
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -146,6 +169,13 @@ const dataVisualizationPie = new Chart(ctxTwo, {
       datasets: [{
         label: 'Salary',
         data: Object.values(statusCounts),
+         backgroundColor: [
+  '#a0aec0', // muted steel blue (lowest)
+  '#bfc8d9', // soft dusty blue
+  '#d6cfc9', // taupe/stone
+  '#e9c6af', // muted peach
+  '#f4a261'  // soft terracotta (highest)
+],
         borderWidth: 1
       }]
     },
@@ -211,6 +241,21 @@ dataVisualizationPie.update('active')
 
 
 })
+
+
+document.addEventListener('change', function () {
+if(dataVisualizationPie){
+  dataVisualizationPie.destroy()
+  createSecondChart()
+}else{
+createSecondChart()
+}
+createSecondChart()
+dataVisualizationPie.update('active')
+
+});
+
+
 }
 
 window.addEventListener('DOMContentLoaded', () => {

@@ -7,11 +7,38 @@ import axios from 'axios';
 
 
 const dataArray = [
-  { date: "2025‑06‑08", value: 5 },
-  { date: "2025‑06‑11", value: 7 },
-  { date: "2025‑06‑12", value: 0 },
-  { date: "2025‑06‑13", value: 2 },
+  // June 2025
+  { date: "2025-06-01", value: 3 },
+  { date: "2025-06-05", value: 1 },
+  { date: "2025-06-08", value: 6 },
+  { date: "2025-06-12", value: 2 },
+  { date: "2025-06-15", value: 4 },
+  { date: "2025-06-19", value: 5 },
+  { date: "2025-06-22", value: 1 },
+  { date: "2025-06-26", value: 7 },
+
+  // July 2025
+  { date: "2025-07-02", value: 3 },
+  { date: "2025-07-04", value: 6 },
+  { date: "2025-07-07", value: 2 },
+  { date: "2025-07-11", value: 8 },
+  { date: "2025-07-17", value: 5 },
+  { date: "2025-07-21", value: 1 },
+  { date: "2025-07-25", value: 4 },
+  { date: "2025-07-30", value: 2 },
+
+  // August 2025
+  { date: "2025-08-01", value: 7 },
+  { date: "2025-08-05", value: 3 },
+  { date: "2025-08-09", value: 5 },
+  { date: "2025-08-13", value: 2 },
+  { date: "2025-08-18", value: 6 },
+  { date: "2025-08-22", value: 4 },
+  { date: "2025-08-27", value: 1 },
+  { date: "2025-08-30", value: 3 }
 ];
+
+
 
 new CalHeatmap().paint({
   itemSelector: "#cal-heatmap",
@@ -20,10 +47,14 @@ new CalHeatmap().paint({
   domain:      { type: "month", gutter: 4 },
   subDomain:   { type: "day", width: 12, height: 12, gutter: 2, radius: 2 },
   data: {
-    source: dataArray,
+   source: dataArray,
     type:   "json",
-    x:      datum => +new Date(datum.date),
-    y:      datum => datum.value   
+    x:      d => {
+      
+      const iso = d.date.replace(/\u2011/g, "-");
+      return new Date(iso).getTime();
+    },
+    y:      d => d.value   
   },
   scale: {
     color: { type: "threshold", domain: [1,3,5,7,10], scheme: "Greens" }
