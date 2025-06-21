@@ -5,25 +5,30 @@ import axios from 'axios';
 import './navBar.js';
 import dayjs from 'dayjs';
 
-const callForKey = (r) => {
-  return axios.get('/api/config').then(response => response.data)
+
+async function callForKey(){
+
+  try{
+      const response =  await axios.get('/api/config', {withCredentials: true})
+  return response.data
+  }catch(err){
+
+    console.error(`Could not GET api info for logo... ${err}`)  
+    return null
+  }
 }
 
 
 
 
-
-
-
-
 function getInfoForCards() {
-  const name = document.getElementById("name").value
+  const applicationStatus = document.getElementById("name").value
   const job = document.getElementById("jobTitle").value
   const company = document.getElementById("company").value
 
   const info = [
     {
-      name: `${name}`,
+      applicationStatus: `${applicationStatus}`,
       job: `${job}`,
       company: `${company}`
     }
@@ -35,44 +40,52 @@ function getInfoForCards() {
 
 
 const writeDB = async () => {
+  console.log('cookie at write time:', document.cookie);
 
-  const info = getInfoForCards()
-  const item = localStorage.getItem('Bearer')
+  console.log('in writeDB');
 
-  const response = await axios.post(
-    '/api/v1/users/writeDB',
-    {
-      name: info[0].name,
-      job: info[0].job,
-      company: info[0].company,
-    },
-    {
-      headers: {
-        'Authorization': `Bearer ${item}`
+  const info = getInfoForCards();
+  const now = dayjs();
+  const formattedDate = now.format('MMM D, YYYY <br> h:mm A');
+  const apiUrl = await logoApiCall();
+
+  try {
+    const response = await axios.post(
+      '/api/v1/users/writeDB',
+      {
+        applicationStatus: info[0].applicationStatus,
+        job: info[0].job,
+        company: info[0].company,
+        apiUrl: apiUrl,
+        formattedDate: formattedDate
+      },
+      {
+        withCredentials: true
       }
-    })
-    .then(response => {
+    );
 
-      return response.data.task._id
+    console.log('end writedb');
+    return response.data.task._id;
 
-    })
+  } catch (err) {
+    console.error('Failed to write DB:', err);
+    return null; 
+  }
+};
 
-  return response
-
-}
 
 
 async function logoApiCall() {
 
-  const response = await callForKey()
-  const apiKey = response.apiKey
+
   const info = getInfoForCards()
   const companyName = info[0].company
   const companyName2 = companyName.replaceAll(' ', '').toLowerCase()
 
   try {
-
-    const apiUrl = await `https://img.logo.dev/${companyName2}.com?token=${apiKey}`
+  const response = await callForKey()
+  const apiKey = response.apiKey
+    const apiUrl = `https://img.logo.dev/${companyName2}.com?token=${apiKey}`
     return apiUrl
 
   } catch (error) {
@@ -90,24 +103,34 @@ async function logoApiCall() {
 */
 
 
-export function createCardHTML(item, apiUrl, jobId, buttonOption, formattedDate) {   
 
-  return `<div value='${buttonOption}' class="innerOutput">
+
+
+
+async function createCardHTML(applicationStatus, job, company, apiUrl, formattedDate, jobId) {   
+ console.log('creating function')
+ //const jobId = await writeDB()
+ console.log('writeDB:', jobId)
+/*
+ if (!jobId) {
+  console.error('Write failed or unauthorized');
+  return;
+}*/
+  return `<div value='${applicationStatus}' class="innerOutput" >
 
   <h3 class="jobOutput"></h3>
 
-  <h3 class="nameOutput">${item.company}</h3>
-  <h3 class="companyOutput">${item.job}</h3>
+  <h3 class="nameOutput">${company}</h3>
+  <h3 class="companyOutput">${job}</h3>
 
   <img src="${apiUrl}" class="companyImage" />
 
 
     <div 
-      value="${buttonOption}" 
-      class="appendedButton ${buttonOption} " 
-      
+      value="${applicationStatus}" 
+       class="${applicationStatus} appendedButton" 
     >
-      ${buttonOption}
+      ${applicationStatus}
     </div>
 
 
@@ -115,7 +138,7 @@ export function createCardHTML(item, apiUrl, jobId, buttonOption, formattedDate)
  
 
   <select name="subject" class='subject' data-id="${jobId}">
-    <option value="" selected='${buttonOption}'>Change Status</option>
+    <option value="" selected='${applicationStatus}'>Change Status</option>
     <option value="Applied">Applied</option>
     <option value="Interested">Interested</option>
     <option value="Closed">Closed</option>
@@ -139,7 +162,7 @@ export function createCardHTML(item, apiUrl, jobId, buttonOption, formattedDate)
 <button class='closeModalButton'></button>
   <form action="/add-note" class='userNotes'>
     
-    <h3>Early Stages with ${item.company}:</h3>
+    <h3>Early Stages with ${company}:</h3>
     <br>
     
    
@@ -187,32 +210,42 @@ export function createCardHTML(item, apiUrl, jobId, buttonOption, formattedDate)
 
 
 async function createCard() {
+  console.log('in createcard function');
+  try {
+    const apiUrl = await logoApiCall();
+    const applicationStatus = document.querySelector('select').value;
+    const now = dayjs();
+    const formattedDate = now.format('MMM D, YYYY <br> h:mm A');
+    const outputCard = document.getElementById('outputCard');
+    const info = getInfoForCards();
+    const jobId = await writeDB()
 
-  const apiUrl = await logoApiCall()
-  const buttonOption = document.querySelector('select').value
-  const now = dayjs()
-  const formattedDate = now.format('MMM D, YYYY <br> h:mm A')
-  const outputCard = document.getElementById('outputCard');
-  const info = getInfoForCards();
-  const jobId = await writeDB()
+    if (document.querySelector("input").value !== "") {
+      info.forEach(async (item) => {
+        const card = document.createElement('div');
+        const job = item.job;
+        const company = item.company;
+        card.className = 'card';
+        card.setAttribute("value", applicationStatus);
+        card.dataset.id = jobId;
+        card.innerHTML = await createCardHTML(applicationStatus, job, company, apiUrl, formattedDate, jobId);
+        outputCard.appendChild(card);
 
-  if (document.querySelector("input").value != "") {
+        document.getElementById("name").value = "";
+        document.getElementById("jobTitle").value = "";
+        document.getElementById("company").value = "";
+      });
+    } else {
+      console.log('One or more required input fields are empty.');
+    }
 
-    info.forEach(item => {
-
-      const card = document.createElement('div');
-      card.className = 'card'
-      card.setAttribute("value", buttonOption)
-      card.innerHTML = createCardHTML(item, apiUrl, jobId, buttonOption, formattedDate)
-      outputCard.appendChild(card)
-
-      document.getElementById("name").value = "";
-      document.getElementById("jobTitle").value = "";
-      document.getElementById("company").value = "";
-    })
+    console.log('end of createCard');
+    return applicationStatus;
+  } catch (err) {
+    console.error('Error in createCard:', err);
   }
-  return buttonOption
 }
+
 
 
 document.addEventListener('change', async function (e) {
@@ -236,7 +269,10 @@ document.addEventListener('change', async function (e) {
 console.log('made it')
   const value = e.target.value;
   btn.setAttribute('value', value);
-  btn.setAttribute('id', value);
+  btn.classList.remove('Applied', 'Interested', 'Closed', 'Interview', 'Rejected', 'Assessment');
+
+  btn.classList.add(value);
+  
   btn.innerText = value;
 
   const targetedButton = e.target.closest(".subject");
@@ -244,34 +280,44 @@ console.log('made it')
 
 const id = targetedButton.getAttribute('data-id');
 console.log(id)
- const item = localStorage.getItem('Bearer')
   await axios.patch(`/api/v1/users/${id}`, {
-    name: e.target.value,
+    applicationStatus: e.target.value,
   },
   {
- headers: {
-          'Authorization': `Bearer ${item}`
-        }
+ withCredentials: true 
 })
 
 });
 
+document.getElementById('submitForm').addEventListener('click', (e) => {
+if(!document.getElementById('submitForm')) return
 
-document.querySelector('form').addEventListener('submit', (e) => {
-if(!document.querySelector('form')) return
-
-  e.preventDefault()
-  e.stopPropagation()
-
-  if (document.getElementById('jobTitle').value == '' || document.getElementById('company').value == '') {
+ if (document.getElementById('jobTitle').value == '' || document.getElementById('company').value == '') {
     alert('Error: Please enter job title to continue');  
 
   } else {
-    createCard()
+    console.log('working')
+  
+ e.preventDefault()
+   createCard()
+  //countForMonthInReview()
+  
   }
+
+ 
+})
+/*
+
+document.querySelector('form').addEventListener('submit', (e) => {
+  console.log('form submitting in client')
+if(!document.querySelector('form')) return
+
+
+
+ 
 })
 
-
+*/
 document.addEventListener("click", async (event) => {
 
   if(!event.target.closest){
@@ -283,7 +329,6 @@ document.addEventListener("click", async (event) => {
   event.preventDefault()
     event.target.closest(".delete").innerText = "Confirm deletion?"
 
-    const item = localStorage.getItem('Bearer')
     const itemToRemove = event.target.closest(".card");
     const targetedButton = event.target.closest(".btn.delete");
     const id = targetedButton.getAttribute('data-id');
@@ -300,33 +345,32 @@ document.addEventListener("click", async (event) => {
     }
     console.log('Deleting user with id:', id);
     await axios.delete(`/api/v1/users/${id}`,
-      {
-        headers: {
-          'Authorization': `Bearer ${item}`
-        }
-      }
+      
+        { withCredentials: true }
+      
     )
 
 
   }
 });
 
+/*
 async function countForMonthInReview() {
   console.log('crwairfpijr')
-  const buttonOption = await createCard()
+  const applicationStatus = await createCard()
 
-  if (buttonOption == 'Applied') {
+  if (applicationStatus == 'Applied') {
     console.log('reviewed')
     document.getElementById('ap').innerText++
-  } else if (buttonOption === 'Interested') {
+  } else if (applicationStatus === 'Interested') {
 
     document.getElementById('in').innerText++
 
-  } else if (buttonOption === 'Interview') {
+  } else if (applicationStatus === 'Interview') {
 
 
     document.getElementById('int').innerText++
-  } else if (buttonOption === 'Rejected') {
+  } else if (applicationStatus === 'Rejected') {
 
     document.getElementById('rej').innerText++
   } else {
@@ -338,20 +382,20 @@ function reduceCountForMonthInReview() {
 
 
   console.log('quettedel')
-  const buttonOption = createCard()
+  const applicationStatus = createCard()
 
-  if (buttonOption == 'Applied') {
+  if (applicationStatus == 'Applied') {
     console.log('reviewed')
     document.getElementById('ap').innerText--
-  } else if (buttonOption === 'Interested') {
+  } else if (applicationStatus === 'Interested') {
 
     document.getElementById('in').innerText++
 
-  } else if (buttonOption === 'Interview') {
+  } else if (applicationStatus === 'Interview') {
 
 
     document.getElementById('int').innerText++
-  } else if (buttonOption === 'Rejected') {
+  } else if (applicationStatus === 'Rejected') {
 
     document.getElementById('rej').innerText++
   } else {
@@ -359,12 +403,7 @@ function reduceCountForMonthInReview() {
   }
 }
 
-document.getElementById('submitForm').addEventListener('click', (e) => {
-if(!document.getElementById('submitForm')) return
-  e.preventDefault()
-  countForMonthInReview()
-})
-
+*/
 document.addEventListener("click", (e) => {
 
   const openButton = e.target.closest(".openModalButton");
@@ -414,7 +453,7 @@ document.querySelector('.overlay').style.display = 'none'
 
 
 
-window.addEventListener('DOMContentLoaded', initializeDashboard);
+
 
 
 async function initializeDashboard() {
@@ -422,8 +461,8 @@ async function initializeDashboard() {
     console.log('initializing maybe')
     
     const userEntries = await fetchCurrentUser();
-    console.log(userEntries)
-    renderDashboard(userEntries);
+    console.log('hello init func: ', userEntries)
+    await renderDashboard(userEntries);
   } catch (error) {
     console.error('Could not fetch user data:', error);
     window.location.href = '/loginUser';
@@ -431,16 +470,45 @@ async function initializeDashboard() {
 }
 
 
-
 async function fetchCurrentUser() {
-  const res = await axios.get('/api/v1/users/getUserData', { withCredentials: true });
-  return res.data.entries; 
+  try {
+    const res = await axios.get('/api/v1/users/getUserData', { withCredentials: true });
+    
+    // Safety check
+    if (res?.data?.entries) {
+      return res.data.entries;
+    } else {
+      console.warn('Unexpected response format:', res.data);
+      console.log('Full fetch response:', res);
+
+      return []; // fallback to empty list
+    }
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    return []; // also fallback on network/server errors
+  }
 }
 
-function renderDashboard(entries) {
-console.log('rendering maybe')
-  entries.forEach(entry => {
-   createCardHTML(entry);
-   
-  });
+
+
+async function renderDashboard(entries) {
+  console.log('rendering maybe');
+  const outputCard = document.getElementById('outputCard'); // container element
+  outputCard.innerHTML = ''; // clear existing cards if needed
+
+  for (const entry of entries) {
+    const { _id, applicationStatus, job, company, apiUrl, formattedDate } = entry;
+
+    // Await the async function to get the card HTML string
+    const cardHTML = await createCardHTML(applicationStatus, job, company, apiUrl, formattedDate, _id);
+
+    // Append the created card HTML to your container
+    const cardDiv = document.createElement('div');
+    cardDiv.className = 'card';
+    cardDiv.innerHTML = cardHTML;
+    outputCard.appendChild(cardDiv);
+  }
 }
+
+window.addEventListener('DOMContentLoaded', initializeDashboard);
+

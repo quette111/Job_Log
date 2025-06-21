@@ -17,16 +17,17 @@ import {createCardHTML} from './file.js'
             );
 console.log(res)
            if(res.data.success) {
-            window.location.href = '/log'
+        setTimeout(() => {
+  window.location.href = '/log';
+}, 300);
+
           console.log('res')
-         
-            if (!user) {
-  console.error('No user returned from backend');
-  return;
-}
-            console.log('hello user', user)
 
            }
+                   if (!res.data.success) {
+  console.error('No user returned from backend');
+  return;
+} 
    
         } catch (error) {
             console.log('Error fetching secret data', error)

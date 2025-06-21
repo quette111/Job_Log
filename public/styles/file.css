@@ -306,24 +306,7 @@ cursor: pointer;
   font-size: 2em;
 }
 
-.appendedButton{
-display: flex;
-border: solid black 0.75px;
-align-items: flex-start;
 
-position: absolute;
-justify-content: flex-start;
-top: -2%;
-left: -10%;
-height: 2vh;
-padding-left: 10%;
-padding-bottom: 1.3%;
-padding-right: 6%;
-width: 200px;
-transform: rotate(-40deg);
-text-align: center;
-
-}
 
 .appendedButton:hover{
   color: white;
@@ -530,27 +513,117 @@ display: grid;
 
 
 .Applied {
+  display: flex;
+border: solid black 0.75px;
+align-items: flex-start;
+
+position: absolute;
+justify-content: flex-start;
+top: -2%;
+left: -10%;
+height: 2vh;
+padding-left: 10%;
+padding-bottom: 1.3%;
+padding-right: 6%;
+width: 200px;
+transform: rotate(-40deg);
+text-align: center;
   background-color: #36a2eb;
   color: rgb(0, 0, 0);
   
 }
 .Interested {
+  display: flex;
+border: solid black 0.75px;
+align-items: flex-start;
+
+position: absolute;
+justify-content: flex-start;
+top: -2%;
+left: -10%;
+height: 2vh;
+padding-left: 10%;
+padding-bottom: 1.3%;
+padding-right: 6%;
+width: 200px;
+transform: rotate(-40deg);
+text-align: center;
   color: black;
   background-color: #ff6485;
 }
 .Closed {
+  display: flex;
+border: solid black 0.75px;
+align-items: flex-start;
+
+position: absolute;
+justify-content: flex-start;
+top: -2%;
+left: -10%;
+height: 2vh;
+padding-left: 10%;
+padding-bottom: 1.3%;
+padding-right: 6%;
+width: 200px;
+transform: rotate(-40deg);
+text-align: center;
   color: black;
   background-color: rgb(255, 145, 0);
 }
 .Assessment {
+  display: flex;
+border: solid black 0.75px;
+align-items: flex-start;
+
+position: absolute;
+justify-content: flex-start;
+top: -2%;
+left: -10%;
+height: 2vh;
+padding-left: 10%;
+padding-bottom: 1.3%;
+padding-right: 6%;
+width: 200px;
+transform: rotate(-40deg);
+text-align: center;
   color: black;
   background-color: rgb(234, 0, 255);
 }
 .Rejected {
+  display: flex;
+border: solid black 0.75px;
+align-items: flex-start;
+
+position: absolute;
+justify-content: flex-start;
+top: -2%;
+left: -10%;
+height: 2vh;
+padding-left: 10%;
+padding-bottom: 1.3%;
+padding-right: 6%;
+width: 200px;
+transform: rotate(-40deg);
+text-align: center;
   color: black;
   background-color: #4cc0c0;
 }
 .Interview {
+  display: flex;
+border: solid black 0.75px;
+align-items: flex-start;
+
+position: absolute;
+justify-content: flex-start;
+top: -2%;
+left: -10%;
+height: 2vh;
+padding-left: 10%;
+padding-bottom: 1.3%;
+padding-right: 6%;
+width: 200px;
+transform: rotate(-40deg);
+text-align: center;
   border:solid 0.5px black;
   color: black;
   background-color: #ff9f40;

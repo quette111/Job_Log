@@ -3,22 +3,24 @@ import Chart from 'chart.js/auto';
 
 async function createChart(){
 
-const item = localStorage.getItem('Bearer');
 
 console.log('working')
-   const response = await axios.get('/api/v1/users',
+   const response = await axios.get('/api/v1/users/getUserData',
   {
  withCredentials: true
       
       })
 
+console.log('quetee entries: ', response.data.entries)
 
-const userData = response.data
+const userData = response.data.entries
 
  const statusCounts = {};
 
 userData.forEach(user => {
-  const status = user.name;
+  console.log(user)
+  console.log(userData)
+  const status = user.applicationStatus;
   statusCounts[status] = (statusCounts[status] || 0) + 1;
 }); 
  
@@ -98,8 +100,12 @@ dataVisualizationChart.update('active')
 })
 }
 
+window.addEventListener('DOMContentLoaded', () => {
 
 createChart()
+});
+
+
 
 
 
@@ -110,19 +116,19 @@ async function createSecondChart(){
 const item = localStorage.getItem('Bearer');
 
 console.log('working')
-   const response = await axios.get('/api/v1/users',
+   const response = await axios.get('/api/v1/users/getUserData',
   {
   withCredentials: true
       
       })
 
 
-const userData = response.data
+const userData = response.data.entries
 
  const statusCounts = {};
 
 userData.forEach(user => {
-  const status = user.name;
+  const status = user.applicationStatus;
   statusCounts[status] = (statusCounts[status] || 0) + 1;
 }); 
  
@@ -207,9 +213,10 @@ dataVisualizationPie.update('active')
 })
 }
 
-
+window.addEventListener('DOMContentLoaded', () => {
 createSecondChart()
 
+});
 
 
 
@@ -222,4 +229,5 @@ createSecondChart()
 
 
 
- 
+
+

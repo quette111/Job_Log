@@ -16,10 +16,10 @@ const appRoutes  = require('./routers/api.js');
 const loginRoutes = require('./routers/loginRoutes.js')
 
 app.use(helmet());
-app.use(cors({origin: 'http://localhost:3000', credentials: true}));
-app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
-app.use(express.json());
+app.use(cors({origin: 'http://localhost:8080', credentials: true}));
+//app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
 app.use(cookieParser()); 
+app.use(express.json());
 app.use(mongoSanitize());
 app.use(xss());
 app.use(hpp());

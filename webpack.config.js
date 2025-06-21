@@ -27,4 +27,22 @@ module.exports = {
   },
    devtool: 'source-map',
   mode: 'development',
+
+
+   devServer: {
+    static: {
+      directory: path.join(__dirname, 'public'), // Or 'dist' if you serve from there
+    },
+    compress: true,
+    port: 8080,
+    historyApiFallback: true,
+    proxy: [
+      {
+        context: ['/api'],
+        target: 'http://localhost:3000', // Your Express server
+        changeOrigin: true,
+        secure: false,
+      },
+    ],
+  },
 };
