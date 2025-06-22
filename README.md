@@ -1,6 +1,6 @@
 # JobLog
 
-![JobLog Screenshot](public/images/jobLogFinal.png)
+![JobLog Screenshot](public/images/jobLogFin.png)
 ![JobLog Screenshot](public/images/jobLogFinal2.png)
 
 ## Description

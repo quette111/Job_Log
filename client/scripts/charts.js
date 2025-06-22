@@ -170,11 +170,11 @@ const dataVisualizationPie = new Chart(ctxTwo, {
         label: 'Salary',
         data: Object.values(statusCounts),
          backgroundColor: [
-  '#a0aec0', // muted steel blue (lowest)
-  '#bfc8d9', // soft dusty blue
-  '#d6cfc9', // taupe/stone
-  '#e9c6af', // muted peach
-  '#f4a261'  // soft terracotta (highest)
+  "#d9ead3", // very light muted green
+  "#b6d7a8", // soft leafy green
+  "#93c47d", // calm medium green
+  "#6aa84f", // classic muted green
+  "#38761d"  // deep forest green
 ],
         borderWidth: 1
       }]

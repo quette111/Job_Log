@@ -57,7 +57,7 @@ new CalHeatmap().paint({
     y:      d => d.value   
   },
   scale: {
-    color: { type: "threshold", domain: [1,3,5,7,10], scheme: "Greens" }
+    color: { type: "threshold", domain: [1,3,5,7,10], scheme: "Blues" }
   }
 });
 
