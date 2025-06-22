@@ -20,6 +20,11 @@ res.status(StatusCodes.CREATED).json({user: { name: `${task.first} ${task.last}`
   }
 
 
+
+
+
+
+
   const loginTheUser = async (req, res) => {
 
     console.log('controller hit')
@@ -27,7 +32,7 @@ res.status(StatusCodes.CREATED).json({user: { name: `${task.first} ${task.last}`
     const {email, password} = req.body
 console.log(password)
 
-    if(!email, !password){
+    if(!email || !password){
             return res.status(400).json({ error: "Missing required fields...."})
 
     }
@@ -50,10 +55,16 @@ console.log(isPasswordCorrect)
     }
 
     const token = user.createJWT()
-res.status(StatusCodes.OK).json({user: { name: `${email}` }, token})
-
+//res.status(StatusCodes.OK).json({user: { name: `${email}` }, token})
+res.cookie('jid', token, {
+  httpOnly: true,
+  secure: true, ///////CHANGE 
+  sameSite: 'none', ///strict
+  maxAge: 15 * 60 * 1000
+}).status(200).json({ success: true })
+console.log('loggin in')
     } catch (error){
-      console.log('Error', error)
+  res.status(500).json({ error: 'Something went wrong during login' });
     }
 
   }

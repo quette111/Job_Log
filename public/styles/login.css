@@ -198,6 +198,14 @@ button{
   pointer-events: none;
 }
 
+#blobs {
+  mix-blend-mode: multiply;
+}
+
+#landingDiv h1, #landingDiv h2, #landingDiv h3 {
+  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
+}
+
 @keyframes fadeInAnimation {
   0% {
     opacity: 0;
@@ -206,4 +214,82 @@ button{
     opacity: 1;
   }
 }
+
+@media (max-width: 1024px) {
+  #aligning {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  #landingDiv {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  #landingDiv h1 {
+    font-size: 3rem;
+    line-height: 1.1;
+    text-align: center;
+    width: 100%;
+  }
+
+  #landingDiv h2,
+  #landingDiv h3 {
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  #landingDiv .button-20 {
+    width: 80%;
+    margin: 1.5rem auto 0;
+  }
+
+  #blobs {
+    left: 0;
+    margin: 2rem auto 1rem;
+    width: 200px;
+    height: auto;
+  }
+
+  #imgContainer {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+  }
+
+  #imgContainer img {
+    width: 90%;
+    margin: 1rem auto;
+  }
+}
+
+@media (max-width: 480px) {
+  #landingDiv h1 {
+    font-size: 2.2rem;
+    text-align: center;
+  }
+
+  #landingDiv h2 {
+    font-size: 1.5rem;
+  }
+
+  #landingDiv h3 {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .button-20 {
+    font-size: 0.95rem;
+    padding: 0.6rem 1rem;
+  }
+
+  #blobs {
+    width: 160px;
+    height: auto;
+  }
+}
+
 

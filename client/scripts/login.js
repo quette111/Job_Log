@@ -1,4 +1,5 @@
-
+import axios from 'axios';
+import './navBar.js';
 
 async function postData() {
     console.log('postData')
