@@ -4,7 +4,7 @@ import axios from 'axios';
  import './heatmap.js'
 import './navBar.js';
 import dayjs from 'dayjs';
-
+import { checkIfUserIsLoggedIn } from './navBar.js';
 
 async function callForKey(){
 
@@ -511,4 +511,3 @@ async function renderDashboard(entries) {
 }
 
 window.addEventListener('DOMContentLoaded', initializeDashboard);
-

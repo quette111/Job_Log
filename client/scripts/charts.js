@@ -109,7 +109,9 @@ dataVisualizationChart.update('active')
 
 
 
-document.addEventListener('change', function () {
+document.addEventListener('change', function (e) {
+    if(!e.target.matches('.subject')) return
+
 if(dataVisualizationChart){
   dataVisualizationChart.destroy()
   createChart()
@@ -243,7 +245,10 @@ dataVisualizationPie.update('active')
 })
 
 
-document.addEventListener('change', function () {
+document.addEventListener('change', function (e) {
+
+    if(!e.target.matches('.subject')) return
+
 if(dataVisualizationPie){
   dataVisualizationPie.destroy()
   createSecondChart()

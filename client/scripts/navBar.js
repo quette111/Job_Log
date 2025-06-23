@@ -28,15 +28,43 @@ document.getElementById('theme-switch').addEventListener('click', ()=>{
 changeDisplayMode()
 })
 
-const logButtonSwitch = document.getElementById('loginA')
 
-if(!localStorage.getItem('Bearer')){
-    console.log('no token')
-}else{
-    logButtonSwitch.innerText = 'Logout'
-    logButtonSwitch.addEventListener('click', (e)=>{
-        e.preventDefault()
-        window.location.href = '/loginUser'
-    })
+
+function checkIfUserIsLoggedIn() {
+  const logButtonSwitch = document.getElementById('loginA');
+  if (!logButtonSwitch) return;
+
+  if (document.cookie && document.cookie.length > 0) {
+    console.log('logoutCook');
+    logButtonSwitch.innerText = 'Logout';
+  } else {
+    console.log('loginCook');
+    logButtonSwitch.innerText = 'Login';
+  }
 }
+
+// Listen for clicks anywhere on the document
+document.addEventListener('click', (e) => {
+  const loginBtn = e.target.closest('#loginA');
+  if (!loginBtn) return;  // Ignore clicks not on the button
+
+  const btnText = loginBtn.innerText;
+
+  if (btnText === 'Login') {
+    console.log('login display');
+    window.location.href = '/loginUser'; 
+  } else if (btnText === 'Logout') {
+    console.log('logout display');
+    // Delete cookie by setting expiration in past; make sure to match path
+    document.cookie = "yourCookieName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    window.location.href = '/'; 
+  }
+});
+
+// Run check on page load
+window.addEventListener('load', checkIfUserIsLoggedIn);
+window.addEventListener('DOMContentLoaded', checkIfUserIsLoggedIn);
+
+
+
 

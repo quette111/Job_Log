@@ -30,23 +30,6 @@ const userDataSchema = new mongoose.Schema({   //userSchema set up per mongoose 
         ref: 'loginData',
         require: true
     },
-     connectedOnLI:{
-        type: Boolean,
-        require: false,
-       
-    },
-    inquire:{
-        type: Boolean,
-        require: false,
-       
-    },
-    salary:{
-        type: Number,
-        require: false,
-        min: 0,
-        max:500000
-       
-    },
 
 },
 {

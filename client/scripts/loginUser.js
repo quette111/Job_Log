@@ -2,6 +2,7 @@ import './loginButton.js'
 import axios from 'axios';
 import './navBar.js';
 import {createCardHTML} from './file.js'
+import { checkIfUserIsLoggedIn } from './navBar.js';
 
  export async function verify() {
 
@@ -48,3 +49,4 @@ function showLogin() {
 document.getElementById('signUp').addEventListener('click', () => {
     showLogin()
 })*/
+

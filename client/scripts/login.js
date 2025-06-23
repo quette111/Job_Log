@@ -1,5 +1,6 @@
 import axios from 'axios';
 import './navBar.js';
+import { checkIfUserIsLoggedIn } from './navBar.js';
 
 async function postData() {
     console.log('postData')
@@ -36,7 +37,7 @@ async function postData() {
           
             setTimeout(() => {
              window.location.href = '/loginUser'   
-            }, 1000);
+            }, 300);
             
         } catch (error) {
             console.error('Error sending frontend data', error)

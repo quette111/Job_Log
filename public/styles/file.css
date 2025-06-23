@@ -5,13 +5,11 @@
 
 
 body {
-   width: 100%;
+
    overflow-x: hidden;
-   margin: 0; 
-  padding: 0;
-  min-height: 100vh;
+
   text-align: center;
-  min-height: 100vh;
+
 
   background-color: var(--base-color);
   color: var(--text-color);
@@ -33,7 +31,7 @@ html {
 
 #mainBody{
   padding:3%;
-  
+
 }
 
 
@@ -479,11 +477,7 @@ margin-top: 15%;
 
 
 @media (max-width: 900px) {
-  body {
-    max-width: 100%;
-    overflow-x: hidden;
-    display: grid;
-  }
+
   #outputCard {
     transform: scale(0.8);
     transform-origin: 0 0;
@@ -492,16 +486,7 @@ margin-top: 15%;
   #bigBox {
 display: grid;
   }
-  #navigationArea {
-    display: flex;
-      transform: scale(0.8);
-    transform-origin: 0 0;
-    margin-left: 7%;
-  }
-  #navigationArea div {
-    font-size: 0.75em;
-    border: solid black 1px;
-  }
+
   #dashboard{
   transform: scale(0.8);
     transform-origin: 0 0;
@@ -1120,6 +1105,7 @@ input[type="checkbox"] {
     margin: 0.5rem 0;
   }
 
+
   /* Form and review full width */
   #stats,
   #review h4 {
@@ -1128,23 +1114,86 @@ input[type="checkbox"] {
   }
 
   /* Shrink navigationArea */
-  #navigationArea {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: auto;
-    margin-top: 1rem;
-  }
+
 
   /* Single-column stats + review */
   #bigBox {
     gap: 1rem;
+
+  }
+  .ch-container{
+ 
+    height: 350px;
+    width: 800px
   }
 
+  #myChart{
+  border-top: 1px solid #cccccc74;
+  border-left: 1px solid #cccccc74;
+    border-bottom: 1px solid #cccccc74;
+  }
+#mySecondChart{
+  border-top: 1px solid #cccccc74;
+  border-right: 1px solid #cccccc74;
+    border-bottom: 1px solid #cccccc74;
+}
+#cal-heatmap{
+  margin-top: 15%;
+  border-top: 1px solid #cccccc74;
+  border-left: 1px solid #cccccc74;
+    border-left: 1px solid #cccccc74;
+    border-bottom: 1px solid #cccccc74;
+}
+.innerOutput{
+height: 90%;
+width: 100%;
+}
+#stats{
+  margin-left: 45%;
+  height: 100%;
+  width: 100vw
+}
+.chart{
+  border: none;
+  margin-top: 10%;
+  height: 400px;
+
+}
+#review{
+display: none;
+}
+#stats select, input{
+  margin-bottom: 0%;
+}
+#stats form {
+ margin-bottom: 0px;
+ margin-top: 5%;
+}
+#submitForm{
+  position: relative;
+  top: 88%;
+}
+#navigationArea{
+     display: grid;
+    
+height: 475px;
+ padding-right: 0%;
+    grid-template-columns: 1fr 1fr; 
+   margin: 0 auto; /* ✅ Horizontally center */
+    margin-left: 65%;
+    margin-top: 10%;
+  width: 180vw;
+  margin-bottom: 10%;
+}
   /* Cards one-column */
   #outputCard {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
+      margin: 0 auto; /* ✅ Horizontally center */
+    margin-left: 40%;
+    width: 1300px;
+    height: 1500px;
+    display: grid;
+ 
+    grid-template-columns: 1fr 1fr; /
   }
 
   /* Make inputs & selects easier to touch */

@@ -3,24 +3,37 @@
 //const { Name, Job, Company } = req.body;
 
 const UserData = require('../models/User')
+const modalData = require('../models/modalDataModel')
 const loginUserData = require('../models/User')
-/*
-const getData = async (req, res) => {
-try{
-  const users = await UserData.find({});
-  res.status(200).json(users)
-}catch (error) {
-  res.status(500).json({ msg: 'Server error' });
-}
-}
 
-*/
-//async code so app doesnt freeze when user makes request 
+
+const postModalData = async (req, res) => {
+console.log('attempting Modal DB write')
+
+  console.log('req.user:', req.user);
+ const {connectedOnLI, inquire, emailFollowUp, salary} = req.body
+
+ 
+
+   try{
+   // pull out the object bc it is not just array
+    const task = await modalData.create({ connectedOnLI, inquire, salary, emailFollowUp, createdBy: req.user.userId}); // create using that object
+
+    res.status(201).json({task})
+    console.log(' writing DB')
+  } catch(error){
+    console.log('Error', error)
+  }
+    
+  };
+
+
+
 const postData = async (req, res) => {
 console.log('attempting DB write')
  console.log('IN POST DATA');
   console.log('req.user:', req.user);
- const {applicationStatus, job, company, apiUrl, formattedDate,jobId, connectedOnLI, inquire, salary} = req.body
+ const {applicationStatus, job, company, apiUrl, formattedDate,jobId } = req.body
 
   if(!applicationStatus || !job || !company){
     return res.status(401).json({error: "error bro"})
@@ -28,7 +41,7 @@ console.log('attempting DB write')
 
    try{
    // pull out the object bc it is not just array
-    const task = await UserData.create({applicationStatus, job, company, apiUrl, jobId, connectedOnLI, formattedDate, inquire, salary, createdBy: req.user.userId}); // create using that object
+    const task = await UserData.create({applicationStatus, job, company, apiUrl, jobId, formattedDate, createdBy: req.user.userId}); // create using that object
 
     res.status(201).json({task})
     console.log(' writing DB')
@@ -97,4 +110,6 @@ console.log('bribri', req.user.userId)
 };
 
 
-module.exports = { postData, deleteDB, editData, fetchUserData}
+
+
+module.exports = { postData, deleteDB, editData, fetchUserData, postModalData}
