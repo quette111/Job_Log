@@ -3,6 +3,7 @@ const mongoose = require('mongoose') //require mongoose applicationStatus, job, 
 const userDataSchema = new mongoose.Schema({   //userSchema set up per mongoose docs, used to set up data format
     applicationStatus:{
     type:String,
+    enum: ['Applied', 'Interested', 'Interview', 'Rejected', 'Closed', 'Assessment'],
     require:[true, 'Please status of application'],
     },
     job:{
@@ -19,7 +20,7 @@ const userDataSchema = new mongoose.Schema({   //userSchema set up per mongoose 
     },
      jobId:{
       type:String,
-      require:[false, 'data ID needs to be sent front client'],
+      require:[true, 'data ID needs to be sent front client'],
     },
     formattedDate:{
       type:String,
@@ -29,6 +30,31 @@ const userDataSchema = new mongoose.Schema({   //userSchema set up per mongoose 
         type: mongoose.Types.ObjectId,
         ref: 'loginData',
         require: true
+    },
+     connectedOnLI:{ 
+        type: String,
+        enum: ['checked', 'unchecked'],
+        require: false,
+       
+    },
+    inquire:{
+        type: String,
+        enum: ['checked', 'unchecked'],
+        require: false,
+       
+    },
+    emailFollowUp:{
+        type: String,
+        enum: ['checked', 'unchecked'], 
+        require: false,
+       
+    },
+    salary:{
+        type: Number,
+        require: false,
+        min: 0,
+        max:500000
+       
     },
 
 },

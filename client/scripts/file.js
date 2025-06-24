@@ -107,10 +107,11 @@ async function logoApiCall() {
 
 
 
-async function createCardHTML(applicationStatus, job, company, apiUrl, formattedDate, jobId) {   
+async function createCardHTML(applicationStatus, job, company, apiUrl, formattedDate, salary, jobId ) {   
  console.log('creating function')
  //const jobId = await writeDB()
  console.log('writeDB:', jobId)
+ if(salary == undefined){salary = ''}
 /*
  if (!jobId) {
   console.error('Write failed or unauthorized');
@@ -158,22 +159,22 @@ async function createCardHTML(applicationStatus, job, company, apiUrl, formatted
 
 
 <div class='modal'>
-  
+
 <button class='closeModalButton'></button>
   <form action="/add-note" class='userNotes'>
     
     <h3>Early Stages with ${company}:</h3>
     <br>
-    
+    <h2>$${salary}</h2>
    
     <label>
-     <input type="checkbox" id='linkedInConnect' name="linkedInConnect" value="linkedInConnect">
+     <input type="checkbox" class='linkedInConnect' name="linkedInConnect">
     Connected on linkedIn
     </label>
 
     <br>
      <label>
-    <input type="checkbox" class="proactiveAction" id='proactiveAction' name="proactiveAction" value="proactiveAction">
+    <input type="checkbox" class="proactiveAction" id='proactiveAction' name="proactiveAction">
     Inquired proactively
     </label>
     <br>
@@ -182,26 +183,26 @@ async function createCardHTML(applicationStatus, job, company, apiUrl, formatted
     <br>
 
     <label>
-    <input type="checkbox" class="followUp" name="followUp" value="followUp">
+    <input type="checkbox" class="followUp" name="followUp">
     I have followed up
     </label>
     <br>
     <br> 
     <label>
-    <input type="checkbox" class="thankYou" name="thankYou" value="thankYou">
+    <input type="checkbox" class="thankYou" name="thankYou">
    Sent a thank you email or letter
     </label>
     <br>
     <br>
-  <label>
+  <label> Estimated Salary: 
        <input type="number" class="salary" name="salary">
-       Estimated Compensation: 
+      
   </label>
   
   
 
 
-    <button class='saveNotes' type="submit">Save Note</button>
+    <button class='saveNotes'>Save Note</button>
   </form>
   </div>
 
@@ -215,10 +216,13 @@ async function createCard() {
     const apiUrl = await logoApiCall();
     const applicationStatus = document.querySelector('select').value;
     const now = dayjs();
+    console.log(now)
     const formattedDate = now.format('MMM D, YYYY');
+    formattedDate.replace(/,? \d{1,2}:\d{2}(?: [AP]M)?/, '');
     const outputCard = document.getElementById('outputCard');
     const info = getInfoForCards();
     const jobId = await writeDB()
+
 
     if (document.querySelector("input").value !== "") {
       info.forEach(async (item) => {
@@ -329,6 +333,8 @@ document.addEventListener("click", async (event) => {
   event.preventDefault()
     event.target.closest(".delete").innerText = "Confirm deletion?"
 
+    document.addEventListener("click", async (event) => {
+       if (event.target.closest(".delete")) {
     const itemToRemove = event.target.closest(".card");
     const targetedButton = event.target.closest(".btn.delete");
     const id = targetedButton.getAttribute('data-id');
@@ -352,7 +358,11 @@ document.addEventListener("click", async (event) => {
 
 
   }
+}
+    )}
 });
+
+
 
 /*
 async function countForMonthInReview() {
@@ -452,6 +462,55 @@ document.querySelector('.overlay').style.display = 'none'
 
 
 
+document.addEventListener("click", async(e) => {
+  if (!document.querySelector(".modal.active")) return;
+
+  if (e.target.classList.contains("saveNotes")) {
+    e.preventDefault();
+
+    const outputCard = e.target.parentElement.parentElement.parentElement.querySelector(".innerOutput"); 
+    if (!outputCard) {
+      console.warn("No .outputCard ancestor found");
+      return;
+    }
+
+   
+    const targetedButton = outputCard.querySelector(".delete");
+    if (!targetedButton) {
+      console.warn("No .subject found inside .outputCard");
+      return;
+    }
+
+    const id = targetedButton.getAttribute("data-id");
+
+    const container = e.target.closest(".modal"); // or whatever wraps the inputs
+
+if (container) {
+  const linkedInCheckbox = container.querySelector(".followUp");
+linkedInCheckbox.setAttribute('checked', '')
+  if (linkedInCheckbox && linkedInCheckbox.checked) {
+    linkedInCheckbox.value = "checked";
+  }
+}
+
+    await axios.patch(
+      `api/v1/users/modalData/${id}`,
+      {
+        connectedOnLI: e.target.querySelector(".linkedInConnect")?.value,
+        inquire: e.target.querySelector(".proactiveAction")?.value,
+        emailFollowUp: e.target.querySelector(".followUp")?.value,
+        thankYou: e.target.querySelector(".thankYou")?.value,
+        salary: e.target.parentElement.querySelector(".salary")?.value,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+  }
+});
+
+
+
 
 
 
@@ -497,10 +556,10 @@ async function renderDashboard(entries) {
   outputCard.innerHTML = ''; // clear existing cards if needed
 
   for (const entry of entries) {
-    const { _id, applicationStatus, job, company, apiUrl, formattedDate } = entry;
+    const { _id, applicationStatus, job, company, apiUrl, formattedDate, salary} = entry;
 
     // Await the async function to get the card HTML string
-    const cardHTML = await createCardHTML(applicationStatus, job, company, apiUrl, formattedDate, _id);
+    const cardHTML = await createCardHTML(applicationStatus, job, company, apiUrl, formattedDate, salary, _id);
 
     // Append the created card HTML to your container
     const cardDiv = document.createElement('div');

@@ -33,7 +33,7 @@ const postData = async (req, res) => {
 console.log('attempting DB write')
  console.log('IN POST DATA');
   console.log('req.user:', req.user);
- const {applicationStatus, job, company, apiUrl, formattedDate,jobId } = req.body
+ const {applicationStatus, job, company, apiUrl, formattedDate,jobId, connectedOnLI, inquire, salary, emailFollowUp } = req.body
 
   if(!applicationStatus || !job || !company){
     return res.status(401).json({error: "error bro"})
@@ -41,7 +41,7 @@ console.log('attempting DB write')
 
    try{
    // pull out the object bc it is not just array
-    const task = await UserData.create({applicationStatus, job, company, apiUrl, jobId, formattedDate, createdBy: req.user.userId}); // create using that object
+    const task = await UserData.create({applicationStatus, job, company, apiUrl, jobId, connectedOnLI, inquire, salary, emailFollowUp, formattedDate, createdBy: req.user.userId}); // create using that object
 
     res.status(201).json({task})
     console.log(' writing DB')
@@ -71,6 +71,18 @@ const editData = async (req, res) => {
     console.log('hello')
     const edit = await UserData.findOneAndUpdate({_id: req.params.id}, {applicationStatus}, {new: true},  { runValidators: true })
     res.status(201).json(edit)
+  } catch(error){
+    console.log(error)
+  }
+}
+
+const modalInputDataPatch = async (req, res) => {
+   const {connectedOnLI, inquire, salary, emailFollowUp} = req.body
+
+  try{
+    console.log('hello')
+    const modalData = await UserData.findOneAndUpdate({_id: req.params.id}, {connectedOnLI, inquire, salary, emailFollowUp}, {new: true},  { runValidators: true })
+    res.status(201).json(modalData)
   } catch(error){
     console.log(error)
   }
@@ -112,4 +124,4 @@ console.log('bribri', req.user.userId)
 
 
 
-module.exports = { postData, deleteDB, editData, fetchUserData, postModalData}
+module.exports = { postData, deleteDB, editData, fetchUserData, modalInputDataPatch}

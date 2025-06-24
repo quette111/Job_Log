@@ -5,38 +5,20 @@ import Tooltip from 'cal-heatmap/plugins/Tooltip';
 import Legend from 'cal-heatmap/plugins/Legend';
 import axios from 'axios';
 
+const response = await axios.get('/api/v1/users/getUserData',
+    {
+      withCredentials: true
 
-const dataArray = [
-  // June 2025
-  { date: "2025-06-01", value: 3 },
-  { date: "2025-06-05", value: 1 },
-  { date: "2025-06-08", value: 6 },
-  { date: "2025-06-12", value: 2 },
-  { date: "2025-06-15", value: 4 },
-  { date: "2025-06-19", value: 5 },
-  { date: "2025-06-22", value: 1 },
-  { date: "2025-06-26", value: 7 },
+    })
 
-  // July 2025
-  { date: "2025-07-02", value: 3 },
-  { date: "2025-07-04", value: 6 },
-  { date: "2025-07-07", value: 2 },
-  { date: "2025-07-11", value: 8 },
-  { date: "2025-07-17", value: 5 },
-  { date: "2025-07-21", value: 1 },
-  { date: "2025-07-25", value: 4 },
-  { date: "2025-07-30", value: 2 },
+  const userData = response.data.entries;
 
-  // August 2025
-  { date: "2025-08-01", value: 7 },
-  { date: "2025-08-05", value: 3 },
-  { date: "2025-08-09", value: 5 },
-  { date: "2025-08-13", value: 2 },
-  { date: "2025-08-18", value: 6 },
-  { date: "2025-08-22", value: 4 },
-  { date: "2025-08-27", value: 1 },
-  { date: "2025-08-30", value: 3 }
-];
+const userDates = userData.map(user => user.createdAt.slice(0, 10));
+
+console.log(JSON.stringify(userDates))
+
+console.log(JSON.parse(JSON.stringify(userDates)))
+
 
 
 
