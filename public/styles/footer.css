@@ -2,30 +2,27 @@
 
 
 body{
-
-   font-family: "Outfit", sans-serif;
+  font-family: "Outfit", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 }
+
 :root{
   --base-color: #F2F0EF;
   --nav-color: white;
   --text-color: black;
   --hover-color:#f0f0f0;
   --img-filter:brightness(1);
-   --secondary-text:black;
-   --primary-color: gray;
-   --tab-color:white;
-   --tab-colorSecondary:rgb(76, 76, 76);
-   --tab-colorThird:rgb(0, 0, 130);
-      --gradient-color:#6fcdf800;
-   --gradient-colorSecondary:  #6fcdf81a;
-   --gradient-colorThird: #9bdefd;
- 
+  --secondary-text:black;
+  --primary-color: gray;
+  --tab-color:white;
+  --tab-colorSecondary:rgb(76, 76, 76);
+  --tab-colorThird:rgb(0, 0, 130);
+  --gradient-color:#6fcdf800;
+  --gradient-colorSecondary:  #6fcdf81a;
+  --gradient-colorThird: #9bdefd;
 }
-
-
 
 #theme-switch{
   cursor: pointer;
@@ -40,10 +37,6 @@ body{
   border-color: #05a6f000;
 }
 
-#theme-switch:hover{
-
-}
-
 #theme-switch svg{
   fill: var(--text-color)
 }
@@ -51,8 +44,6 @@ body{
 #theme-switch svg:last-child{
   display: none;
 }
-
-
 
 .darkmode #theme-switch svg:first-child{
   display: none;
@@ -66,24 +57,16 @@ body{
   background-color: var(--base-color);
   color: var(--text-color);
   width: 100vw;
-
 }
 
-
-
-
-
 nav{
- position: fixed;
+  position: fixed;
   bottom: 0;
   left: 0;
-
   right: 0;
   width: 100%;
-
   background-color: var(--nav-color);
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
-
 }
 
 nav, ul{
@@ -92,8 +75,6 @@ nav, ul{
   display: flex;
   justify-content: flex-end;
   align-items: center;
-   
-
 }
 
 nav li{
@@ -123,7 +104,6 @@ nav a:hover{
 
 nav li:first-child{
   margin-right: auto;
-
 }
 
 .sidebar{
@@ -140,7 +120,6 @@ nav li:first-child{
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-
 }
 
 .sidebar li{
@@ -172,5 +151,4 @@ nav li:first-child{
 
 #loginText{
   color: #29b3f3;
-
 }

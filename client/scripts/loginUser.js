@@ -1,52 +1,56 @@
 import './loginButton.js'
 import axios from 'axios';
 import './navBar.js';
-import {createCardHTML} from './file.js'
-import { checkIfUserIsLoggedIn } from './navBar.js';
 
- export async function verify() {
+export async function verify() {
+    try {
+        const email = document.getElementById('email').value
+        const password = document.getElementById('password').value
 
-        try {
+        if (!password || !email) {
+            const outerForm = document.getElementById('outerForm')
+            outerForm.style.cssText = 'border:2px solid red;text-align:center;'
+            const para = document.createElement("p")
+            para.style.cssText = 'color:red;text-align:center;';
+            para.innerText = "Please enter your username and password . . .";
+            document.body.appendChild(para)
 
-            console.log('hit function')
-        
-         const res = await axios.post('/api/v1/login/loginTheUser', {
+            setTimeout(() => {
+                outerForm.style.cssText = 'border: 1px solid white;'
+                para.innerText = ''
+            }, 3000);
+            return
+        }
+        const res = await axios.post('/api/v1/login/loginTheUser', {
             email: document.getElementById('email').value,
             password: document.getElementById('password').value,
+        },
+            { withCredentials: true });
 
-           },{withCredentials: true}
-            );
-console.log(res)
-           if(res.data.success) {
-        setTimeout(() => {
-  window.location.href = '/log';
-}, 300);
+        if (res.data.success) {
+            setTimeout(() => {
+                window.location.href = '/log';
+            }, 300);
+        }
+    } catch (error) {
 
-          console.log('res')
+        if (error.response.status === 400) {
 
-           }
-                   if (!res.data.success) {
-  console.error('No user returned from backend');
-  return;
-} 
-   
-        } catch (error) {
-            console.log('Error fetching secret data', error)
-            //showLoginError()
+            const outerForm = document.getElementById('outerForm')
+            outerForm.style.cssText = 'border:2px solid red;'
+            const para = document.createElement("p")
+            para.style.cssText = 'color:red;text-align:center;';
+            para.innerText = "Your username or password is incorrect. . .";
+            document.body.appendChild(para)
+
+            setTimeout(() => {
+                outerForm.style.cssText = 'border: 1px solid white;'
+                para.innerText = ''
+
+            }, 3000);
+            console.error('No user returned from backend');
         }
     }
-//}
-
-
-
-/*
-
-function showLogin() {
-    document.getElementById('hideLog').hidden = false
-    document.getElementById('hideLog').cssText =  ' animation: fadeInAnimation ease 3s; animation-iteration-count: 1; animation-fill-mode: forwards;'
 }
 
-document.getElementById('signUp').addEventListener('click', () => {
-    showLogin()
-})*/
 

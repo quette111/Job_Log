@@ -5,44 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <link rel="stylesheet" href="/styles/login.css" />
-    <link rel="icon" href="/images/logo.svg" type="image/png">
-
+    <link rel="icon" href="/images/logo.svg" type="image/png" />
   </head>
   <body>
- 
+    <%- include('partials/nav') %>
 
+    <div id="aligning">
+      <div id="landingDiv">
+        <img height="300" width="300" id="blobs" src="images/blobs.png" />
 
-<%- include('partials/nav') %>
+        <h2>Less Hassle,</h2>
+        <h1>
+          More<br />
+          Interviews
+        </h1>
 
+        <h3 id="jlDescription">
+          JobLog helps you track your progress and log data while you are on the
+          job hunt in one click.
+        </h3>
 
+        <button id="signUp" class="button-20" role="button">Get Started</button>
+      </div>
 
-
-  <div id="aligning">
-
-    <div id="landingDiv">
-      <img height="300" width="300" id="blobs" src="images/blobs.png">
-
-      <h2>Less Hassle,</h2>
-      <h1>More<br> Interviews</h1>
-
-      <h3 id="jlDescription">JobLog helps you track your progress and log data while you are on the job hunt in one click.</h3>
-
-      <button id="signUp" class="button-20" role="button">Get Started</button>
-     
-
+      <div id="imgContainer">
+        <img id="track" src="./images/jobLogFin.png" />
+        <img id="track" src="./images/jobLogFinal2.png" />
+      </div>
     </div>
 
-<div id="imgContainer">
-<img id="track" src="./images/jobLogFin.png">
-<img id="track" src="./images/jobLogFinal2.png">
-</div>
-
-
-
-  </div>
-
- <script src="/scripts/landing.js"></script>
-
-
+    <script src="/scripts/landing.js"></script>
   </body>
 </html>

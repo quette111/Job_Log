@@ -6,93 +6,59 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Job Log</title>
     <link rel="stylesheet" href="/styles/file.css" />
-<link rel="icon" href="/images/logo.svg" type="image/png">
-
+    <link rel="icon" href="/images/logo.svg" type="image/png" />
   </head>
   <body>
-  
-<%- include('partials/nav') %>
-  <div class="overlay" hidden></div>
+    <%- include('partials/nav') %>
+    <div class="overlay" hidden></div>
 
-<div id="mainBody">
-
-   
-
- <div class="chart">
-
-  
-      <canvas id="myChart"></canvas>
-    <div id="cal-heatmap"></div>
-     <canvas id="mySecondChart"></canvas>
-    </div>
-   
-
-
-
-    <div id="bigBox">
-      <div id="navigationArea">
-        <div class="column" id="stats">
-        <form>
-        <label for="name">Status:</label>
-        <select autofocus id="name" name="name">
-          <option>--Please choose a job status--</option>
-          <option value="Applied">Applied</option>
-          <option value="Interested">Interested</option>
-          <option value="Closed">Closed</option>
-          <option value="Assessment">Assessment</option>
-          <option value="Rejected">Rejected</option>
-          <option value="Interview">Interview</option>
-        </select>
-  <br>
-        <label for="jobTitle">Job Title:</label>
-        <input name="job" id="jobTitle" />
-   <br>
-   
-        <label for="company">Company:</label>
-
-   
-        <input name="company" id="company" />
-   <button id="submitForm" class="submit" type="submit">Add Job</button>
-   
-    </form>
-         
-
-        </div>
-        
-         <div class="column" id="review">
-       
-
-          <h4 id="firstRev">Applied:<span id="ap">3</span></h4>
-          <h4 id="secRev">Interested:<span id="in">2</span></h4>
-          <h4 id="thirdRev">Interview:<span id="int">1</span></h4>
-          <h4 id="fourthRev">Rejected:<span id="rej">0</span></h4>
-
-        </div>
-
-
-        
+    <div id="mainBody">
+      <div class="chart">
+        <canvas id="myChart"></canvas>
+        <div id="cal-heatmap"></div>
+        <canvas id="mySecondChart"></canvas>
       </div>
 
-      <div id="outputCard">
+      <div id="bigBox">
+        <div id="navigationArea">
+          <div class="column" id="stats">
+            <form>
+              <label for="name">Status:</label>
+              <select autofocus id="name" name="name">
+                <option>--Please choose a job status--</option>
+                <option value="Applied">Applied</option>
+                <option value="Interested">Interested</option>
+                <option value="Closed">Closed</option>
+                <option value="Assessment">Assessment</option>
+                <option value="Rejected">Rejected</option>
+                <option value="Interview">Interview</option>
+              </select>
+              <br />
+              <label for="jobTitle">Job Title:</label>
+              <input name="job" id="jobTitle" />
+              <br />
+
+              <label for="company">Company:</label>
+
+              <input name="company" id="company" />
+              <button id="submitForm" class="submit" type="submit">
+                Add Job
+              </button>
+            </form>
+          </div>
+
+          <div class="column" id="review">
+            <h4 id="firstRev">Applied:<span id="ap"></span></h4>
+            <h4 id="secRev">Interested:<span id="in"></span></h4>
+            <h4 id="thirdRev">Interview:<span id="int"></span></h4>
+            <h4 id="fourthRev">Rejected:<span id="rej"></span></h4>
+          </div>
+        </div>
+
+        <div id="outputCard"></div>
+      </div>
     </div>
-    </div>
-
-   
-</div>
-
-
-
-
-
-
-
-
-
-
-    
-    
 
     <script src="/scripts/dashboard.js"></script>
   </body>
 </html>
-

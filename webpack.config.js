@@ -31,7 +31,7 @@ module.exports = {
 
    devServer: {
     static: {
-      directory: path.join(__dirname, 'public'), // Or 'dist' if you serve from there
+      directory: path.join(__dirname, 'public'), 
     },
     compress: true,
     port: 8080,
@@ -39,7 +39,7 @@ module.exports = {
     proxy: [
       {
         context: ['/api'],
-        target: 'http://localhost:3000', // Your Express server
+        target: 'http://localhost:3000', 
         changeOrigin: true,
         secure: false,
       },

@@ -6,13 +6,13 @@ const userSchema = new mongoose.Schema({
     first:{
         type:String,
         require:[true, 'Please provide first name'],
-        minlength: 3,
+        minlength: 2,
         maxLength: 25,
     }, 
     last:{
          type:String,
         require:[true, 'Please provide last name'],
-        minlength: 3,
+        minlength: 2,
         maxLength: 25,
     },
      email:{
@@ -26,7 +26,10 @@ const userSchema = new mongoose.Schema({
     password:{
         type:String,
         require:[true, 'Please provide password'],
-        minLength:6,
+        minLength:10,
+        match:[
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{10,}$/, 'Please provide valid password'
+        ],
     },
 },
 {

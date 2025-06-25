@@ -1,29 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/styles/signup.css" />
     <title>Document</title>
-    <link rel="icon" href="/images/logo.svg" type="image/png">
-
-</head>
-<body>
+    <link rel="icon" href="/images/logo.svg" type="image/png" />
+  </head>
+  <body>
     <%- include('partials/nav') %>
-    
- <h1>Create a JobLog account</h1><br>
+
+    <h1>Create a jobLog account</h1>
+    <br />
     <div id="outerForm">
-     
       <form id="form" method="post">
-        
+        <label id="firstNameLabel" for="username">First name</label><br />
+        <label id="lastNameLabel" for="username">Last name</label><br />
 
-        <label id="firstNameLabel" for="username">First name</label><br>
-         <label id="lastNameLabel" for="username">Last name</label><br>
-
-<div id="firstAndLastName">
-        <input type="text" id="username" placeholder="Your first name"/>
-        <input type="text" id="last" placeholder="Your last name"/>
-          </div>
+        <div id="firstAndLastName">
+          <input type="text" id="username" placeholder="Your first name" />
+          <input type="text" id="last" placeholder="Your last name" />
+        </div>
         <br />
         <label for="email">Email</label>
         <input type="email" id="email" placeholder="Your email" />
@@ -35,11 +32,7 @@
         <br />
         <button type="submit" id="submit">Create Account</button>
       </form>
-
-    
-
     </div>
-  <script src="/scripts/signup.js"></script>
-
-</body>
+    <script src="/scripts/signup.js"></script>
+  </body>
 </html>

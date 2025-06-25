@@ -2,43 +2,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
 
 body{
-   font-family: "Outfit", sans-serif;
+  font-family: "Outfit", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 }
+
 *{
   margin:0;
   padding: 0;
 }
 
 #jlDescription{
-   color: var(--secondary-text);
+  color: var(--secondary-text);
 }
+
 #menuButton{
   cursor: pointer;
 }
 
-
 #closeMenuButton{
-    cursor: pointer;
+  cursor: pointer;
 }
 
 #create{text-align: center;
-    background-color: #6fcdf8;
-
-display: flex;
-align-items: center;
-text-align: center;}
-
+  background-color: #6fcdf8;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
 
 #hideLog{
-    background-color: #6fcdf8b0;
-    padding: 15%;
-    border: 1px solid #29b3f3;
-    border-radius: 50px;
-    margin-top: 5%;
-
+  background-color: #6fcdf8b0;
+  padding: 15%;
+  border: 1px solid #29b3f3;
+  border-radius: 50px;
+  margin-top: 5%;
 }
 
 #blobs{
@@ -52,11 +51,11 @@ text-align: center;}
 }
 
 #imgContainer{
-   display: flex;
- justify-content: flex-end;
- flex-direction: column;
-position: relative;
-left: 0%;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  position: relative;
+  left: 0%;
 }
 
 #imgContainer img{
@@ -65,18 +64,16 @@ left: 0%;
   width:100%;
   padding: 3%;
   background: rgba(255, 255, 255, 0.2);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(70, 70, 70, 0.465);
-backdrop-filter: blur(5px);
--webkit-backdrop-filter: blur(5px);
-border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(70, 70, 70, 0.465);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
-#track{
 
+#track{
  height: 25%;
  width: 35%;
-
- 
  display: flex;
  justify-content: flex-end;
  flex-direction: column;
@@ -91,9 +88,8 @@ width: 50%;
 }
 
 #aligning{
-    display: flex;
-    flex-direction: row;
-   
+  display: flex;
+  flex-direction: row;
 }
 
 button{
@@ -287,8 +283,12 @@ button{
   }
 
   #blobs {
-    width: 160px;
-    height: auto;
+   display: none;
+  }
+  #imgContainer img {
+    width: 90%;
+    height: 85%;
+    margin: 1rem auto;
   }
 }
 

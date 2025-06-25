@@ -1,64 +1,61 @@
 const openSidebar = () => {
-document.querySelector('.sidebar').style.display = 'flex'
-
+    document.querySelector('.sidebar').style.display = 'flex'
 }
 
-document.getElementById('menuButton').addEventListener('click', ()=>{
-openSidebar()
+document.getElementById('menuButton').addEventListener('click', () => {
+    openSidebar()
 })
 
 const closeSideBar = () => {
     document.querySelector('.sidebar').style.display = 'none'
 }
 
-document.getElementById('closeMenuButton').addEventListener('click', ()=>{
-closeSideBar()
+document.getElementById('closeMenuButton').addEventListener('click', () => {
+    closeSideBar()
 })
 
 const changeDisplayMode = () => {
     //const body 
-    if(document.body.className != 'darkmode'){
+    if (document.body.className != 'darkmode') {
         document.body.className = 'darkmode'
-    } else{
+    } else {
         document.body.className = ''
     }
 }
 
-document.getElementById('theme-switch').addEventListener('click', ()=>{
-changeDisplayMode()
+document.getElementById('theme-switch').addEventListener('click', () => {
+    changeDisplayMode()
 })
 
-
-
 function checkIfUserIsLoggedIn() {
-  const logButtonSwitch = document.getElementById('loginA');
-  if (!logButtonSwitch) return;
+    const logButtonSwitch = document.getElementById('loginA');
+    if (!logButtonSwitch) return;
 
-  if (document.cookie && document.cookie.length > 0) {
-    console.log('logoutCook');
-    logButtonSwitch.innerText = 'Logout';
-  } else {
-    console.log('loginCook');
-    logButtonSwitch.innerText = 'Login';
-  }
+    if (document.cookie && document.cookie.length > 0) {
+        console.log('logoutCook');
+        logButtonSwitch.innerText = 'Logout';
+    } else {
+        console.log('loginCook');
+        logButtonSwitch.innerText = 'Login';
+    }
 }
 
 // Listen for clicks anywhere on the document
 document.addEventListener('click', (e) => {
-  const loginBtn = e.target.closest('#loginA');
-  if (!loginBtn) return;  // Ignore clicks not on the button
+    const loginBtn = e.target.closest('#loginA');
+    if (!loginBtn) return;  // Ignore clicks not on the button
 
-  const btnText = loginBtn.innerText;
+    const btnText = loginBtn.innerText;
 
-  if (btnText === 'Login') {
-    console.log('login display');
-    window.location.href = '/loginUser'; 
-  } else if (btnText === 'Logout') {
-    console.log('logout display');
-    // Delete cookie by setting expiration in past; make sure to match path
-    document.cookie = "yourCookieName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    window.location.href = '/'; 
-  }
+    if (btnText === 'Login') {
+        console.log('login display');
+        window.location.href = '/loginUser';
+    } else if (btnText === 'Logout') {
+        console.log('logout display');
+        // Delete cookie by setting expiration in past
+        document.cookie = "yourCookieName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        window.location.href = '/';
+    }
 });
 
 // Run check on page load

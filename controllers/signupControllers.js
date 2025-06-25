@@ -1,73 +1,57 @@
 const loginUser = require('../models/loginModel')
-const {StatusCodes} = require('http-status-codes')
+const { StatusCodes } = require('http-status-codes')
 
 const postUserData = async (req, res) => {
- 
-    const {first, last, email, password} = req.body; // pull out the object bc it is not just array
-    if(!first || !last || !email || !password){
-      return res.status(400).json({ error: "Missing required fields...."})
-    } 
-    
-    try{
-    const task = await loginUser.create({first, last, email, password}); // create using that object
-  
-      
-res.status(StatusCodes.CREATED).json({user: { name: `${task.first} ${task.last}` }})
 
-  } catch(error){
+  const { first, last, email, password } = req.body;
+  if (!first || !last || !email || !password) {
+    return res.status(400).json({ error: "Missing required fields...." })
+  }
+
+  try {
+    const task = await loginUser.create({ first, last, email, password });
+    res.status(StatusCodes.CREATED).json({ user: { name: `${task.first} ${task.last}` } })
+  } catch (error) {
     console.log('Error', error)
   }
+}
+
+const loginTheUser = async (req, res) => {
+
+  const { email, password } = req.body
+
+  if (!email || !password) {
+    return res.status(400).json({ error: "Missing required fields...." })
   }
 
+  try {
+    const user = await loginUser.findOne({ email })
 
-
-
-
-
-
-  const loginTheUser = async (req, res) => {
-
-    console.log('controller hit')
-
-    const {email, password} = req.body
-console.log(password)
-
-    if(!email || !password){
-            return res.status(400).json({ error: "Missing required fields...."})
-
+    if (!user) {
+      return res.status(400).json({ error: "Incorrect email...." })
     }
 
-    try{
+    const isPasswordCorrect = await user.comparePassword(password)
 
-      const user = await loginUser.findOne({email})
-
-      if(!user){
-              return res.status(400).json({ error: "Incorrect email...."})
-
-      }
-
-     const isPasswordCorrect = await user.comparePassword(password)
-console.log(isPasswordCorrect)
-    if(!isPasswordCorrect){
-
-      return res.status(400).json({ error: "Incorrect password...."})
-
+    if (!isPasswordCorrect) {
+      return res.status(400).json({ error: "Incorrect password...." })
     }
 
     const token = user.createJWT()
-//res.status(StatusCodes.OK).json({user: { name: `${email}` }, token})
-res.cookie('jid', token, {
-  httpOnly: true,
-  secure: true, ///////CHANGE 
-  sameSite: 'none', ///strict
-  maxAge: 15 * 60 * 1000
-}).status(200).json({ success: true })
-console.log('loggin in')
-    } catch (error){
-  res.status(500).json({ error: 'Something went wrong during login' });
-    }
 
+    res.cookie('jid', token, {
+      httpOnly: true,
+      secure: true, ///////CHANGE 
+      sameSite: 'none', ///strict
+      maxAge: 1000 * 60 * 60
+    }).status(200).json({ success: true })
+    console.log('loggin in')
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: 'Something went wrong during login' });
   }
+}
 
-  module.exports = {postUserData, loginTheUser}
-  
+
+
+module.exports = { postUserData, loginTheUser }

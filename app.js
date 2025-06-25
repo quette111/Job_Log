@@ -12,18 +12,21 @@ const app = express();
 const mongoose = require('mongoose');
 const PORT = process.env.PORT || 3000;
 const cookieParser = require('cookie-parser')
-const appRoutes  = require('./routers/api.js');
+const appRoutes = require('./routers/api.js');
 const loginRoutes = require('./routers/loginRoutes.js')
 
 app.use(helmet());
-app.use(cors({origin: 'http://localhost:8080', credentials: true}));
-//app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
-app.use(cookieParser()); 
+app.use(cors({ origin: 'http://localhost:8080', credentials: true }));
+app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
+app.use(cookieParser());
 app.use(express.json());
 app.use(mongoSanitize());
 app.use(xss());
 app.use(hpp());
-
+app.use((req, res, next) => {
+  res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self';");
+  next();
+});
 
 
 app.use('/api/v1/users', appRoutes);
@@ -50,7 +53,7 @@ app.use(
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", "https://cdn.jsdelivr.net"],
       imgSrc: ["'self'", "data:", "https://img.logo.dev"],
-    
+
     },
   })
 );
@@ -73,10 +76,10 @@ app.get('/loginUser', (req, res) => {
 })
 
 app.get('/log', (req, res) => {
-res.render('log')
+  res.render('log')
 });
 
-app.get('/signup', (req, res)=> {
+app.get('/signup', (req, res) => {
   res.render('signUp')
 })
 
@@ -92,7 +95,7 @@ app.all('*', (req, res) => {
 
 const start = async () => {
   try {
-    
+
     await mongoose.connect(process.env.MONGO_URI, console.log('connected to DB'))
     app.listen(PORT, console.log(`Server is listening on port ${PORT}...`))
   } catch (error) {

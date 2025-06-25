@@ -1,27 +1,25 @@
-//NOTE TO SELF: MODULARIZE CODE, IMPROVE VARIABLE NAMES
 import axios from 'axios';
- import './charts.js'
- import './heatmap.js'
+import './charts.js'
+import './heatmap.js'
 import './navBar.js';
 import dayjs from 'dayjs';
 import { checkIfUserIsLoggedIn } from './navBar.js';
 
-async function callForKey(){
+async function callForKey() {
 
-  try{
-      const response =  await axios.get('/api/config', {withCredentials: true})
-  return response.data
-  }catch(err){
+  try {
+    const response = await axios.get('/api/config', { withCredentials: true })
+    return response.data
+  } catch (err) {
 
-    console.error(`Could not GET api info for logo... ${err}`)  
+    console.error(`Could not GET api info for logo... ${err}`)
     return null
   }
 }
 
 
-
-
 function getInfoForCards() {
+
   const applicationStatus = document.getElementById("name").value
   const job = document.getElementById("jobTitle").value
   const company = document.getElementById("company").value
@@ -33,16 +31,12 @@ function getInfoForCards() {
       company: `${company}`
     }
   ]
-
   return info
-
 }
 
 
 const writeDB = async () => {
-  console.log('cookie at write time:', document.cookie);
 
-  console.log('in writeDB');
 
   const info = getInfoForCards();
   const now = dayjs();
@@ -64,27 +58,26 @@ const writeDB = async () => {
       }
     );
 
-    console.log('end writedb');
+    
     return response.data.task._id;
 
   } catch (err) {
     console.error('Failed to write DB:', err);
-    return null; 
+    return null;
   }
 };
 
-
-
+//Calling logo.dev API 
 async function logoApiCall() {
 
-
+  
   const info = getInfoForCards()
   const companyName = info[0].company
   const companyName2 = companyName.replaceAll(' ', '').toLowerCase()
 
   try {
-  const response = await callForKey()
-  const apiKey = response.apiKey
+    const response = await callForKey()
+    const apiKey = response.apiKey
     const apiUrl = `https://img.logo.dev/${companyName2}.com?token=${apiKey}`
     return apiUrl
 
@@ -96,27 +89,10 @@ async function logoApiCall() {
 
 }
 
+async function createCardHTML(applicationStatus, job, company, apiUrl, formattedDate, salary, jobId) {
 
-/*function confirmCreation() {
-  document.getElementById(submitForm).innerText = 'Entry added . . . '
-}
-*/
+  if (salary == undefined) { salary = '' }
 
-
-
-
-
-
-async function createCardHTML(applicationStatus, job, company, apiUrl, formattedDate, salary, jobId ) {   
- console.log('creating function')
- //const jobId = await writeDB()
- console.log('writeDB:', jobId)
- if(salary == undefined){salary = ''}
-/*
- if (!jobId) {
-  console.error('Write failed or unauthorized');
-  return;
-}*/
   return `<div value='${applicationStatus}' class="innerOutput" >
 
   <h3 class="jobOutput"></h3>
@@ -129,8 +105,7 @@ async function createCardHTML(applicationStatus, job, company, apiUrl, formatted
 
     <div 
       value="${applicationStatus}" 
-       class="${applicationStatus} appendedButton" 
-    >
+       class="${applicationStatus} appendedButton">
       ${applicationStatus}
     </div>
 
@@ -165,42 +140,45 @@ async function createCardHTML(applicationStatus, job, company, apiUrl, formatted
     
     <h3>Early Stages with ${company}:</h3>
     <br>
-    <h2>$${salary}</h2>
+    <h2>Salary: $${salary}</h2><br>
    
     <label>
-     <input type="checkbox" class='linkedInConnect' name="linkedInConnect">
-    Connected on linkedIn
+      <input type="checkbox" class='linkedInConnect' name="linkedInConnect">
+      Connected on linkedIn
     </label>
 
     <br>
+
      <label>
-    <input type="checkbox" class="proactiveAction" id='proactiveAction' name="proactiveAction">
-    Inquired proactively
+      <input type="checkbox" class="proactiveAction" id='proactiveAction' name="proactiveAction">
+      Inquired proactively
     </label>
+
     <br>
 
     <h3>Late Stages:</h3>
+
     <br>
 
     <label>
-    <input type="checkbox" class="followUp" name="followUp">
-    I have followed up
+      <input type="checkbox" class="followUp" name="followUp">
+      I have followed up
     </label>
+
     <br>
     <br> 
-    <label>
-    <input type="checkbox" class="thankYou" name="thankYou">
-   Sent a thank you email or letter
-    </label>
-    <br>
-    <br>
-  <label> Estimated Salary: 
-       <input type="number" class="salary" name="salary">
-      
-  </label>
-  
-  
 
+    <label>
+      <input type="checkbox" class="thankYou" name="thankYou">
+      Sent a thank you email or letter
+    </label>
+
+    <br>
+    <br>
+
+  <label> Salary input: 
+       <input type="number" class="salary" name="salary">
+  </label>
 
     <button class='saveNotes'>Save Note</button>
   </form>
@@ -211,18 +189,15 @@ async function createCardHTML(applicationStatus, job, company, apiUrl, formatted
 
 
 async function createCard() {
-  console.log('in createcard function');
+
   try {
     const apiUrl = await logoApiCall();
-    const applicationStatus = document.querySelector('select').value;
+    window.applicationStatus = document.querySelector('select').value;
     const now = dayjs();
-    console.log(now)
     const formattedDate = now.format('MMM D, YYYY');
-    formattedDate.replace(/,? \d{1,2}:\d{2}(?: [AP]M)?/, '');
     const outputCard = document.getElementById('outputCard');
     const info = getInfoForCards();
     const jobId = await writeDB()
-
 
     if (document.querySelector("input").value !== "") {
       info.forEach(async (item) => {
@@ -234,7 +209,6 @@ async function createCard() {
         card.dataset.id = jobId;
         card.innerHTML = await createCardHTML(applicationStatus, job, company, apiUrl, formattedDate, jobId);
         outputCard.appendChild(card);
-
         document.getElementById("name").value = "";
         document.getElementById("jobTitle").value = "";
         document.getElementById("company").value = "";
@@ -242,145 +216,122 @@ async function createCard() {
     } else {
       console.log('One or more required input fields are empty.');
     }
-
-    console.log('end of createCard');
+   
+   
     return applicationStatus;
+
   } catch (err) {
     console.error('Error in createCard:', err);
   }
 }
 
 
-
+//Update functionality
 document.addEventListener('change', async function (e) {
+
   if (!e.target.matches('.subject')) return;
 
-  console.log('Subject changed:', e.target.value);
-
   const row = e.target.closest('div');
-  console.log(row)
+
   if (!row) {
     console.warn('No .time container found');
     return;
   }
 
   const btn = row.querySelector('.appendedButton');
-  console.log(`button?`, btn)
+
   if (!btn) {
     console.warn('No .appendedButton found in row');
     return;
   }
-console.log('made it')
+
   const value = e.target.value;
   btn.setAttribute('value', value);
   btn.classList.remove('Applied', 'Interested', 'Closed', 'Interview', 'Rejected', 'Assessment');
-
   btn.classList.add(value);
-  
   btn.innerText = value;
 
   const targetedButton = e.target.closest(".subject");
-  console.log(targetedButton)
+  const id = targetedButton.getAttribute('data-id');
 
-const id = targetedButton.getAttribute('data-id');
-console.log(id)
   await axios.patch(`/api/v1/users/${id}`, {
     applicationStatus: e.target.value,
   },
-  {
- withCredentials: true 
-})
-
+    {
+      withCredentials: true
+    })
 });
 
 document.getElementById('submitForm').addEventListener('click', (e) => {
-if(!document.getElementById('submitForm')) return
+  if (!document.getElementById('submitForm')) return
 
- if (document.getElementById('jobTitle').value == '' || document.getElementById('company').value == '') {
-    alert('Error: Please enter job title to continue');  
+  if (document.getElementById('jobTitle').value == '' || document.getElementById('company').value == '') {
+    alert('Error: Please enter job title to continue');  //////////////////UPDATE
 
   } else {
-    console.log('working')
-  
- e.preventDefault()
-   createCard()
-  //countForMonthInReview()
-  
+
+    e.preventDefault()
+    createCard()
+    countForMonthInReview()
+      const navigationArea = document.getElementById('navigationArea')
+        navigationArea.style.cssText = 'border:2px solid green;'
+        setTimeout(() => {
+            navigationArea.style.cssText = 'border:1px solid #ccc;'
+
+        }, 3000);
+
   }
-
- 
-})
-/*
-
-document.querySelector('form').addEventListener('submit', (e) => {
-  console.log('form submitting in client')
-if(!document.querySelector('form')) return
-
-
-
- 
 })
 
-*/
 document.addEventListener("click", async (event) => {
 
-  if(!event.target.closest){
+  if (!event.target.closest) {
     return
   }
 
-
   if (event.target.closest(".delete")) {
-  event.preventDefault()
+    event.preventDefault()
     event.target.closest(".delete").innerText = "Confirm deletion?"
 
     document.addEventListener("click", async (event) => {
-       if (event.target.closest(".delete")) {
-    const itemToRemove = event.target.closest(".card");
-    const targetedButton = event.target.closest(".btn.delete");
-    const id = targetedButton.getAttribute('data-id');
+      if (event.target.closest(".delete")) {
+        const itemToRemove = event.target.closest(".card");
+        const targetedButton = event.target.closest(".btn.delete");
+        const id = targetedButton.getAttribute('data-id');
 
-    console.log(itemToRemove.parentElement.id)
-    console.log(`Hello quette . .  .${itemToRemove.parentElement.id}`)
+        if (itemToRemove) {
+          itemToRemove.classList.add("fade-out");
+          setTimeout(() => {
+            itemToRemove.remove();
+          }, 500);
+        }
 
-    if (itemToRemove) {
-      itemToRemove.classList.add("fade-out");
-      setTimeout(() => {
-        console.log('removing from the DOM')
-        itemToRemove.remove();
-      }, 500);
+        await axios.delete(`/api/v1/users/${id}`,
+          { withCredentials: true }
+        )
+      }
     }
-    console.log('Deleting user with id:', id);
-    await axios.delete(`/api/v1/users/${id}`,
-      
-        { withCredentials: true }
-      
     )
-
-
   }
-}
-    )}
 });
 
 
 
-/*
-async function countForMonthInReview() {
-  console.log('crwairfpijr')
-  const applicationStatus = await createCard()
 
-  if (applicationStatus == 'Applied') {
+async function countForMonthInReview() {
+
+  if (window.applicationStatus == 'Applied') {
     console.log('reviewed')
     document.getElementById('ap').innerText++
-  } else if (applicationStatus === 'Interested') {
+  } else if (window.applicationStatus === 'Interested') {
 
     document.getElementById('in').innerText++
 
-  } else if (applicationStatus === 'Interview') {
+  } else if (window.applicationStatus === 'Interview') {
 
 
     document.getElementById('int').innerText++
-  } else if (applicationStatus === 'Rejected') {
+  } else if (window.applicationStatus === 'Rejected') {
 
     document.getElementById('rej').innerText++
   } else {
@@ -388,6 +339,7 @@ async function countForMonthInReview() {
   }
 
 }
+  
 function reduceCountForMonthInReview() {
 
 
@@ -413,17 +365,15 @@ function reduceCountForMonthInReview() {
   }
 }
 
-*/
+
+//Modal functionality
 document.addEventListener("click", (e) => {
 
   const openButton = e.target.closest(".openModalButton");
+
   if (!openButton) return;
 
-
-
   const innerOutput = openButton.closest(".innerOutput");
-
-
   const modal = innerOutput?.nextElementSibling;
 
   if (!modal || !modal.classList.contains("modal")) return;
@@ -433,15 +383,12 @@ document.addEventListener("click", (e) => {
 
   document.querySelectorAll(".modal.active").forEach(m => m.classList.remove("active"));
   document.querySelectorAll(".openModalButton.active").forEach(b => b.classList.remove("active"));
-      document.querySelector('.overlay').style.display = 'none';
-
-
+  document.querySelector('.overlay').style.display = 'none';
 
   if (!isActive) {
     modal.classList.add("active");
     openButton.classList.add("active");
-      document.querySelector('.overlay').style.display = 'block';
-
+    document.querySelector('.overlay').style.display = 'block';
   }
 });
 
@@ -449,50 +396,51 @@ document.addEventListener("click", (e) => {
 
 document.addEventListener("click", (e) => {
 
-if(!document.querySelector('.modal.active')) return
-  if(e.target.classList[0] == 'closeModalButton'){
-  e.preventDefault()
-  console.log('working')
-document.querySelector('.modal.active').classList.remove('active')
-document.querySelector('.overlay').style.display = 'none'
+  if (!document.querySelector('.modal.active')) return
+  if (e.target.classList[0] == 'closeModalButton') {
+    e.preventDefault()
 
+    document.querySelector('.modal.active').classList.remove('active')
+    document.querySelector('.overlay').style.display = 'none'
   }
-  
 });
 
 
 
-document.addEventListener("click", async(e) => {
+document.addEventListener("click", async (e) => {
   if (!document.querySelector(".modal.active")) return;
 
   if (e.target.classList.contains("saveNotes")) {
     e.preventDefault();
 
-    const outputCard = e.target.parentElement.parentElement.parentElement.querySelector(".innerOutput"); 
+    const outputCard = e.target.parentElement.parentElement.parentElement.querySelector(".innerOutput");
+
     if (!outputCard) {
       console.warn("No .outputCard ancestor found");
       return;
     }
 
-   
     const targetedButton = outputCard.querySelector(".delete");
+
     if (!targetedButton) {
       console.warn("No .subject found inside .outputCard");
       return;
     }
 
     const id = targetedButton.getAttribute("data-id");
+    const saveNoteButton = e.target.closest('.saveNotes')
+    saveNoteButton.style.cssText = 'border:solid 1px green;'
+    saveNoteButton.innerText = 'Note Saved'
 
-    const container = e.target.closest(".modal"); // or whatever wraps the inputs
+    e.target.parentElement.querySelector(".salary")?.value
+     setTimeout(() => {
+            saveNoteButton.style.cssText = 'border: 1px solid white;'
 
-if (container) {
-  const linkedInCheckbox = container.querySelector(".followUp");
-linkedInCheckbox.setAttribute('checked', '')
-  if (linkedInCheckbox && linkedInCheckbox.checked) {
-    linkedInCheckbox.value = "checked";
-  }
-}
+            saveNoteButton.innerText = 'Save Note'
 
+        }, 3000);
+
+    
     await axios.patch(
       `api/v1/users/modalData/${id}`,
       {
@@ -510,17 +458,36 @@ linkedInCheckbox.setAttribute('checked', '')
 });
 
 
+async function displayWelcome() {
+  try{
 
+    const fetchCurrentUsersName = await axios.get('/api/v1/users/getUsersName', { withCredentials: true })
+    const name = fetchCurrentUsersName.data.user.first
+    const mainBody = document.getElementById('mainBody')
+           
+            const para = document.createElement("p")
+            para.style.cssText = 'color:black;transition: opacity 250ms ease-in;z-index:50;position:absolute;top:8%;left:45%';
+            para.innerText = `Welcome ${name}!`
+            mainBody.append(para)
+     
+            setTimeout(() => {
+
+            para.innerText = ''
+
+        }, 10000);
+
+  }catch (error) {
+    console.error('Could not fetch user data:', error);
+  }
+}
 
 
 
 
 async function initializeDashboard() {
   try {
-    console.log('initializing maybe')
-    
     const userEntries = await fetchCurrentUser();
-    console.log('hello init func: ', userEntries)
+
     await renderDashboard(userEntries);
   } catch (error) {
     console.error('Could not fetch user data:', error);
@@ -532,7 +499,7 @@ async function initializeDashboard() {
 async function fetchCurrentUser() {
   try {
     const res = await axios.get('/api/v1/users/getUserData', { withCredentials: true });
-    
+
     // Safety check
     if (res?.data?.entries) {
       return res.data.entries;
@@ -544,7 +511,7 @@ async function fetchCurrentUser() {
     }
   } catch (error) {
     console.error('Error fetching user data:', error);
-    return []; // also fallback on network/server errors
+    return [];
   }
 }
 
@@ -556,12 +523,12 @@ async function renderDashboard(entries) {
   outputCard.innerHTML = ''; // clear existing cards if needed
 
   for (const entry of entries) {
-    const { _id, applicationStatus, job, company, apiUrl, formattedDate, salary} = entry;
+    const { _id, applicationStatus, job, company, apiUrl, formattedDate, salary } = entry;
 
     // Await the async function to get the card HTML string
     const cardHTML = await createCardHTML(applicationStatus, job, company, apiUrl, formattedDate, salary, _id);
 
-    // Append the created card HTML to your container
+    // Append the created card HTML to container
     const cardDiv = document.createElement('div');
     cardDiv.className = 'card';
     cardDiv.innerHTML = cardHTML;
@@ -570,3 +537,4 @@ async function renderDashboard(entries) {
 }
 
 window.addEventListener('DOMContentLoaded', initializeDashboard);
+window.addEventListener('DOMContentLoaded', displayWelcome);
