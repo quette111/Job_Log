@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "api.js",
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "webpack",
     "start": "node app.js",
     "dev": "webpack serve --config webpack.config.js",
     "dev:webpack": "webpack --watch --mode development"
