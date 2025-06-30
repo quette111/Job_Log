@@ -1,5 +1,5 @@
-const UserData = require('../models/User')
-const loginUser = require('../models/loginModel')
+import UserData from '../models/User.js';
+import loginUser from '../models/loginModel.js';
 
 const postData = async (req, res) => {
 
@@ -88,4 +88,11 @@ const fetchCurrentUsersName = async (req, res) => {
   }
 };
 
-module.exports = { postData, deleteDB, editData, fetchUserData, modalInputDataPatch, fetchCurrentUsersName }
+export {
+  postData,
+  deleteDB,
+  editData,
+  fetchUserData,
+  modalInputDataPatch,
+  fetchCurrentUsersName,
+};

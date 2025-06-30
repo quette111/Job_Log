@@ -3,7 +3,7 @@ import './charts.js'
 import './heatmap.js'
 import './navBar.js';
 import dayjs from 'dayjs';
-import { checkIfUserIsLoggedIn } from './navBar.js';
+
 
 async function callForKey() {
 
@@ -67,6 +67,7 @@ const writeDB = async () => {
   }
 };
 
+
 //Calling logo.dev API 
 async function logoApiCall() {
 
@@ -88,6 +89,7 @@ async function logoApiCall() {
   }
 
 }
+
 
 async function createCardHTML(applicationStatus, job, company, apiUrl, formattedDate, salary, jobId) {
 
@@ -199,15 +201,15 @@ async function createCard() {
     const info = getInfoForCards();
     const jobId = await writeDB()
 
-    if (document.querySelector("input").value !== "") {
+    if (document.getElementById("jobTitle").value !== "") {
       info.forEach(async (item) => {
         const card = document.createElement('div');
         const job = item.job;
         const company = item.company;
         card.className = 'card';
-        card.setAttribute("value", applicationStatus);
+        card.setAttribute("value", window.applicationStatus);
         card.dataset.id = jobId;
-        card.innerHTML = await createCardHTML(applicationStatus, job, company, apiUrl, formattedDate, jobId);
+        card.innerHTML = await createCardHTML(window.applicationStatus, job, company, apiUrl, formattedDate, jobId);
         outputCard.appendChild(card);
         document.getElementById("name").value = "";
         document.getElementById("jobTitle").value = "";
@@ -217,8 +219,7 @@ async function createCard() {
       console.log('One or more required input fields are empty.');
     }
    
-   
-    return applicationStatus;
+  return window.applicationStatus;
 
   } catch (err) {
     console.error('Error in createCard:', err);
@@ -226,10 +227,8 @@ async function createCard() {
 }
 
 
-//Update functionality
-document.addEventListener('change', async function (e) {
-
-  if (!e.target.matches('.subject')) return;
+async function changeJobStatus(e) {
+    if (!e.target.matches('.subject')) return;
 
   const row = e.target.closest('div');
 
@@ -260,20 +259,32 @@ document.addEventListener('change', async function (e) {
     {
       withCredentials: true
     })
-});
+}
 
-document.getElementById('submitForm').addEventListener('click', (e) => {
-  if (!document.getElementById('submitForm')) return
+
+function submitForm(e) {
+
+if (!document.getElementById('submitForm')) return
 
   if (document.getElementById('jobTitle').value == '' || document.getElementById('company').value == '') {
-    alert('Error: Please enter job title to continue');  //////////////////UPDATE
 
+     const navigationArea = document.getElementById('navigationArea')
+
+        navigationArea.style.cssText = 'border:2px solid red;'
+        setTimeout(() => {
+            navigationArea.style.cssText = 'border:1px solid #ccc;'
+
+        }, 3000);
+
+    
   } else {
 
     e.preventDefault()
     createCard()
     countForMonthInReview()
+
       const navigationArea = document.getElementById('navigationArea')
+
         navigationArea.style.cssText = 'border:2px solid green;'
         setTimeout(() => {
             navigationArea.style.cssText = 'border:1px solid #ccc;'
@@ -281,11 +292,12 @@ document.getElementById('submitForm').addEventListener('click', (e) => {
         }, 3000);
 
   }
-})
+}
 
-document.addEventListener("click", async (event) => {
 
-  if (!event.target.closest) {
+async function deleteUserEntry(event) {
+
+   if (!event.target.closest) {
     return
   }
 
@@ -302,6 +314,7 @@ document.addEventListener("click", async (event) => {
         if (itemToRemove) {
           itemToRemove.classList.add("fade-out");
           setTimeout(() => {
+            reduceCountForMonthInReview()
             itemToRemove.remove();
           }, 500);
         }
@@ -313,9 +326,7 @@ document.addEventListener("click", async (event) => {
     }
     )
   }
-});
-
-
+}
 
 
 async function countForMonthInReview() {
@@ -340,10 +351,9 @@ async function countForMonthInReview() {
 
 }
   
+
 function reduceCountForMonthInReview() {
 
-
-  console.log('quettedel')
   const applicationStatus = createCard()
 
   if (applicationStatus == 'Applied') {
@@ -351,25 +361,24 @@ function reduceCountForMonthInReview() {
     document.getElementById('ap').innerText--
   } else if (applicationStatus === 'Interested') {
 
-    document.getElementById('in').innerText++
+    document.getElementById('in').innerText--
 
   } else if (applicationStatus === 'Interview') {
 
 
-    document.getElementById('int').innerText++
+    document.getElementById('int').innerText--
   } else if (applicationStatus === 'Rejected') {
 
-    document.getElementById('rej').innerText++
+    document.getElementById('rej').innerText--
   } else {
     return
   }
 }
 
 
-//Modal functionality
-document.addEventListener("click", (e) => {
+function openTheModal(e) {
 
-  const openButton = e.target.closest(".openModalButton");
+   const openButton = e.target.closest(".openModalButton");
 
   if (!openButton) return;
 
@@ -390,25 +399,24 @@ document.addEventListener("click", (e) => {
     openButton.classList.add("active");
     document.querySelector('.overlay').style.display = 'block';
   }
-});
+}
 
 
+function closeTheModal(e) {
 
-document.addEventListener("click", (e) => {
-
-  if (!document.querySelector('.modal.active')) return
+    if (!document.querySelector('.modal.active')) return
   if (e.target.classList[0] == 'closeModalButton') {
     e.preventDefault()
 
     document.querySelector('.modal.active').classList.remove('active')
     document.querySelector('.overlay').style.display = 'none'
   }
-});
+}
 
 
+async function saveNotesModal(e) {
 
-document.addEventListener("click", async (e) => {
-  if (!document.querySelector(".modal.active")) return;
+   if (!document.querySelector(".modal.active")) return;
 
   if (e.target.classList.contains("saveNotes")) {
     e.preventDefault();
@@ -455,7 +463,7 @@ document.addEventListener("click", async (e) => {
       }
     );
   }
-});
+}
 
 
 async function displayWelcome() {
@@ -482,7 +490,7 @@ async function displayWelcome() {
 }
 
 
-
+//Loading in the users data
 
 async function initializeDashboard() {
   try {
@@ -515,8 +523,6 @@ async function fetchCurrentUser() {
   }
 }
 
-
-
 async function renderDashboard(entries) {
   console.log('rendering maybe');
   const outputCard = document.getElementById('outputCard'); // container element
@@ -536,5 +542,21 @@ async function renderDashboard(entries) {
   }
 }
 
+
+//Event Listener Attachments
+
+document.addEventListener('change', changeJobStatus)
+
+document.getElementById('submitForm').addEventListener('click', submitForm)
+
+document.addEventListener("click", deleteUserEntry)
+
+document.addEventListener("click", openTheModal)
+
+document.addEventListener("click", closeTheModal)
+
+document.addEventListener("click", saveNotesModal)
+
 window.addEventListener('DOMContentLoaded', initializeDashboard);
+
 window.addEventListener('DOMContentLoaded', displayWelcome);

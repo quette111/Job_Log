@@ -42,6 +42,9 @@ html {
   background-attachment: scroll;
 }
 
+.saveNotes{
+  cursor: pointer;
+}
 .userNotes{
   text-align: left;
   position: fixed;
@@ -279,7 +282,8 @@ textarea {
 
 .innerOutput {
   position: relative;
-  background: rgba(255, 255, 255, 0.753);
+  background: var(--output-color);
+  color: var(--text-color);
   border-radius: 16px;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
   backdrop-filter: blur(5px);
@@ -431,7 +435,7 @@ textarea {
   margin-top: 3%;
   border: 1px solid #ccc;
   border-radius: 15px;
-  background: linear-gradient(135deg, #e3e3e3cf, #ddddddc0);
+  background: var(--navigation-area);
   gap: 15px;
   height: 95vh;
   width: 40vw;
@@ -613,6 +617,7 @@ width: 92%;
 }
 
 .chart {
+  background-color: var(--modal-color);
   border: 1px solid #ccc;
   top: 15vh;
   left: 0;
@@ -779,13 +784,15 @@ width: 92%;
 
 
 .darkmode{
-  --base-color: #060b1c;
+  --base-color: #000000;
   --nav-color: #38405d;
   --text-color: rgb(255, 255, 255);
   --hover-color:#42485d;
   --img-filter:brightness(0.80);
   --secondary-text: #e0e5ff;
-
+  --modal-color:#202227;
+  --output-color: #202227;
+  --navigation-area: #202227;
 }
 
 #theme-switch{
@@ -951,6 +958,7 @@ input[type="checkbox"] {
 #cal-heatmap{
   height: auto;
   overflow-x: auto;
+  background-color: #141414;
 }
 
 #cal-heatmap svg{
@@ -1153,4 +1161,11 @@ input[type="checkbox"] {
     margin-left: 90%;
     position: absolute;
   }
+}
+
+
+#searchBar{
+  width: 30vw;
+  height: 30px;
+  border-radius: 25px;
 }

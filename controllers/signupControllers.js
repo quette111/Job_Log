@@ -1,5 +1,6 @@
-const loginUser = require('../models/loginModel')
-const { StatusCodes } = require('http-status-codes')
+import loginUser from '../models/loginModel.js';
+import { StatusCodes } from 'http-status-codes';
+
 
 const postUserData = async (req, res) => {
 
@@ -54,4 +55,5 @@ const loginTheUser = async (req, res) => {
 
 
 
-module.exports = { postUserData, loginTheUser }
+export { postUserData, loginTheUser };
+

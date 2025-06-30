@@ -58,6 +58,7 @@ document.addEventListener('click', (e) => {
     }
 });
 
+
 // Run check on page load
 window.addEventListener('load', checkIfUserIsLoggedIn);
 window.addEventListener('DOMContentLoaded', checkIfUserIsLoggedIn);

@@ -1,23 +1,30 @@
-require('dotenv').config();
+import 'dotenv/config';  
 
-const express = require('express');
-const helmet = require('helmet');
-const cors = require('cors');
-const rateLimit = require('express-rate-limit');
-const mongoSanitize = require('express-mongo-sanitize');
-const xss = require('xss-clean');
-const hpp = require('hpp');
-const path = require('path');
+import express from 'express';
+import 'express-async-errors';
+import helmet from 'helmet';
+import cors from 'cors';
+import rateLimit from 'express-rate-limit';
+import mongoSanitize from 'express-mongo-sanitize';
+import xss from 'xss-clean';
+import hpp from 'hpp';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import mongoose from 'mongoose';
+import cookieParser from 'cookie-parser';
+
+import appRoutes from './routers/api.js';
+import loginRoutes from './routers/loginRoutes.js';
+
 const app = express();
-const mongoose = require('mongoose');
 const PORT = process.env.PORT || 3000;
-const cookieParser = require('cookie-parser')
-const appRoutes = require('./routers/api.js');
-const loginRoutes = require('./routers/loginRoutes.js')
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(helmet());
 app.use(cors({ origin: 'http://localhost:8080', credentials: true }));
-app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
+//app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(mongoSanitize());
@@ -35,17 +42,10 @@ app.use('/api/v1/login', loginRoutes)
 app.use('/scripts', express.static(path.join(__dirname, 'dist')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.json());
-
-
-
-
-
 
 app.use(
   helmet.contentSecurityPolicy({
@@ -59,9 +59,6 @@ app.use(
 );
 
 
-
-
-// Serve index.html for the root route
 app.get('/', (req, res) => {
   res.render('index')
 

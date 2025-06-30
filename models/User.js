@@ -1,4 +1,4 @@
-const mongoose = require('mongoose') //require mongoose applicationStatus, job, company, apiUrl, jobId, formattedDate
+import mongoose from 'mongoose';
 
 const userDataSchema = new mongoose.Schema({   //userSchema set up per mongoose docs, used to set up data format
     applicationStatus:{
@@ -64,4 +64,5 @@ const userDataSchema = new mongoose.Schema({   //userSchema set up per mongoose 
 
 const UserData = mongoose.model('UserData', userDataSchema)   //creating instance of model data
 
-module.exports = UserData   //exporting for public use
+export default UserData;
+

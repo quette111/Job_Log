@@ -19,13 +19,15 @@
         <canvas id="mySecondChart"></canvas>
       </div>
 
+        <input type="search" id="searchBar" placeholder="Filter Job Entries">
+
       <div id="bigBox">
         <div id="navigationArea">
           <div class="column" id="stats">
             <form>
               <label for="name">Status:</label>
               <select autofocus id="name" name="name">
-                <option>--Please choose a job status--</option>
+                <option value='null'>--Please choose a job status--</option>
                 <option value="Applied">Applied</option>
                 <option value="Interested">Interested</option>
                 <option value="Closed">Closed</option>

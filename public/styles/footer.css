@@ -22,6 +22,9 @@ body{
   --gradient-color:#6fcdf800;
   --gradient-colorSecondary:  #6fcdf81a;
   --gradient-colorThird: #9bdefd;
+  --modal-color: rgba(255, 255, 255, 0);
+  --output-color: rgba(255, 255, 255, 0.753);
+  --navigation-area:linear-gradient(135deg, #e3e3e3cf, #ddddddc0);
 }
 
 #theme-switch{

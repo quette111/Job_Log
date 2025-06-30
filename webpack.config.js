@@ -1,15 +1,19 @@
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+export default {
   entry: {
     landing: './client/scripts/landing.js',
     signup: './client/scripts/login.js',
     login: './client/scripts/loginUser.js',
     dashboard: './client/scripts/file.js',
   },
-    target: 'web',
+  target: 'web',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+   path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
   },
   module: {
@@ -25,13 +29,11 @@ module.exports = {
       },
     ],
   },
-   devtool: 'source-map',
+  devtool: 'source-map',
   mode: 'development',
-
-
-   devServer: {
+  devServer: {
     static: {
-      directory: path.join(__dirname, 'public'), 
+      directory: path.join(new URL('.', import.meta.url).pathname, 'public'),
     },
     compress: true,
     port: 8080,
@@ -39,7 +41,7 @@ module.exports = {
     proxy: [
       {
         context: ['/api'],
-        target: 'http://localhost:3000', 
+        target: 'http://localhost:3000',
         changeOrigin: true,
         secure: false,
       },
