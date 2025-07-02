@@ -142,7 +142,7 @@ async function createCardHTML(applicationStatus, job, company, apiUrl, formatted
     
     <h3>Early Stages with ${company}:</h3>
     <br>
-    <h2>Salary: $${salary}</h2><br>
+    <h2 class='salaryOutput'>Salary: $${salary}</h2><br>
    
     <label>
       <input type="checkbox" class='linkedInConnect' name="linkedInConnect">
@@ -436,11 +436,15 @@ async function saveNotesModal(e) {
     }
 
     const id = targetedButton.getAttribute("data-id");
-    const saveNoteButton = e.target.closest('.saveNotes')
+    const saveNoteButton = e.target.closest('.saveNotes');
+    console.log(e.target)
+    console.log(e.target.parentElement.closest('salaryOutput'))
+    const salaryOutput = e.target.parentElement.querySelector('.salaryOutput');
     saveNoteButton.style.cssText = 'border:solid 1px green;'
     saveNoteButton.innerText = 'Note Saved'
 
-    e.target.parentElement.querySelector(".salary")?.value
+    salaryOutput.innerText = `Salary: $${e.target.parentElement.querySelector(".salary")?.value}`
+
      setTimeout(() => {
             saveNoteButton.style.cssText = 'border: 1px solid white;'
 
@@ -511,6 +515,7 @@ async function fetchCurrentUser() {
     // Safety check
     if (res?.data?.entries) {
       return res.data.entries;
+
     } else {
       console.warn('Unexpected response format:', res.data);
       console.log('Full fetch response:', res);
@@ -539,7 +544,28 @@ async function renderDashboard(entries) {
     cardDiv.className = 'card';
     cardDiv.innerHTML = cardHTML;
     outputCard.appendChild(cardDiv);
+
+    
   }
+
+      const userData = entries
+      console.log(entries)
+    const statusCounts = {};
+
+    userData.forEach(number => {
+      const status = number.applicationStatus;
+
+      statusCounts[status] = (statusCounts[status] || 0) + 1;
+      
+            
+    });
+
+    
+        document.getElementById('ap').innerText = Object.values(statusCounts)[0]
+        document.getElementById('in').innerText = Object.values(statusCounts)[1]
+        document.getElementById('int').innerText = Object.values(statusCounts)[2]
+        document.getElementById('rej').innerText = Object.values(statusCounts)[3]
+
 }
 
 

@@ -330,7 +330,7 @@ textarea {
   color: black;
   margin-right: 10%;
   background-color: #36a3ebd8;
-  transition: margin-right 0.3s ease; 
+  transition: margin-right 0.7s ease; 
 }
 
 #secRev:hover{
@@ -349,7 +349,7 @@ textarea {
   color: black;
   margin-right: 25%;
   background-color: #ff6486d8;
-  transition: margin-right 0.3s ease; 
+  transition: margin-right 0.7s ease; 
 }
 
 #thirdRev:hover{
@@ -368,7 +368,7 @@ textarea {
   color: black;
   margin-right: 40%;
   background-color: #ffa040d8;
-  transition: margin-right 0.3s ease; 
+  transition: margin-right 0.7s ease; 
 }
 
 #fourthRev:hover{
@@ -387,7 +387,7 @@ textarea {
   color: black;
   margin-right: 60%;
   background-color: #4cc0c0d8;
-  transition: margin-right 0.3s ease; 
+  transition: margin-right 0.7s ease; 
 }
 
 #status {
