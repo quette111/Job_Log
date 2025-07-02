@@ -1,5 +1,4 @@
 import path from 'path';
-
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -11,13 +10,18 @@ export default {
     login: './client/scripts/loginUser.js',
     dashboard: './client/scripts/file.js',
     charts: './client/scripts/charts.js',
-    heatmap: './client/scripts/heatmap.js', 
-     loginButton: './client/scripts/loginButton.js'
+    heatmap: './client/scripts/heatmap.js',
+    loginButton: './client/scripts/loginButton.js'
   },
   target: 'web',
   output: {
-   path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
+  },
+  resolve: {
+    alias: {
+      'chart.js$': 'chart.js/auto/auto.js'
+    }
   },
   module: {
     rules: [
@@ -36,7 +40,7 @@ export default {
   mode: 'development',
   devServer: {
     static: {
-      directory: path.join(new URL('.', import.meta.url).pathname, 'public'),
+      directory: path.join(__dirname, 'public'),
     },
     compress: true,
     port: 8080,
