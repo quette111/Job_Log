@@ -10,6 +10,9 @@ export default {
     signup: './client/scripts/login.js',
     login: './client/scripts/loginUser.js',
     dashboard: './client/scripts/file.js',
+    charts: './client/scripts/charts.js',
+    heatmap: './client/scripts/heatmap.js', 
+     loginButton: './client/scripts/loginButton.js'
   },
   target: 'web',
   output: {
