@@ -86,6 +86,11 @@ app.get('/api/config', (req, res) => {
   });
 });
 
+app.get("/multiply", (req, res) => {
+  const result = req.query.first * req.query.second;
+  res.json({ result: result });
+});
+
 app.all('*', (req, res) => {
   res.status(404).send('Resource not found');
 });
@@ -99,5 +104,7 @@ const start = async () => {
     console.log(error)
   }
 }
+
+module.exports = { app };
 
 start()

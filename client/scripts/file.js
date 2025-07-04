@@ -548,6 +548,11 @@ async function renderDashboard(entries) {
     
   }
 
+
+
+  
+
+
       const userData = entries
       console.log(entries)
     const statusCounts = {};
@@ -568,6 +573,27 @@ async function renderDashboard(entries) {
 
 }
 
+async function searchForData(e) {
+
+
+  
+    const value = e.target.value
+
+    const card = document.querySelectorAll('.nameOutput')
+
+    const nameOutput = document.querySelector('.nameOutput')
+    const company = document.querySelector('.nameOutput')
+    const appendedButton = document.querySelector('.appendedButton')
+  
+         card.forEach(user => {
+      console.log(user)
+      console.log(user.childNodes)
+        const showCard = user.innerText.includes(value) 
+        user.parentElement.parentElement.classList.toggle("hide", !showCard)
+      })
+}
+
+
 
 //Event Listener Attachments
 
@@ -583,6 +609,9 @@ document.addEventListener("click", closeTheModal)
 
 document.addEventListener("click", saveNotesModal)
 
+document.querySelector('#searchBar').addEventListener('input', searchForData)
+
 window.addEventListener('DOMContentLoaded', initializeDashboard);
 
 window.addEventListener('DOMContentLoaded', displayWelcome);
+

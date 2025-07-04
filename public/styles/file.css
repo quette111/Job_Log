@@ -1169,3 +1169,7 @@ input[type="checkbox"] {
   height: 30px;
   border-radius: 25px;
 }
+
+.hide{
+  display: none;
+}
