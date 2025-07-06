@@ -19,9 +19,9 @@ export default {
     filename: '[name].js',
   },
   resolve: {
-  // alias: {
-  //   'chart.js$': 'chart.js/auto/auto.js' // optional, remove if using direct import
-  // }
+  alias: {
+     'chart.js$': 'chart.js/auto/auto.js' // optional, remove if using direct import
+   }
 },
 module: {
   rules: [
