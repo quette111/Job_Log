@@ -19,24 +19,30 @@ export default {
     filename: '[name].js',
   },
   resolve: {
-    alias: {
-      'chart.js$': 'chart.js/auto/auto.js'
-    }
-  },
-  /*module: {
-    rules: [
-      {
-        test: /\.m?js$/,
-        exclude: /node_modules/,
-        use: { loader: 'babel-loader', options: { presets: ['@babel/preset-env'] } },
+  // alias: {
+  //   'chart.js$': 'chart.js/auto/auto.js' // optional, remove if using direct import
+  // }
+},
+module: {
+  rules: [
+    // Babel disabled for now
+    /*
+    {
+      test: /\.m?js$/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'babel-loader',
+        options: { presets: ['@babel/preset-env'] },
       },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-    ],
-  },
-  */
+    },
+    */
+    {
+      test: /\.css$/,
+      use: ['style-loader', 'css-loader'],
+      include: /node_modules|client/,
+    },
+  ],
+},
   devtool: 'source-map',
   mode: 'development',
   devServer: {
