@@ -23,7 +23,7 @@ export default {
       'chart.js$': 'chart.js/auto/auto.js'
     }
   },
-  module: {
+  /*module: {
     rules: [
       {
         test: /\.m?js$/,
@@ -36,6 +36,7 @@ export default {
       },
     ],
   },
+  */
   devtool: 'source-map',
   mode: 'development',
   devServer: {
