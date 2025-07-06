@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Chart from 'chart.js/auto.js';
+import Chart from 'chart.js/auto/auto.js';
 
 async function createChart() {
 
