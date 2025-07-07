@@ -34,7 +34,6 @@
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dayjs": "^1.11.13",
-    "debug": "^4.3.4",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
@@ -56,6 +55,9 @@
     "webpack-dev-server": "^5.2.2",
     "webpack-node-externals": "^3.0.0",
     "xss-clean": "^0.1.4"
+  },
+   "overrides": {
+    "debug": "4.3.4"
   },
   "devDependencies": {
     "@babel/core": "^7.27.3",
