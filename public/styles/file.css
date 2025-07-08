@@ -1030,16 +1030,19 @@ input[type="checkbox"] {
     width: 800px
   }
   #myChart{
+
     border-top: 1px solid #cccccc74;
     border-left: 1px solid #cccccc74;
     border-bottom: 1px solid #cccccc74;
   }
 #mySecondChart{
+
     border-top: 1px solid #cccccc74;
     border-right: 1px solid #cccccc74;
     border-bottom: 1px solid #cccccc74;
 }
 #cal-heatmap{
+  display: none;
     margin-top: 15%;
     border-top: 1px solid #cccccc74;
     border-left: 1px solid #cccccc74;
@@ -1047,7 +1050,7 @@ input[type="checkbox"] {
     border-bottom: 1px solid #cccccc74;
 }
 .innerOutput{
-  height: 60%;
+  height: 100%;
   width: 100%;
 }
 #stats{
@@ -1058,7 +1061,8 @@ input[type="checkbox"] {
 .chart{
   border: none;
   margin-top: 10%;
-  height: 400px;
+  height: 600px;
+  width: 700px;
 
 }
 #review{
