@@ -4,7 +4,7 @@
   "type": "module",
   "main": "api.js",
   "scripts": {
-    "postinstall": "patch-package",
+    "postinstall": "cp src/fixes/debug-common.js node_modules/debug/src/common.js",
     "build": "webpack --mode production",
     "start": "node app.js",
     "dev": "webpack serve --config webpack.config.js",
