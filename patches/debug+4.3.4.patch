@@ -1,0 +1,12 @@
+diff --git a/node_modules/debug/src/common.js b/node_modules/debug/src/common.js
+index e3291b2..31ba499 100644
+--- a/node_modules/debug/src/common.js
++++ b/node_modules/debug/src/common.js
+@@ -271,4 +271,7 @@ function setup(env) {
+ 	return createDebug;
+ }
+ 
++
++module.exports = {};
++
+ module.exports = setup;
