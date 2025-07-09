@@ -1042,12 +1042,10 @@ input[type="checkbox"] {
     border-bottom: 1px solid #cccccc74;
 }
 #cal-heatmap{
-  display: none;
-    margin-top: 15%;
-    border-top: 1px solid #cccccc74;
-    border-left: 1px solid #cccccc74;
-    border-left: 1px solid #cccccc74;
-    border-bottom: 1px solid #cccccc74;
+position: absolute;
+display: none;
+    margin-top: 125%;
+background-color: none;
 }
 .innerOutput{
   height: 100%;
@@ -1084,7 +1082,7 @@ input[type="checkbox"] {
 }
 #navigationArea{
   display: grid;
-  height: 475px;
+  height: 600px;
   padding-right: 0%;
   grid-template-columns: 1fr 1fr; 
   margin: 0 auto; 
@@ -1092,15 +1090,16 @@ input[type="checkbox"] {
   margin-top: 10%;
   width: 180vw;
   margin-bottom: 10%;
+  font-size: 200%;
 }
   /* Cards one-column */
   #outputCard {
     margin: 0 auto;
-    margin-left: 25%;
+    margin-left: 35%;
     width: 1300px;
-    height: 1500px;
+    height: 600px;
     display: grid;
- 
+    font-size: 110%;
     grid-template-columns: 1fr 1fr; /
   }
   /* Make inputs & selects easier to touch */
@@ -1131,7 +1130,32 @@ input[type="checkbox"] {
   .overlay{
   height: 0;
   width: 0;
+  display: none;
+  z-index: 50;
   }
+
+  #searchBar{
+display: none;
+
+}
+
+#welcomeMessage{
+  position: absolute;
+  top: 3%;
+  left: 35%;
+  font-size: 110%;
+}
+.nav-wrapper{
+ margin-left: 800px;
+box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.415);
+}
+
+#submitForm{
+  font-size: 120%;
+  width: 80%;
+  height: 70px;
+  padding-left: 20%;
+}
 
 }
 /* reset any unwanted wrapper on mobile */
@@ -1146,8 +1170,13 @@ input[type="checkbox"] {
   .modal {
     max-width: 95%;         /* nearly full-screen on very small phones */
     padding: 1rem;
+  
   }
-
+  .modal.active{
+      width: 1200px;
+    height: 1200px;
+    z-index: 50;
+  }
   .userNotes {
     gap: 0.75rem;
   }

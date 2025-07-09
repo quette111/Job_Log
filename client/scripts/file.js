@@ -478,6 +478,7 @@ async function displayWelcome() {
     const mainBody = document.getElementById('mainBody')
            
             const para = document.createElement("p")
+            para.id = 'welcomeMessage'
             para.style.cssText = 'color:black;transition: opacity 250ms ease-in;z-index:50;position:absolute;top:8%;left:45%';
             para.innerText = `Welcome ${name}!`
             mainBody.append(para)
