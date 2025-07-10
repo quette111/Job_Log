@@ -1070,6 +1070,11 @@ background-color: none;
 label{
   font-size: 2.5rem;
 }
+input,
+textarea,
+select {
+  font-size: 25px;
+}
 #review{
   display: none;
 }
@@ -1174,17 +1179,34 @@ display: none;
 
 #welcomeMessage{
   position: absolute;
-  top: 3%;
+  margin-top: 18vh;
   left: 35%;
-  font-size: 110%;
+
+  font-size: 2rem;
+  margin-left: 90vw;
+
 }
 nav{
-  height: 10vh;
+  height: 25vh;
+
 width: 1300px;
 box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.415);
+margin-bottom: 13vh;
+}
+#theme-switch{
+  height: 200px;
+  width: 200px;;
+}
+svg{
+  height: 75px;
+  width: 75px;
 }
 select{
   height: 10vh;
+}
+#logoJL{
+  height: 300px;
+  width: 300px;
 }
 #submitForm{
   font-size: 120%;
