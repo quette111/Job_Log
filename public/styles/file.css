@@ -224,6 +224,7 @@ textarea {
   cursor: pointer;
   align-items: center;
   align-self: center;
+  top: 1000px;
 }
 
 #submitForm:after {
@@ -1029,6 +1030,9 @@ input[type="checkbox"] {
     height: 350px;
     width: 800px
   }
+  body{
+    overflow-x: hidden;
+  }
   #myChart{
 
     border-top: 1px solid #cccccc74;
@@ -1063,6 +1067,9 @@ background-color: none;
   width: 700px;
 
 }
+label{
+  font-size: 2.5rem;
+}
 #review{
   display: none;
 }
@@ -1082,11 +1089,11 @@ background-color: none;
 }
 #navigationArea{
   display: grid;
-  height: 600px;
+  height: 650px;
   padding-right: 0%;
   grid-template-columns: 1fr 1fr; 
   margin: 0 auto; 
-  margin-left: 65%;
+  margin-left: 62%;
   margin-top: 10%;
   width: 180vw;
   margin-bottom: 10%;
@@ -1097,10 +1104,35 @@ background-color: none;
     margin: 0 auto;
     margin-left: 35%;
     width: 1300px;
-    height: 600px;
+    height: 2600px;
     display: grid;
-    font-size: 110%;
-    grid-template-columns: 1fr 1fr; /
+    font-size: 2.5rem;
+
+    grid-template-columns: 1fr;
+  }
+  .card{
+      margin-bottom: 13vh;
+  }
+  .dateAndTime{
+font-size: 3.2rem;
+  }
+  .subject{
+font-size: 3.2rem;
+
+  }
+
+  .btn.delete{
+font-size: 3.5rem;
+  }
+  .openModalButton{
+    
+  }
+  .appendedButton{
+    margin-top: 9%;
+    height: 5vh;
+    width: 100vw;
+    font-size: 2.5rem;
+    padding-left: 15%;
   }
   /* Make inputs & selects easier to touch */
   #stats input,
@@ -1134,6 +1166,7 @@ background-color: none;
   z-index: 50;
   }
 
+  
   #searchBar{
 display: none;
 
@@ -1145,16 +1178,20 @@ display: none;
   left: 35%;
   font-size: 110%;
 }
-.nav-wrapper{
- margin-left: 800px;
+nav{
+  height: 10vh;
+width: 1300px;
 box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.415);
 }
-
+select{
+  height: 10vh;
+}
 #submitForm{
   font-size: 120%;
   width: 80%;
   height: 70px;
   padding-left: 20%;
+
 }
 
 }

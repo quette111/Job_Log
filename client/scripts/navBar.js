@@ -31,12 +31,12 @@ function checkIfUserIsLoggedIn() {
     const logButtonSwitch = document.getElementById('loginA');
     if (!logButtonSwitch) return;
 
-    if (document.cookie && document.cookie.length > 0) {
+    if (!document.cookie) {
         console.log('logoutCook');
-        logButtonSwitch.innerText = 'Logout';
+        logButtonSwitch.innerText = 'Login';
     } else {
         console.log('loginCook');
-        logButtonSwitch.innerText = 'Login';
+        logButtonSwitch.innerText = 'Logout';
     }
 }
 
@@ -59,7 +59,7 @@ document.addEventListener('click', (e) => {
 });
 
 
-// Run check on page load
+
 window.addEventListener('load', checkIfUserIsLoggedIn);
 window.addEventListener('DOMContentLoaded', checkIfUserIsLoggedIn);
 

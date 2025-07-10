@@ -566,11 +566,21 @@ async function renderDashboard(entries) {
             
     });
 
-    
-        document.getElementById('ap').innerText = Object.values(statusCounts)[0]
-        document.getElementById('in').innerText = Object.values(statusCounts)[1]
-        document.getElementById('int').innerText = Object.values(statusCounts)[2]
+    if(Object.values(statusCounts)[0] != undefined){
+      document.getElementById('ap').innerText = Object.values(statusCounts)[0]
+    }
+        
+     if(Object.values(statusCounts)[1] != undefined){
+   document.getElementById('in').innerText = Object.values(statusCounts)[1]
+     }
+
+    if(Object.values(statusCounts)[2] != undefined){
+  document.getElementById('int').innerText = Object.values(statusCounts)[2]
+      }
+
+    if(Object.values(statusCounts)[3] != undefined){
         document.getElementById('rej').innerText = Object.values(statusCounts)[3]
+    }
 
 }
 
