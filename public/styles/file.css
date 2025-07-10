@@ -1203,7 +1203,8 @@ svg{
   width: 75px;
 }
 select{
-  height: 10vh;
+  height: 30vh;
+  font-size: 2.5rem;
 }
 #logoJL{
   height: 300px;
