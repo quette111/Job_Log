@@ -1103,6 +1103,7 @@ select {
   width: 180vw;
   margin-bottom: 10%;
   font-size: 200%;
+  border: solid rgb(54, 54, 54) 1px;
 }
   /* Cards one-column */
   #outputCard {
@@ -1194,8 +1195,8 @@ box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.415);
 margin-bottom: 13vh;
 }
 #theme-switch{
-  height: 200px;
-  width: 200px;;
+  height: 150px;
+  width: 150px;;
 }
 svg{
   height: 75px;
