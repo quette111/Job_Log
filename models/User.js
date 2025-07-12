@@ -1,8 +1,9 @@
-const mongoose = require('mongoose') //require mongoose 
+import mongoose from 'mongoose';
 
 const userDataSchema = new mongoose.Schema({   //userSchema set up per mongoose docs, used to set up data format
-    name:{
+    applicationStatus:{
     type:String,
+    enum: ['Applied', 'Interested', 'Interview', 'Rejected', 'Closed', 'Assessment'],
     require:[true, 'Please status of application'],
     },
     job:{
@@ -13,18 +14,38 @@ const userDataSchema = new mongoose.Schema({   //userSchema set up per mongoose 
       type:String,
       require:[true, 'Please company name'],
     },
+     apiUrl:{
+      type:String,
+      require:[true, 'External API URL needs to be sent front client'],
+    },
+     jobId:{
+      type:String,
+      require:[true, 'data ID needs to be sent front client'],
+    },
+    formattedDate:{
+      type:String,
+      require:[true, 'date needs to be sent front client'],
+    },
     createdBy: {
         type: mongoose.Types.ObjectId,
         ref: 'loginData',
         require: true
     },
-     connectedOnLI:{
-        type: Boolean,
+     connectedOnLI:{ 
+        type: String,
+        enum: ['checked', 'unchecked'],
         require: false,
        
     },
     inquire:{
-        type: Boolean,
+        type: String,
+        enum: ['checked', 'unchecked'],
+        require: false,
+       
+    },
+    emailFollowUp:{
+        type: String,
+        enum: ['checked', 'unchecked'], 
         require: false,
        
     },
@@ -43,4 +64,5 @@ const userDataSchema = new mongoose.Schema({   //userSchema set up per mongoose 
 
 const UserData = mongoose.model('UserData', userDataSchema)   //creating instance of model data
 
-module.exports = UserData   //exporting for public use
+export default UserData;
+

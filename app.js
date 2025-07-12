@@ -1,31 +1,51 @@
-require('dotenv').config();
+import 'dotenv/config';  
 
-const express = require('express');
-const helmet = require('helmet');
-const cors = require('cors');
-const rateLimit = require('express-rate-limit');
-const mongoSanitize = require('express-mongo-sanitize');
-const xss = require('xss-clean');
-const hpp = require('hpp');
-const path = require('path');
+import express from 'express';
+import 'express-async-errors';
+import helmet from 'helmet';
+import cors from 'cors';
+import rateLimit from 'express-rate-limit';
+import mongoSanitize from 'express-mongo-sanitize';
+import xss from 'xss-clean';
+import hpp from 'hpp';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import mongoose from 'mongoose';
+import cookieParser from 'cookie-parser';
+
+import appRoutes from './routers/api.js';
+import loginRoutes from './routers/loginRoutes.js';
+
 const app = express();
-const mongoose = require('mongoose');
 const PORT = process.env.PORT || 3000;
-const authorizationMiddleware = require('./middleware/auth.js')
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(helmet());
-app.use(cors({ origin: 'https://localhost1159', credentials: true }));
-app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
+app.use(cors({ origin: 'http://localhost:8080', credentials: true }));
+//app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
+app.use(cookieParser());
 app.use(express.json());
 app.use(mongoSanitize());
 app.use(xss());
 app.use(hpp());
-app.use(express.json());
+app.use((req, res, next) => {
+  res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self';");
+  next();
+});
+
+
+app.use('/api/v1/users', appRoutes);
+app.use('/api/v1/login', loginRoutes)
+
+app.use('/scripts', express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-const appRoutes  = require('./routers/api.js');
-const loginRoutes = require('./routers/loginRoutes.js')
+app.use(express.json());
 
 app.use(
   helmet.contentSecurityPolicy({
@@ -33,17 +53,12 @@ app.use(
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", "https://cdn.jsdelivr.net"],
       imgSrc: ["'self'", "data:", "https://img.logo.dev"],
-    
+
     },
   })
 );
 
-app.use(express.static('./public'));
 
-app.use('/api/v1/users', appRoutes);
-app.use('/api/v1/login', loginRoutes)
-
-// Serve index.html for the root route
 app.get('/', (req, res) => {
   res.render('index')
 
@@ -58,10 +73,10 @@ app.get('/loginUser', (req, res) => {
 })
 
 app.get('/log', (req, res) => {
-res.render('log')
+  res.render('log')
 });
 
-app.get('/signup', (req, res)=> {
+app.get('/signup', (req, res) => {
   res.render('signUp')
 })
 
@@ -71,18 +86,21 @@ app.get('/api/config', (req, res) => {
   });
 });
 
+
+
 app.all('*', (req, res) => {
   res.status(404).send('Resource not found');
 });
 
 const start = async () => {
   try {
-    
+
     await mongoose.connect(process.env.MONGO_URI, console.log('connected to DB'))
-    app.listen(PORT, console.log(`Server is listening on port ${PORT}...`))
+    app.listen(PORT, console.log(`Server is listening on port: ${PORT}...`))
   } catch (error) {
     console.log(error)
   }
 }
+
 
 start()

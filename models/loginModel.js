@@ -1,32 +1,39 @@
-const mongoose = require('mongoose') //require mongoose 
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import validator from 'validator';
 
-const userSchema = new mongoose.Schema({   //userSchema set up per mongoose docs, used to set up data format
+const userSchema = new mongoose.Schema({
     first:{
         type:String,
         require:[true, 'Please provide first name'],
-        minlength: 3,
+        minlength: 2,
         maxLength: 25,
     }, 
     last:{
          type:String,
         require:[true, 'Please provide last name'],
-        minlength: 3,
+        minlength: 2,
         maxLength: 25,
     },
-     email:{
-        type:String,
-        require:[true, 'Please provide email'],
-        match:[
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Please provide valid email'
-        ],
-        unique: true,
+    email: {
+    type: String,
+    required: [true, 'Please provide email'],
+    lowercase: true,
+    trim: true,
+    maxLength: 254,
+    validate: {
+      validator: (v) => validator.isEmail(v),
+      message: props => `${props.value} is not a valid email!`
+   }
     },
     password:{
         type:String,
         require:[true, 'Please provide password'],
-        minLength:6,
+        minLength:10,
+        match:[
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{10,}$/, 'Please provide valid password'
+        ],
     },
 },
 {
@@ -61,6 +68,6 @@ userSchema.methods.comparePassword = async function (userPassword) {
 }
 
 
-const loginUser = mongoose.model('LoginData', userSchema)   //creating instance of model data
+const loginUser = mongoose.model('LoginData', userSchema)
 
-module.exports = loginUser   //exporting for public us
+export default loginUser;

@@ -1,31 +1,64 @@
-const path = require('path');
-const nodeExternals = require('webpack-node-externals');
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-module.exports = {
-  entry: './app.js', // your main JS file (change if needed)
-  target: 'node',          // for backend bundling
-  externals: [nodeExternals()], // don't bundle node_modules
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+export default {
+  entry: {
+    landing: './client/scripts/landing.js',
+    signup: './client/scripts/login.js',
+    login: './client/scripts/loginUser.js',
+    dashboard: './client/scripts/file.js',
+    charts: './client/scripts/charts.js',
+    heatmap: './client/scripts/heatmap.js',
+    loginButton: './client/scripts/loginButton.js'
+  },
+  target: 'web',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js', // output bundle
+    filename: '[name].js',
   },
-  module: {
-    rules: [
-      {
-        test: /\.m?js$/,     // .js or .mjs files
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'], // transpile modern JS
-          },
-        },
+  resolve: {
+  //alias: {
+    // 'chart.js$': 'chart.js/auto/auto.js' // optional, remove if using direct import
+   //}
+},
+module: {
+  rules: [
+    // Babel disabled for now
+    /*
+    {
+      test: /\.m?js$/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'babel-loader',
+        options: { presets: ['@babel/preset-env'] },
       },
+    },
+    */
+    {
+      test: /\.css$/,
+      use: ['style-loader', 'css-loader'],
+      include: /node_modules|client/,
+    },
+  ],
+},
+  devtool: 'source-map',
+  mode: 'development',
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'public'),
+    },
+    compress: true,
+    port: 8080,
+    historyApiFallback: true,
+    proxy: [
       {
-        test: /\.css$/,      // if you import css files
-        use: ['style-loader', 'css-loader'],
+        context: ['/api'],
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false,
       },
     ],
   },
-  mode: 'development',  // switch to 'production' for optimized build
 };

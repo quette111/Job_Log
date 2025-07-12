@@ -1,108 +1,127 @@
 @import url('./navbar.css');
 @import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
 
-
-body{
-   font-family: "Outfit", sans-serif;
+body {
+  font-family: "Outfit", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+  margin: 0;
+  padding: 0;
 }
 
-#outerForm{
+
+#outerForm {
   background-color: #ffffffd8;
- 
-  height: 600px;
+  width: 90%;
+  max-width: 500px;
+  margin: 3% auto;
+  height: auto;
+  padding: 2rem 1rem;
+  border: 1px solid white;
+  border-radius: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
-margin-top: 4.5%;
-margin-left: 33.5%;
- border: 1px solid white;
-width: 500px;
-filter: drop-shadow(
-    1px 2px 4px hsl(0, 1%, 81%)
-  );
- border-radius: 25px;
-
+  flex-direction: column;
+  filter: drop-shadow(1px 2px 4px hsl(0, 1%, 81%));
 }
 
-
-form{
- 
-text-align:center ;
-margin-left: 8%;
+form {
+  text-align: center;
+  width: 100%;
 }
 
-input{
-    height: 25px;
-    display: flex;
-    width: 90%;
-     margin: 8px 0;
+input {
+  height: 25px;
+  width: 90%;
+  margin: 8px 0;
   box-sizing: border-box;
   border: none;
   border-bottom: 1px solid #29b3f3;
   background-color: #ffffffd8;
-  
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+#submit {
+  height: 2.5rem;
+  width: 85%;
+  background: #29b3f3;
+  border-radius: 999px;
+  box-shadow: #10a8ef 0 10px 20px -10px;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 8px 18px;
+  border: 0.5px solid #10a8ef;
+  margin-top: 20px;
+}
+
+#submit:hover {
+  background: #1b78a4;
+}
+
+h1 {
+  font-weight: 100;
+  font-size: 1.6rem;
+  text-align: center;
+  margin-top: 4%;
+}
+
+#firstAndLastName {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#firstNameLabel
+ {
+ 
+  position: relative;
+  top: 6vh;
+  margin: 0;
+  text-align: left;
+}
+#lastNameLabel{
+    position: relative;
+  margin-left:18vw;
  
 }
 
-label{
-    display: flex;
-    
+/* Media Query for larger screens */
+@media (min-width: 768px) {
+  #firstAndLastName {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  #firstAndLastName input {
+    width: 48%;
+  }
+  #outerForm {
+    padding: 2.5rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
 }
 
- #submit{
-  height: 2.5rem;
-  width:85%;
- background: #29b3f3;
-  border-radius: 999px;
-  box-shadow: #10a8ef 0 10px 20px -10px;
-  box-sizing: border-box;
-  color: #FFFFFF;
-  cursor: pointer;
-  font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 24px;
-  opacity: 1;
-  outline: 0 solid transparent;
-  padding: 8px 18px;
-  border: 0.5px solid #10a8ef;
- }
-
- #submit:hover{
-  background: #1b78a4;
- }
-
- p{
-  display: flex;
-  position: absolute;
-  left: 42%;
-  bottom: 2%;
- }
-
- h1{
-  position: absolute;
-  top: 23%;
-  left: 40%;
-  z-index: 100;
-  font-weight: 100;
-  font-size: 27px;
- }
-
- #firstAndLastName{
-  display: flex;
-
- }
-
- #firstNameLabel{
-  position:relative;
-  top: 50%;
- }
-
+@media (max-width: 480px) {
+  
  #lastNameLabel{
-  position: relative;
-  left: 50%;
-  margin-bottom: 0%;
- }
+    display: none;
+  }
+
+  #firstNameLabel{
+    position: absolute;
+    margin-bottom: 80vh;
+  }
+}

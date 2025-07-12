@@ -5,86 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Job Log</title>
-    <link rel="stylesheet" href="../styles/file.css" />
-<link rel="icon" href="../images/logo.svg" type="image/png">
-
+    <link rel="stylesheet" href="/styles/file.css" />
+    <link rel="icon" href="/images/logo.svg" type="image/png" />
   </head>
   <body>
-  
-<%- include('partials/nav') %>
-  <div class="overlay" hidden></div>
+    <%- include('partials/nav') %>
+    <div class="overlay" hidden></div>
 
-<div id="mainBody">
-  <div>
-    <form id="formDiv">
-      <div id="formWrapper">
-<div id="formMain">
-        <label for="name">Status:</label>
-        <select autofocus id="name" name="name">
-          <option>--Please choose a job status--</option>
-          <option value="Applied">Applied</option>
-          <option value="Interested">Interested</option>
-          <option value="Closed">Closed</option>
-          <option value="Assessment">Assessment</option>
-          <option value="Rejected">Rejected</option>
-          <option value="Interview">Interview</option>
-        </select>
-  <br>
-        <label for="jobTitle">Job Title:</label>
-        <input name="job" id="jobTitle" />
-   <br>
-        <label for="company">Company:</label>
-        <input name="company" id="company" />
+    <div id="mainBody">
+      <div class="chart">
+        <canvas id="myChart"></canvas>
+        <div id="cal-heatmap"></div>
+        <canvas id="mySecondChart"></canvas>
       </div>
-</div>
-      <button id="submitForm" class="submit" type="submit">Add Job</button>
-   
-    </form>
- <div class="chart">
 
-      <canvas id="myChart"></canvas>
+        <input type="search" id="searchBar" placeholder="Filter Job Entries">
 
-    </div>
-    <div id="chartWrapper">
-           <canvas id="mySecondChart"></canvas>
-    </div>
+      <div id="bigBox">
+        <div id="navigationArea">
+          <div class="column" id="stats">
+            <form>
+              <label for="name">Status:</label>
+              <select autofocus id="name" name="name">
+                <option value='null'>--Please choose a job status--</option>
+                <option value="Applied">Applied</option>
+                <option value="Interested">Interested</option>
+                <option value="Closed">Closed</option>
+                <option value="Assessment">Assessment</option>
+                <option value="Rejected">Rejected</option>
+                <option value="Interview">Interview</option>
+              </select>
+              <br />
+              <label for="jobTitle">Job Title:</label>
+              <input name="job" id="jobTitle" />
+              <br />
 
-</div>
+              <label for="company">Company:</label>
 
-    <div id="bigBox">
-      <div id="navigationArea">
-        <div class="column" id="stats">
-          <h3>Month In Review:</h3>
-          <h3></h3>
+              <input name="company" id="company" />
+              <button id="submitForm" class="submit" type="submit">
+                Add Job
+              </button>
+            </form>
+          </div>
 
-          <h4 id="firstRev">Applied:<span id="ap">0</span></h4>
-          <h4 id="secRev">Interested:<span id="in">0</span></h4>
-          <h4 id="thirdRev">Interview:<span id="int">0</span></h4>
-          <h4 id="fourthRev">Rejected:<span id="rej">0</span></h4>
-
+          <div class="column" id="review">
+            <h4 id="firstRev">Applied:<span id="ap">0</span></h4>
+            <h4 id="secRev">Interested:<span id="in">0</span></h4>
+            <h4 id="thirdRev">Interview:<span id="int">0</span></h4>
+            <h4 id="fourthRev">Rejected:<span id="rej">0</span></h4>
+          </div>
         </div>
 
-        
+        <div id="outputCard"></div>
       </div>
-
-      <div id="outputCard"></div>
     </div>
 
-   
-</div>
-
-<%- include('partials/footer') %>
-   <script src="./js/axios.min.js"></script>
-
-<script src="/js/chart.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js" integrity="sha256-nP25Pzivzy0Har7NZtMr/TODzfGWdlTrwmomYF2vQXM=" crossorigin="anonymous"></script>
-
-    <script src="./scripts/charts.js"></script>
-
-    <script src="./scripts/navBar.js"></script>
-
-    <script type="module" src="./scripts/file.js"></script>
+    <script src="/dist/heatmap.js"></script>
+    <script src="/dist/charts.js"></script>
+    <script src="/scripts/dashboard.js"></script>
   </body>
 </html>
-
