@@ -12,7 +12,7 @@ body {
 
 
 #outerForm {
-  background-color: #ffffffd8;
+  background-color: var(--outerFormColor);
   width: 90%;
   max-width: 500px;
   margin: 3% auto;

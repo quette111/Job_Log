@@ -9,7 +9,7 @@ async function postData() {
     const password = document.getElementById('password').value
 
 
-
+console.log('heelo')
     if (!username || !password || !email || !lastName) {
         const outerForm = document.getElementById('outerForm')
         outerForm.style.cssText = 'border:2px solid red;'

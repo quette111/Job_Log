@@ -4,6 +4,12 @@ import './heatmap.js'
 import './navBar.js';
 import dayjs from 'dayjs';
 
+ if (window.innerWidth < 500) {
+    document.getElementById('viewport').setAttribute(
+      'content',
+      'width=device-width, initial-scale=0.8, maximum-scale=1.0, user-scalable=yes'
+    );
+  }
 
 async function callForKey() {
 
@@ -332,7 +338,7 @@ async function deleteUserEntry(event) {
 async function countForMonthInReview() {
 
   if (window.applicationStatus == 'Applied') {
-    console.log('reviewed')
+
     document.getElementById('ap').innerText++
   } else if (window.applicationStatus === 'Interested') {
 
@@ -357,7 +363,7 @@ function reduceCountForMonthInReview() {
   const applicationStatus = createCard()
 
   if (applicationStatus == 'Applied') {
-    console.log('reviewed')
+
     document.getElementById('ap').innerText--
   } else if (applicationStatus === 'Interested') {
 
@@ -437,8 +443,8 @@ async function saveNotesModal(e) {
 
     const id = targetedButton.getAttribute("data-id");
     const saveNoteButton = e.target.closest('.saveNotes');
-    console.log(e.target)
-    console.log(e.target.parentElement.closest('salaryOutput'))
+
+  
     const salaryOutput = e.target.parentElement.querySelector('.salaryOutput');
     saveNoteButton.style.cssText = 'border:solid 1px green;'
     saveNoteButton.innerText = 'Note Saved'
@@ -518,8 +524,7 @@ async function fetchCurrentUser() {
       return res.data.entries;
 
     } else {
-      console.warn('Unexpected response format:', res.data);
-      console.log('Full fetch response:', res);
+
 
       return []; // fallback to empty list
     }
@@ -530,7 +535,7 @@ async function fetchCurrentUser() {
 }
 
 async function renderDashboard(entries) {
-  console.log('rendering maybe');
+
   const outputCard = document.getElementById('outputCard'); // container element
   outputCard.innerHTML = ''; // clear existing cards if needed
 
@@ -555,7 +560,7 @@ async function renderDashboard(entries) {
 
 
       const userData = entries
-      console.log(entries)
+
     const statusCounts = {};
 
     userData.forEach(number => {
@@ -597,8 +602,7 @@ async function searchForData(e) {
     const appendedButton = document.querySelector('.appendedButton')
   
          card.forEach(user => {
-      console.log(user)
-      console.log(user.childNodes)
+     
         const showCard = user.innerText.includes(value) 
         user.parentElement.parentElement.classList.toggle("hide", !showCard)
       })

@@ -29,11 +29,12 @@ body{
       --gradient-color:#6fcdf800;
    --gradient-colorSecondary:  #6fcdf81a;
    --gradient-colorThird: #9bdefd;
- 
+   --buttonText: #FFFFFF;
+   --outerFormColor: #ffffffd8;
 }
 
 .darkmode{
-  --base-color: #060b1c;
+  --base-color: #000000;
   --nav-color: #38405d;
   --text-color: rgb(255, 255, 255);
   --hover-color:#42485d;
@@ -45,13 +46,15 @@ body{
     --gradient-color:#c3ecff00;
    --gradient-colorSecondary:  #c7edff35;
    --gradient-colorThird: #d7f2ff;
+    --buttonText: #000000;
+    --outerFormColor: #031432d8;
 }
 
 
 #theme-switch{
   cursor: pointer;
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
   padding: 0;
   border-radius: 50%;
   background-color: var(--base-color);
@@ -59,6 +62,7 @@ body{
   justify-content: center;
   align-items: center;
   border-color: #05a6f000;
+  margin-right: 3%;
 }
 
 #theme-switch:hover{

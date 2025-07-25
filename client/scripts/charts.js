@@ -143,7 +143,7 @@ async function createSecondChart() {
 
     userData.forEach(user => {
       const salary = Number(user.salary);
-      console.log(salary)
+
       if (isNaN(salary)) return; // skip non-numeric values
 
       if (salary < 40000) {

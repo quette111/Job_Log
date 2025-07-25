@@ -20,7 +20,7 @@ export default {
   },
   resolve: {
   //alias: {
-    // 'chart.js$': 'chart.js/auto/auto.js' // optional, remove if using direct import
+    // 'chart.js$': 'chart.js/auto/auto.js' // remove if using direct import
    //}
 },
 module: {

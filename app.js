@@ -59,6 +59,14 @@ app.use(
 );
 
 
+app.get('/auth/check', (req, res) => {
+  if (req.cookies.jid) {
+
+    return res.json({ loggedIn: true });
+  }
+  res.json({ loggedIn: false });
+});
+
 app.get('/', (req, res) => {
   res.render('index')
 
@@ -77,7 +85,7 @@ app.get('/log', (req, res) => {
 });
 
 app.get('/signup', (req, res) => {
-  res.render('signUp')
+  res.render('signup')
 })
 
 app.get('/api/config', (req, res) => {

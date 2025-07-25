@@ -9,7 +9,7 @@ body{
   font-style: normal;
 }
 #outerForm{
-  background-color: #ffffffd8;
+  background-color: var(--outerFormColor);
  
   height: 600px;
   display: flex;
@@ -58,7 +58,7 @@ label{
   border-radius: 999px;
   box-shadow: #10a8ef 0 10px 20px -10px;
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: var(--buttonText);
   cursor: pointer;
   font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
   font-size: 16px;
