@@ -43,8 +43,9 @@ app.use('/scripts', express.static(path.join(__dirname, 'dist')));
 app.use(express.static(path.join(__dirname, 'public')));
 console.log('Running from:', __dirname);
 
+app.set('views', path.resolve('views'));
 app.set('view engine', 'ejs');
-app.set('views', path.join(process.cwd(), 'views'));
+
 
 
 app.use(express.json());
