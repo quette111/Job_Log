@@ -90,7 +90,7 @@ app.get('/signup', (req, res) => {
   res.render('signup')
 })
 
-app.get('/api/config', (req, res) => {
+app.get('/api/config', (req, res) => {``
   res.json({
     apiKey: process.env.API_KEY,
   });
@@ -100,6 +100,13 @@ app.get('/api/config', (req, res) => {
 
 app.all('*', (req, res) => {
   res.status(404).send('Resource not found');
+});
+
+
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke! Check the console for details.');
 });
 
 const start = async () => {
