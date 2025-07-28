@@ -97,7 +97,16 @@ app.get('/api/config', (req, res) => {``
   });
 });
 
+import fs from 'fs';
 
+
+app.get('/_debug/views', (req, res) => {
+  const viewsDir = path.join(__dirname, '../views');
+  fs.readdir(viewsDir, (err, files) => {
+    if (err) return res.status(500).send(err.message);
+    res.json(files);
+  });
+});
 
 app.all('*', (req, res) => {
   res.status(404).send('Resource not found');
