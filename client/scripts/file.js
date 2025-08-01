@@ -40,6 +40,54 @@ function getInfoForCards() {
   return info
 }
 
+const callOpenAi = async () => {
+
+   const info = getInfoForCards();
+
+  try {
+    const response = await axios.post(
+      '/api/v1/users/openAIWrite',
+      {
+        applicationStatus: info[0].applicationStatus,
+        job: info[0].job,
+        company: info[0].company,
+      },
+      {
+        withCredentials: true
+      }
+    );
+
+
+
+    return response.data.tips;
+
+
+  } catch (err) {
+    console.error('Failed to write DB:', err);
+    return null;
+  }
+};
+
+
+
+
+
+function formatAiOutput(callAI) {
+  let formatted = '';
+
+  for (let i = 0; i < callAI.length; i++) {
+    const ch = callAI[i];
+
+
+    if (/\d/.test(ch)) {
+      formatted += '<br>';
+    }
+
+    formatted += ch;
+  }
+
+  return formatted;
+}
 
 const writeDB = async () => {
 
@@ -48,7 +96,10 @@ const writeDB = async () => {
   const now = dayjs();
   const formattedDate = now.format('MMM D, YYYY h:mm A');
   const apiUrl = await logoApiCall();
-
+ const formattedAIString = await callOpenAi()
+  console.log(formattedAIString)
+    const OpenAiData = formatAiOutput(formattedAIString)
+console.log(OpenAiData)
   try {
     const response = await axios.post(
       '/api/v1/users/writeDB',
@@ -57,14 +108,16 @@ const writeDB = async () => {
         job: info[0].job,
         company: info[0].company,
         apiUrl: apiUrl,
-        formattedDate: formattedDate
+        formattedDate: formattedDate,
+        callAI: formattedAIString
       },
       {
         withCredentials: true
       }
     );
 
-    
+
+
     return response.data.task._id;
 
   } catch (err) {
@@ -72,6 +125,9 @@ const writeDB = async () => {
     return null;
   }
 };
+
+
+
 
 
 //Calling logo.dev API 
@@ -97,10 +153,18 @@ async function logoApiCall() {
 }
 
 
-async function createCardHTML(applicationStatus, job, company, apiUrl, formattedDate, salary, jobId) {
 
-  if (salary == undefined) { salary = '' }
 
+
+async function createCardHTML(applicationStatus, job, company, apiUrl, formattedDate, salary, jobId, callAI) {
+
+  if (salary == undefined) { 
+
+    salary = '' }
+  if (callAI == undefined) { callAI = '' }
+
+   const formattedString = formatAiOutput(callAI) 
+  
   return `<div value='${applicationStatus}' class="innerOutput" >
 
   <h3 class="jobOutput"></h3>
@@ -188,6 +252,8 @@ async function createCardHTML(applicationStatus, job, company, apiUrl, formatted
        <input type="number" class="salary" name="salary">
   </label>
 
+  <h3 class='tipsOutput'>Key resume points:<span class='tipsFromAi'>${formattedString}</span></h3>
+
     <button class='saveNotes'>Save Note</button>
   </form>
   </div>
@@ -206,16 +272,22 @@ async function createCard() {
     const outputCard = document.getElementById('outputCard');
     const info = getInfoForCards();
     const jobId = await writeDB()
-
+    const formattedAIString = await callOpenAi()
+  
+    const callAI = formatAiOutput(formattedAIString)
+    console.log(callAI)
     if (document.getElementById("jobTitle").value !== "") {
       info.forEach(async (item) => {
         const card = document.createElement('div');
+
+
+       
         const job = item.job;
         const company = item.company;
         card.className = 'card';
         card.setAttribute("value", window.applicationStatus);
         card.dataset.id = jobId;
-        card.innerHTML = await createCardHTML(window.applicationStatus, job, company, apiUrl, formattedDate, jobId);
+        card.innerHTML = await createCardHTML(window.applicationStatus, job, company, apiUrl, formattedDate, '', jobId, callAI);
         outputCard.appendChild(card);
         document.getElementById("name").value = "";
         document.getElementById("jobTitle").value = "";
@@ -540,10 +612,10 @@ async function renderDashboard(entries) {
   outputCard.innerHTML = ''; // clear existing cards if needed
 
   for (const entry of entries) {
-    const { _id, applicationStatus, job, company, apiUrl, formattedDate, salary } = entry;
+    const { _id, applicationStatus, job, company, apiUrl, formattedDate, salary, callAI } = entry;
 
     // Await the async function to get the card HTML string
-    const cardHTML = await createCardHTML(applicationStatus, job, company, apiUrl, formattedDate, salary, _id);
+    const cardHTML = await createCardHTML(applicationStatus, job, company, apiUrl, formattedDate, salary, _id, callAI);
 
     // Append the created card HTML to container
     const cardDiv = document.createElement('div');
@@ -607,6 +679,10 @@ async function searchForData(e) {
         user.parentElement.parentElement.classList.toggle("hide", !showCard)
       })
 }
+
+
+
+
 
 
 

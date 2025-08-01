@@ -32,9 +32,15 @@ const calData = Object.entries(frequencyMap).map(([date, value]) => ({
   value
 }));
 
+const now        = new Date();
+const startMonth = now.getMonth() - 2;
+const startYear  = now.getFullYear() + Math.floor(startMonth / 12);
+const realMonth  = (startMonth + 12) % 12;
+const startDate  = new Date(startYear, realMonth, 1);
+
  const heatmap = new CalHeatmap().paint({
   itemSelector: "#cal-heatmap",
-  start: new Date(2025, 5, 1),
+  start: startDate,
   range: 3,
   domain: { type: "month", gutter: 4 },
   subDomain: { type: "day", width: 12, height: 12, gutter: 2, radius: 2 },

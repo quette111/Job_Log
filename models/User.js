@@ -56,6 +56,11 @@ const userDataSchema = new mongoose.Schema({   //userSchema set up per mongoose 
         max:500000
        
     },
+    callAI:{
+        type: String,
+        require: false,
+   
+    },
 
 },
 {

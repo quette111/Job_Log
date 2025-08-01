@@ -3,14 +3,14 @@ import loginUser from '../models/loginModel.js';
 
 const postData = async (req, res) => {
 
-  const { applicationStatus, job, company, apiUrl, formattedDate, jobId, connectedOnLI, inquire, salary, emailFollowUp } = req.body
+  const { applicationStatus, job, company, apiUrl, formattedDate, jobId, connectedOnLI, inquire, salary, callAI, emailFollowUp } = req.body
 
   if (!applicationStatus || !job || !company) {
     return res.status(401).json({ error: "error bro" })
   }
 
   try {
-    const task = await UserData.create({ applicationStatus, job, company, apiUrl, jobId, connectedOnLI, inquire, salary, emailFollowUp, formattedDate, createdBy: req.user.userId }); 
+    const task = await UserData.create({ applicationStatus, job, company, apiUrl, jobId, connectedOnLI, inquire, salary, callAI, emailFollowUp, formattedDate, createdBy: req.user.userId }); 
     res.status(201).json({ task })
   } catch (error) {
     console.log('Error', error)

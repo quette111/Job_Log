@@ -71,6 +71,7 @@ html {
   text-shadow: #000 0px 5px 5px 5px;
   flex-direction: column;
   width: 100%;
+
 }
 
 .userNotes h3,
@@ -971,14 +972,14 @@ input[type="checkbox"] {
 
 
 @media (max-width: 1024px) {
-  /* Wrap bigBox into a single column */
+
   #bigBox {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
   }
-  /* Make the form full width */
+
   #stats {
     width: 90%;
     max-width: 500px;
@@ -999,32 +1000,32 @@ input[type="checkbox"] {
     flex: 1 1 calc(50% - 1rem);
     margin: 0.5rem 0;
   }
-  /* Output cards wrap tighter */
+
   #outputCard {
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 1rem;
     padding: 0.5rem;
   }
-  /* Reduce spacing/paddings */
+
   #mainBody {
     padding: 1.5%;
   }
 }
 
 @media (max-width: 600px) {
-  /* Chart full-width */
+
   .chart canvas,
   .chart > div {
     width: 100%;
     margin: 0.5rem 0;
   }
-  /* Form and review full width */
+
   #stats,
   #review h4 {
     width: 100%;
     flex: 1 1 100%;
   }
-  /* Single-column stats + review */
+
   #bigBox {
     gap: 1rem;
   }
@@ -1144,7 +1145,7 @@ font-size: 3.5rem;
     font-size: 2.5rem;
     padding-left: 15%;
   }
-  /* Make inputs & selects easier to touch */
+
   #stats input,
   #stats select,
   #submitForm {
@@ -1167,7 +1168,7 @@ font-size: 3.5rem;
   }
   .userNotes{
     width: 175vw;
-     height: 175vw;
+     height:110%;
   }
   .overlay{
   height: 0;
@@ -1223,7 +1224,7 @@ select{
 }
 
 }
-/* reset any unwanted wrapper on mobile */
+
 @media (max-width: 600px) {
   #mainBody, .container {
     width: 100%;
@@ -1233,7 +1234,7 @@ select{
 }
 @media (max-width: 480px) {
   .modal {
-    max-width: 95%;         /* nearly full-screen on very small phones */
+    max-width: 95%;  
     padding: 1rem;
   
   }
@@ -1247,18 +1248,26 @@ select{
   }
 
   .userNotes label {
-    flex-direction: column; /* stack checkbox above its label text */
+    flex-direction: column;
     align-items: flex-start;
   }
 
   .closeModalButton {
-    /* reposition close button for small screens */
+   
     top: 0.5rem;
     right: 0.5rem;
 
     margin-left: 90%;
     position: absolute;
   }
+
+.tipsOutput{
+  font-size: 20px;
+  width: fit-content;
+}
+.tipsFromAi{
+  font-size: 19px;
+}
 }
 
 
@@ -1270,4 +1279,12 @@ select{
 
 .hide{
   display: none;
+}
+
+.tipsOutput{
+  font-size: 13px;
+  width: fit-content;
+}
+.tipsFromAi{
+  font-size: 12px;
 }
