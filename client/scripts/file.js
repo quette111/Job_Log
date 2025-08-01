@@ -210,10 +210,17 @@ async function createCardHTML(applicationStatus, job, company, apiUrl, formatted
 <button class='closeModalButton'></button>
   <form action="/add-note" class='userNotes'>
     
-    <h3>Early Stages with ${company}:</h3>
+    <h2 >Early Stages with ${company}:</h2>
     <br>
-    <h2 class='salaryOutput'>Salary: $${salary}</h2><br>
-   
+
+    <div id='salaryBorder'>
+    <label class='center'> Salary input: 
+       <input class='salary center' type="number" name="salary">
+  </label>
+
+  </div>
+    <h3 class='salaryOutput center'>Salary: $${salary}</h3><br>
+
     <label>
       <input type="checkbox" class='linkedInConnect' name="linkedInConnect">
       Connected on linkedIn
@@ -228,7 +235,7 @@ async function createCardHTML(applicationStatus, job, company, apiUrl, formatted
 
     <br>
 
-    <h3>Late Stages:</h3>
+    <h2>Late Stages:</h2>
 
     <br>
 
@@ -248,9 +255,7 @@ async function createCardHTML(applicationStatus, job, company, apiUrl, formatted
     <br>
     <br>
 
-  <label> Salary input: 
-       <input type="number" class="salary" name="salary">
-  </label>
+ 
 
   <h3 class='tipsOutput'>Key resume points:<span class='tipsFromAi'>${formattedString}</span></h3>
 
@@ -670,10 +675,17 @@ async function searchForData(e) {
     const card = document.querySelectorAll('.nameOutput')
 
     const nameOutput = document.querySelector('.nameOutput')
-    const company = document.querySelector('.nameOutput')
-    const appendedButton = document.querySelector('.appendedButton')
+    const companyOutput = document.querySelectorAll('.companyOutput')
+    //const appendedButton = document.querySelector('.appendedButton')
   
          card.forEach(user => {
+     
+        const showCard = user.innerText.includes(value) 
+        user.parentElement.parentElement.classList.toggle("hide", !showCard)
+      })
+
+
+      companyOutput.forEach(user => {
      
         const showCard = user.innerText.includes(value) 
         user.parentElement.parentElement.classList.toggle("hide", !showCard)
