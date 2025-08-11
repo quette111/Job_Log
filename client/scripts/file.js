@@ -666,31 +666,30 @@ async function renderDashboard(entries) {
 
 }
 
-async function searchForData(e) {
+function searchForData(e) {
+  const value = e.target.value.trim().toLowerCase();
+
+  if (!value) {
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('hide'));
+    return;
+  }
+
+  document.querySelectorAll('.card').forEach(card => {
+    const nameEl = card.querySelector('.nameOutput');
+    const companyEl = card.querySelector('.companyOutput');
+    const statusEl = card.querySelector('.appendedButton');
 
 
-  
-    const value = e.target.value
-
-    const card = document.querySelectorAll('.nameOutput')
-
-    const nameOutput = document.querySelector('.nameOutput')
-    const companyOutput = document.querySelectorAll('.companyOutput')
-    //const appendedButton = document.querySelector('.appendedButton')
-  
-         card.forEach(user => {
-     
-        const showCard = user.innerText.includes(value) 
-        user.parentElement.parentElement.classList.toggle("hide", !showCard)
-      })
+    const nameText = nameEl ? nameEl.textContent.toLowerCase() : '';
+    const companyText = companyEl ? companyEl.textContent.toLowerCase() : '';
+    const statusText = statusEl ? statusEl.textContent.toLowerCase() : '';
 
 
-      companyOutput.forEach(user => {
-     
-        const showCard = user.innerText.includes(value) 
-        user.parentElement.parentElement.classList.toggle("hide", !showCard)
-      })
+    const matches = nameText.includes(value) || companyText.includes(value) || statusText.includes(value);
+    card.classList.toggle('hide', !matches);
+  });
 }
+
 
 
 
