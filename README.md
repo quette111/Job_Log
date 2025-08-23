@@ -2,6 +2,8 @@
 
 ![JobLog Screenshot](public/images/jobLogFin.png)
 ![JobLog Screenshot](public/images/jobLogFinal2.png)
+![JobLog Screenshot](public/images/jlIMG3.png)
+
 
 ## Description
 **JobLog** is a web application that helps users track their job applications. Users can enter job details, including:
