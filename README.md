@@ -40,7 +40,7 @@ This project is currently a **work in progress**.
    ```
 3. Start the server:
    ```sh
-   node server.js
+   npm run start
    ```
 4. Open the app in your browser.
 
