@@ -29,7 +29,7 @@ This project is currently a **work in progress**.
 ## Installation & Setup
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/JobLog.git
+   git clone https://github.com/yourusername/Job_Log.git
    cd JobLog
    ```
 2. Install dependencies:
@@ -45,11 +45,11 @@ This project is currently a **work in progress**.
 ## Roadmap
 - [✅] Improve UI/UX
 - [✅] Implement user authentication
-- [ ] Persist data currently in Mongoose when users login
+- [✅] Persist data currently in Mongoose when users login
 - [✅] Security middleware
-- [ ] Error handling
-- [ ] Implement filter by status feature
-- [ ] Finish Chart.js data visualization
+- [✅] Error handling
+- [✅] Implement filter by status feature
+- [✅] Finish Chart.js data visualization
 
 ---
 **Author:** Marquette Hanson
