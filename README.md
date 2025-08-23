@@ -14,6 +14,7 @@ Once added, the app displays job entries as cards, incorporating the **logo.dev 
 This project is currently a **work in progress**.
 
 ## Features
+- OpenAI API gives personalized suggestions based on every job entry
 - Add job applications with relevant details.
 - Automatically fetch company logos using **logo.dev API**.
 - Display job applications as interactive cards.
