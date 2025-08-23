@@ -1,4 +1,4 @@
-# JobLog
+# jobLog
 
 ![JobLog Screenshot](public/images/jobLogFin.png)
 ![JobLog Screenshot](public/images/jobLogFinal2.png)
